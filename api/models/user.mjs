@@ -17,16 +17,16 @@ const User = mongoose.model('User', new mongoose.Schema({
     maxlength: 24
   },
   email: {
-      type: String,
-      required: true,
-      minlength: 5,
-      maxlength: 32,
-      unique: true
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 32,
+    unique: true
   },
   password: {
     type: String,
     required: true,
-    minlength: 5, 
+    minlength: 5,
     maxlength: 255
   },
   profile_image: {
@@ -39,16 +39,20 @@ const User = mongoose.model('User', new mongoose.Schema({
     default: ''
   },
   category_subscriptions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
-  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }] ,
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
   created_posts: [{ post_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Posts' } }],
   liked_posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Posts' }],
   liked_comments: {
-    type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comments'}]
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comments' }]
   },
-  saved_posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Posts'}]
+  saved_posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Posts' }],
   // posts: {
-
+  preferences: {
+    type: {
+      dark_mode: { type: Boolean, default: false },
+      
+  }}
   // }
   // comments: [{typ}]
 }, snakeCaseStamps));

@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import  {useDarkMode} from "./styles/dark-mode/useDarkMode.js"
 import './App.css';
+import React, { useState, useEffect } from 'react';
+import SiteRoutes from './components/Routes.js';
+import Header from './components/header/Header.tsx';
+import {ThemeProvider} from "styled-components";
+import { GlobalStyles } from "./styles/dark-mode/globalStyles.js";
+import { lightTheme, darkTheme } from "./styles/dark-mode/themes.js"
+
+
+
 
 function App() {
+  const [theme, themeToggler] = useDarkMode();
+
+  
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <ThemeProvider theme={themeMode}>
+      <>
+        <GlobalStyles />
+        
+        <div className="App">
+         
+            <Header themeToggler={ themeToggler} theme={theme} />
+      <SiteRoutes />
     </div>
+    </>
+    </ThemeProvider>
   );
 }
 

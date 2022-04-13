@@ -31,7 +31,7 @@ authRouter.post('/login', async (req, res) => {
   console.log('this is token' + token)
   // Set tokens to header and return basic user info,
   res.header({ 'x-auth-token': token, 'authorization': `Bearer ${token}` })
-    .send(_.assign({ token: token }, _.pick(user, ['_id', 'email', 'username', 'created_at', 'updated_at', 'favorites'])));
+    .send(_.assign({ token: token }, _.pick(user, ['_id', 'email', 'username', 'created_at', 'updated_at', 'followers', 'following', 'profile_image', 'bio'])));
   // console.log(req.headers)
 });
 
