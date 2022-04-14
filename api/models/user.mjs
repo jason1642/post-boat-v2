@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
-
+import validator from 'validator'
 const snakeCaseStamps = {
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   }};
-
+  
 const User = mongoose.model('User', new mongoose.Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId
@@ -14,18 +14,20 @@ const User = mongoose.model('User', new mongoose.Schema({
     type: String,
     required: true,
     minlength: 3,
-    maxlength: 24
+    maxlength: 24,
+    validate: [validator.isAlphanumeric, 'Usernames may only have letters and numbers.']
   },
   email: {
     type: String,
     required: true,
     minlength: 5,
     maxlength: 32,
-    unique: true
+    unique: true,
+    validate: [validator.isEmail, 'Invalid email']
   },
   password: {
     type: String,
-    required: true,
+    required: [true, 'Enter a password'],
     minlength: 5,
     maxlength: 255
   },

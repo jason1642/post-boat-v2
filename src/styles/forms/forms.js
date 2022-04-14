@@ -17,13 +17,29 @@ export const Form = styled.form`
 
 `;
 export const Input = styled.input`
-  padding: 7px;
+  padding: 8px;
 
-  margin: 10px 0px;
-  width: 50%;
+  margin: 5px 0px;
+  width: 85%;
   border-radius: 13px;
   border-width: 0px;
-  
+`
+export const Label = styled.label`
+  width: 66%;
+  display: flex;
+  padding: 3px;
+  align-items: center;
+  /* border: 1px solid black; */
+  gap: 5px;
+  justify-content: space-between;
+
+
+`
+export const Span = styled.div`
+  width: 15%;
+  /* margin: 0 3px; */
+  text-align: right;
+  padding-right: 3px;
 `
 export const Title = styled.h1`
   color: ${({ theme }) => theme.text};
@@ -40,3 +56,16 @@ export const SubmitButton = styled.button`
   }
 `;
 
+export const ErrorDisplay = styled.div`
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-start;
+  align-items: flex-start;
+
+`
+export const ErrorItem = styled.div`
+  color: #b63d3d;
+  margin: 3px 0;
+  
+`

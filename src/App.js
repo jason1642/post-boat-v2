@@ -65,10 +65,10 @@ useEffect(() => {
         <div className="App">
          
           <Header themeToggler={themeToggler} theme={theme} />
-          {
+          {/* {
         isResolved && currentUser &&  <h1>USER IS {currentUser.username}</h1>
     
-      }
+      } */}
       <SiteRoutes />
     </div>
     </>

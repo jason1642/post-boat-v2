@@ -17,7 +17,8 @@ export const createUser = async (input:UserInput) =>
   await api.post('/api/user/create', input)
     .then(res => {
     console.log(res)
-    window.location.reload();
+      // window.location.reload();
+      return res
     }).catch(err => {
     console.log(err)
     return err;

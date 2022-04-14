@@ -8,7 +8,7 @@ export const lightTheme = {
   inverseBackground: '#3b3838',
   inverseText: 'white',
   icon: '#444242',
-  elementBackground: 'grey',
+  elementBackground: '#d2d2d2',
   buttonBackground: 'white',
 }
 export const darkTheme = {
