@@ -45,13 +45,15 @@ const reducer = (state = initialState, action) => {
       console.log(action.payload)
       return {
         ...state,
-        status: 'error'
+        status: 'error',
+        authenticated: false
       }
     
     case LOG_IN_FAIL:
       return {
         ...state, 
-        status: "error"
+        status: "error",
+        authenticated: false
       };
     
     // case LOG_OUT_USER:

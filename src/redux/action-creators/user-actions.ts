@@ -23,7 +23,7 @@ export const logInUser = (userInput: any) => {
       console.log('CANNOT LOG IN')
       return dispatch({
         type:  LOG_IN_FAIL,
-        payload: userInput
+        payload: {status: 'error'}
       })
       })
 }
@@ -50,7 +50,7 @@ export const verifyUser = () => {
         console.log(err)
         return dispatch({
           type: VERIFY_USER_FAIL,
-          payload: undefined
+          payload: {status: 'error'}
         })
       })
   }
