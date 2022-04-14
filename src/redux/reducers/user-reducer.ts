@@ -1,4 +1,4 @@
-import {  LOG_OUT_USER, VERIFY_USER, VERIFY_USER_FAIL, LOG_IN_FAIL, REGISTER_USER, REGISTER_ERROR, REGISTER_SUCCESS, LOG_IN_SUCCESS } from "../constants";
+import {  LOG_OUT_USER, VERIFY_USER_SUCCESS, VERIFY_USER_FAIL, LOG_IN_FAIL, REGISTER_USER, REGISTER_ERROR, REGISTER_SUCCESS, LOG_IN_SUCCESS } from "../constants";
 import _ from 'lodash'
 
 interface InitialStateTypes  {
@@ -36,23 +36,23 @@ const reducer = (state = initialState, action) => {
       return _.assign(action.payload,
         { authenticated: true })
     
-    // case VERIFY_USER:
-    //     console.log(action.payload)
-    //   return _.assign(action.payload,
-    //     { authenticated: true })
+    case VERIFY_USER_SUCCESS:
+        console.log(action.payload)
+      return _.assign(action.payload,
+        { authenticated: true })
     
-    // case VERIFY_USER_FAIL:
-      
-    //   return {
-    //     ...state,
-    //     status: 'error'
-    //   }
+    case VERIFY_USER_FAIL:
+      console.log(action.payload)
+      return {
+        ...state,
+        status: 'error'
+      }
     
-    // case LOG_IN_FAIL:
-    //   return {
-    //     ...state, 
-    //     status: "error"
-    //   };
+    case LOG_IN_FAIL:
+      return {
+        ...state, 
+        status: "error"
+      };
     
     // case LOG_OUT_USER:
     //   return action.payload;
@@ -60,16 +60,16 @@ const reducer = (state = initialState, action) => {
     // case REGISTER_USER:
     //   return action.payload;
     
-    // case REGISTER_SUCCESS: 
-    //   return {
-    //     ...state,
-    //     status: 'success'
-    //   }
-    // case REGISTER_ERROR:
-    //   return {
-    //     ...state,
-    //     status: 'error'
-    //   }
+    case REGISTER_SUCCESS: 
+      return {
+        ...state,
+        status: 'success'
+      }
+    case REGISTER_ERROR:
+      return {
+        ...state,
+        status: 'error'
+      }
 
     default:
       return state;

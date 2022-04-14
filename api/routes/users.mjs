@@ -14,6 +14,7 @@ const userRouter = express.Router();
 
 
 // /create 
+// Returns user object with id, username email, password, and created at date
 const createUser = async (req,res) => {
   // Without Joi validation, i need to figure out how to send an error to front end with mongoose validation
   let secret
@@ -25,18 +26,18 @@ const createUser = async (req,res) => {
     return res.status(400).send('That username or email is already taken.');
 } else {
     // Insert the new user if they do not exist yet
-  user = new User(_.assign(_.pick(req.body, ['username', 'email', 'password']),
+  user = new User(_.assign(_.pick(req.body, ['username', 'email', 'password', 'bio']),
     { _id: new mongoose.Types.ObjectId() }));
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
-   
+
     await user.save();
     // console.log(process.env.TOKEN_SECRET)
     secret = process.env.TOKEN_SECRET ? process.env.TOKEN_SECRET : global.TokenSecret
     // console.log(config.has('PrivateKey'))
     const token = jwt.sign({ _id: user._id }, secret);
     
-    return res.header('x-auth-token', token).send(_.assign(_.pick(user, ['_id', 'username', 'email', 'password', 'created_at']), {token: token}));
+    return res.header('x-auth-token', token).send(_.assign(_.pick(user, ['_id', 'username', 'email', 'password', 'created_at', 'bio']), {token: token}));
   }
 }; 
 userRouter.post('/create', createUser)
@@ -146,7 +147,7 @@ userRouter.post('/follow', followUser)
 
 
 
-
+// These two api calls can be combined into one with a double query
 // Delete user by ID
 const deleteUserById = async (req, res, next) => {
   res.send(await User.deleteOne({_id: req.body._id}))

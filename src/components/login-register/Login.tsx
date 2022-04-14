@@ -1,9 +1,15 @@
 import * as React from 'react';
 import {Form, Input, Title, SubmitButton} from '../../styles/forms/forms.js'
 import { useState, useEffect } from 'react';
+import _ from 'lodash'
+import { bindActionCreators } from 'redux'
+import { useSelector, useDispatch} from 'react-redux';
+import { userActions } from '../../redux/index.ts';
+import e from 'express';
 
 interface ILoginProps {
 }
+const valueNames = ['username', 'password',]
 
 const Login: React.FunctionComponent<ILoginProps> = (props) => {
 
@@ -12,39 +18,41 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
     password: '',
 
   })
+  const dispatch = useDispatch()
+  const { logInUser } = bindActionCreators(userActions, dispatch);
 
   const handleInputChange = (e) => {
-    console.log(e)
+    // console.log(e)
     setUserInput(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }))
   }
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Axios post to express 
-  }
+  const handleLogin = async () =>
+    await logInUser(userInput).then(userData => {
+      console.log(userData)
+        
+  },err=>console.log(err))
   return (
     <Form
-      onSubmit={handleSubmit}
+      onSubmit={async (e) => {
+        e.preventDefault()
+        handleLogin()
+      }}
       >
       <Title>Log in</Title>
-      <Input
-        type='text'
-        value={userInput.username}
-        placeholder=''
+
+      {valueNames.map(name =><Input
+        type={name === 'username' ? 'text' : 'password'}
+        value={userInput[name]}
+        placeholder={_.capitalize(name)}
         onChange={handleInputChange}
-        name='username'
+        name={name}
       />
-   
-      <Input
-        type='password'
-        value={userInput.password}
-        placeholder='Password'
-        onChange={handleInputChange}
-        name='password'
-      />
-      <SubmitButton />
+        )}
+      
+      <SubmitButton>Submit</SubmitButton>
+
     </Form>
   );
 };

@@ -52,7 +52,14 @@ const User = mongoose.model('User', new mongoose.Schema({
     type: {
       dark_mode: { type: Boolean, default: false },
       
-  }}
+    },
+    default: {
+      preferences: {
+        dark_mode: false
+      }
+    },
+    _id: false
+  }
   // }
   // comments: [{typ}]
 }, snakeCaseStamps));

@@ -1,10 +1,16 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Form, Input, Title, SubmitButton } from '../../styles/forms/forms.js'
+import { useNavigate} from 'react-router-dom';
+import { createUser } from '../api-helpers/user-api.ts'
+import _ from 'lodash'
+ 
 interface IRegisterProps {
 }
-
+const valueNames = ['username', 'email',  'bio','password',]
 const Register: React.FunctionComponent<IRegisterProps> = (props) => {
+  const navigate = useNavigate()
+
   const [userInput, setUserInput] = useState({
     username: '',
     password: '',
@@ -13,14 +19,16 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
   })
 
   const handleInputChange = (e) => {
-    console.log(e)
     setUserInput(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }))
   }
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e: any) => {
+    e.preventDefault() 
+    await createUser(userInput).then(res => {
+      console.log(res)
+    },err=>console.log(err))
     // Axios post to express 
   }
   return (
@@ -28,28 +36,18 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
       onSubmit={handleSubmit}
       >
       <Title>Register</Title>
-      <Input
-        type='text'
-        value={userInput.username}
-        placeholder=''
+
+      {valueNames.map(name =>
+        <Input
+        type={name === ('username' || 'bio') ? 'text' : name}
+        value={userInput[name]}
+        placeholder={_.capitalize(name)}
         onChange={handleInputChange}
-        name='username'
-      />
-      <Input
-        type='email'
-        value=''
-        placeholder=''
-        onChange={handleInputChange}
-        name=''
-      />
-      <Input
-        type='password'
-        value={userInput.password}
-        placeholder='Password'
-        onChange={handleInputChange}
-        name='password'
-      />
-      <SubmitButton />
+        name={name}
+      />)}
+      
+      
+      <SubmitButton >Submit</SubmitButton>
     </Form>
   );
 };

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
+import {removeToken} from '../api-helpers/user-api.ts'
 import {
   AiOutlineHome,
   AiFillHome,
@@ -36,7 +37,19 @@ const Item = styled(Link)`
   /* font-size: 12px; */
   margin: 0;
 `
-const Nav: React.FunctionComponent<INavProps> = ({theme}) => {
+
+const handleLogout = ( ) => {
+  localStorage.clear();
+  // setUser(null)
+  removeToken();
+  console.log('You are logged out')
+  console.log(localStorage)
+  window.location.reload();
+}
+
+const Nav: React.FunctionComponent<INavProps> = ({ theme }) => {
+  
+  
   return (
     <List>
       <Item to={'/'} >
@@ -45,8 +58,8 @@ const Nav: React.FunctionComponent<INavProps> = ({theme}) => {
       <Item to={'/'} >
         {theme === 'light' ? <IoPersonSharp /> : <IoPersonOutline />}
       </Item>
-      <Item to={'/register'} >Categories</Item>
-      <Item to={'/login'} >Create</Item>
+      <Item to={'/register'} >Register</Item>
+      <Item to={'/login'} >Login</Item>
       <Item to={'/'} >
         {theme === 'light' ? <AiFillMessage /> : <AiOutlineMessage />}
       </Item>
@@ -56,10 +69,10 @@ const Nav: React.FunctionComponent<INavProps> = ({theme}) => {
         {theme === 'light'}
     </Item> */}
 
-      {/* Log out */}
-      {/* <Item to='/'>
+    
+      <Item onClick={handleLogout} to='/'>
         {theme==='light' ? <BiLogOut/> : <IoLogOutSharp />}
-      </Item> */}
+      </Item>
     </List>
   );
 };

@@ -40,13 +40,16 @@ authRouter.post('/login', async (req, res) => {
 
 
 
-authRouter.post('/verify', async (req, res, next) => 
-  jwt.verify(req.body.token, process.env.TOKEN_SECRET,
+authRouter.post('/verify', async (req, res, next) => {
+  // console.log(req.body.token, 'this is the verify token')
+  return await jwt.verify(req.body.token, process.env.TOKEN_SECRET,
     async (err, user) => {
-      console.log(user)
+    
       if (err) return res.status(403).send('invalid token')
-      return await User.findOne({ _id: user._id }).then(userRes=>res.send(userRes))    
-    }  
+      return await User.findOne({ _id: user._id }).then(userRes => res.send(userRes))
+    }
   )
+}
 )
+  
   export default authRouter

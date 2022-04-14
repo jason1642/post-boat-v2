@@ -1,11 +1,11 @@
 // Combine all reducers 
 
 import { combineReducers } from 'redux';
-// import userReducer from './userReducer.ts';
+import userReducer from './user-reducer.ts';
 
 // Function that takes an objects of all reducers to combine 
 const reducers = combineReducers({
-  // currentUser: userReducer
+  currentUser: userReducer
 });
 
 
