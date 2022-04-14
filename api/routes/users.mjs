@@ -5,9 +5,33 @@ import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import _ from 'lodash';
 import { verifyUser } from '../middleware/verify.mjs';
+import Post from '../models/post.mjs';
 
 const userRouter = express.Router();
-
+const randomStrings = [
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+]
 // /api/user
 // Express conventions:
 // If only IDs are being sent to a request as data, use get rather than post and put IDs in params
@@ -32,7 +56,7 @@ const createUser = async (req,res) => {
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
     await user.save();
-    console.log('RUNNING SAVE')
+    // console.log('RUNNING SAVE')
 
   secret = process.env.TOKEN_SECRET ? process.env.TOKEN_SECRET : global.TokenSecret
     const token = jwt.sign({ _id: user._id }, secret);
@@ -185,6 +209,55 @@ const editUser = async (req, res, next) => {
   res.send(user)
 }
 userRouter.put('/edit', editUser)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// For testing purposes only
+userRouter.post('/create-many-users', async (req, res) => {
+  const dataArray = randomStrings.map((ele, i) => ({
+    username: ele + i,
+    email: ele + i + '@gmail.com',
+    password: 'pass123'
+  }))
+  await User.insertMany(dataArray)
+  
+
+  res.send(dataArray)
+})
+// Testing only
+userRouter.post('/create-many-posts', async (req, res) => {
+  const users = await User.find({})
+  const dataArray = users.map((ele, i) => ({
+    author: {
+      user_id: ele._id,
+      username: ele.username,
+      profile_image:'testimage.jpg'
+    },
+    title: 'Title for post number ' + i,
+    text: 'This is the text for the description of this post that i am testing ',
+    category: 'general',
+    images: ['oneimage.jpg']
+  }))
+  // console.log(users)
+  console.log(users)
+  await Post.insertMany(dataArray)
+  console.log(dataArray)
+  return res.send(users)
+})
+
+
 
 
 export default userRouter; 
