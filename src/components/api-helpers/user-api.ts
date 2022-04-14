@@ -16,7 +16,7 @@ interface UserInput {
 export const createUser = async (input:UserInput) => 
   await api.post('/api/user/create', input)
     .then(res => {
-    console.log(res)
+    // console.log(res)
       // window.location.reload();
       return res
     }).catch(err => {

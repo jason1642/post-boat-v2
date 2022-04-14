@@ -1,16 +1,15 @@
-import { useRoutes } from "react-router-dom";
-import Header from './header/Header.tsx'
+import { useRoutes, Navigate } from "react-router-dom";
 import Login from "./login-register/Login.tsx";
 import Register from "./login-register/Register.tsx";
-
-const SiteRoutes = () => {
+import HomePage from "./home-page/HomePage.tsx";
+const SiteRoutes = ({currentUser}) => {
   
-
+  
   return useRoutes([
-    { path: '/login', element: <Login /> },
-    { path: '/register', element: <Register /> },
+    { path: '/login', element: currentUser.authenticated ? <Navigate to='/' replace /> : <Login /> },
+    { path: '/register', element: currentUser.authenticated ? <Navigate to='/' replace /> : <Register /> },
     // { path: '/', element: <Header /> },
-    // {path: '/', element: <HomePage />}
+    { path: '/', element: <HomePage currentUser={currentUser} />}
   ])
 }
 

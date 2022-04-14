@@ -9,18 +9,18 @@ export const logInUser = (userInput: any) => {
   // Uses /api/user/auth post to verify credentials, then grants a jwt and user info
   return (dispatch: any) => 
     api.post('/api/auth/login', userInput).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
 
       localStorage.setItem('authToken', res.data.token);
       api.defaults.headers.common.authorization = `Bearer ${res.data.token}`;
-      console.log(localStorage)
+      // console.log(localStorage)
       return dispatch({
         type: LOG_IN_SUCCESS,
         payload: res.data
       })
     })
       .catch(err => {
-      console.log('CANNOT LOG IN')
+      // console.log('CANNOT LOG IN')
       return dispatch({
         type:  LOG_IN_FAIL,
         payload: {status: 'error'}
@@ -34,13 +34,13 @@ export const verifyUser = () => {
   // };
   return (dispatch: any) => {
     const token = localStorage.getItem('authToken')
-    console.log(token)
+    // console.log(token)
   
       return api.post('/api/auth/verify',
         {
         token: token
       }).then(res => {
-        console.log(res, 'verify route')
+        // console.log(res, 'verify route')
         return dispatch({
           type: VERIFY_USER_SUCCESS,
           payload: res.data

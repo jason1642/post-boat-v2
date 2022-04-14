@@ -1,17 +1,14 @@
 import * as React from 'react';
 import {Form, Input, Title, SubmitButton} from '../../styles/forms/forms.js'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import _ from 'lodash'
 import { bindActionCreators } from 'redux'
-import { useSelector, useDispatch} from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { userActions } from '../../redux/index.ts';
 import { useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-import e from 'express';
 
-interface ILoginProps {
-}
 const valueNames = ['username', 'password',]
 
 const Login = (props) => {
@@ -25,7 +22,6 @@ const Login = (props) => {
   const { logInUser } = bindActionCreators(userActions, dispatch);
 
   const handleInputChange = (e) => {
-    // console.log(e)
     setUserInput(prev => ({
       ...prev,
       [e.target.name]: e.target.value
@@ -50,7 +46,10 @@ const Login = (props) => {
           willClose: () => {
             clearInterval(timerInterval)
           }
-        }).then(()=>navigate('/') )
+        }).then(() => {
+          navigate('/')
+          window.location.reload()
+        })
         
       } else {
         Swal.fire({
@@ -58,14 +57,6 @@ const Login = (props) => {
           icon: 'error',
           html: 'Sorry, wrong username or password. Please try again',
           timer: 1500,
-          // timerProgressBar: true,
-          // didOpen: () => {
-          //   Swal.showLoading()
-          //   const b: any = Swal.getHtmlContainer().querySelector('b')
-          //   timerInterval = setInterval(() => {
-          //     b.textContent = Swal.getTimerLeft()
-          //   }, 100)
-          // },
           willClose: () => {
             clearInterval(timerInterval)
           }

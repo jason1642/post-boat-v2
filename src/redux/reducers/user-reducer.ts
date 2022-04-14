@@ -32,17 +32,17 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOG_IN_SUCCESS:
       // console.log('The current user is ', action.payload)
-      console.log(action.payload)
+      // console.log(action.payload)
       return _.assign(action.payload,
         { authenticated: true })
     
     case VERIFY_USER_SUCCESS:
-        console.log(action.payload)
+        // console.log(action.payload)
       return _.assign(action.payload,
         { authenticated: true })
     
     case VERIFY_USER_FAIL:
-      console.log(action.payload)
+      // console.log(action.payload)
       return {
         ...state,
         status: 'error',

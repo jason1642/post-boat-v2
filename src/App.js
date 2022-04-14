@@ -64,12 +64,12 @@ useEffect(() => {
         
         <div className="App">
          
-          <Header themeToggler={themeToggler} theme={theme} />
-          {/* {
-        isResolved && currentUser &&  <h1>USER IS {currentUser.username}</h1>
+          <Header currentUser={currentUser} themeToggler={themeToggler} theme={theme} />
+          {
+        isResolved && <SiteRoutes currentUser={currentUser}/>
     
-      } */}
-      <SiteRoutes />
+      }
+      
     </div>
     </>
     </ThemeProvider>
