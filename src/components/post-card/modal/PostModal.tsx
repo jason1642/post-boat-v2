@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import moment from 'moment'
-import _ from 'lodash'
-import { Container, Date, Span, BottomRow, ImageContainer, Image, TopRow, CategoryName,  Main, Title, Header, Comment, Text } from '../../styles/post/modal.js'
+// import _ from 'lodash'
+import { Container,  ImageContainer, Image, Main, Text } from '../../../styles/post/modal.js'
 import Modal from 'react-modal/dist/react-modal.js'
-import CommentSection from './comment-section/CommentSection.tsx'
-
+import CommentSection from '../comment-section/CommentSection.tsx'
+import Header from './Header.tsx'
 interface IPostModalProps {
   modalIsOpen: boolean,
   closeModal: any,
   isOpen: boolean,
   data: any,
-  likePost: any
+  likePost: any,
+  currentUser: any,
+
 }
 const customStyles = {
   content: {
@@ -39,7 +40,7 @@ const customStyles = {
     
   }
 };
-const PostModal: React.FunctionComponent<IPostModalProps> = ({data, likePost, closeModal, modalIsOpen}) => {
+const PostModal: React.FunctionComponent<IPostModalProps> = ({currentUser, data, likePost, closeModal, modalIsOpen}) => {
   let subtitle;
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -54,25 +55,13 @@ const PostModal: React.FunctionComponent<IPostModalProps> = ({data, likePost, cl
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <Header>
-          <TopRow>
-            <CategoryName>/{_.capitalize(data.category)}</CategoryName>
-            <Date>Posted: {_.capitalize(moment().startOf('day').fromNow(data.created_at))} ago</Date>
-          </TopRow>
-          <Title>
-            {data.title}
-          </Title>
-          <BottomRow>
-          <Span>{data.comments.length} {data.comments.length !== 1 ? 'Comments': 'Comment'}</Span>
-            <Span onClick={()=>likePost(data._id, currentUser._id)}
-            >{data.liked_by.length} {data.liked_by.length !== 1 ? 'Likes' : 'Like'}</Span>
-          <Span>{data.saved_by.length} {data.saved_by.length !== 1 ? 'saves': 'save'}</Span>
-            <Span style={{justifySelf:'flex-end'}}>More posts from {data.category}</Span>
-          </BottomRow>
-        </Header>
-        {/* <button onClick={closeModal}>close</button>
-        <div>I am a modal</div> */}
-       
+     
+        <Header
+          currentUser={currentUser}
+          likePost={likePost}
+          data={data}
+        />
+
         <Main>
           {data.images.length > 0 &&
             <ImageContainer>

@@ -32,7 +32,7 @@ const fetchPostsData = async (category: string | undefined) => {
 
   return (
     <Container>
-      {console.log(feedData.length)}
+      {/* {console.log(feedData.length)} */}
       {!feedData || feedData.length === 0 ?
         'There are no posts yet.' :
         feedData.map((ele, i: number) =>

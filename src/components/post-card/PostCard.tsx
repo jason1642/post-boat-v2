@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai/index.js'
 import moment from 'moment'
 import {BottomRow, Text, ImageContainer, Image, Container,CreatedBy, Span, Main, TopRow, Title} from '../../styles/post/post-card.js'
-import PostModal from './PostModal.tsx';
+import PostModal from './modal/PostModal.tsx';
 import { likePost } from '../api-helpers/post-api.ts'
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -22,14 +22,14 @@ const styles = {
   
 }
 const PostCard: React.FunctionComponent<IPostCardProps> = ({data}) => {
-  console.log(data)
+  // console.log(data)
 
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const currentUser = useSelector((state: any) => state.currentUser);
 
   useEffect(() => {
-    console.log(currentUser)
+    // console.log(currentUser)
   }, [])
   
   function openModal() {

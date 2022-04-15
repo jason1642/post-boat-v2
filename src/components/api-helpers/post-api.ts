@@ -7,11 +7,12 @@ const api = axios.create({
 
 // like and unlike
 export const likePost = async (post_id: string, user_id: string) =>
-  await api.post('/api/post/like', {
+  await api.post('/api/posts/like', {
     post_id: post_id,
     user_id: user_id
   }).then(res => {
-      console.log(res)
+    console.log(res)
+    return res
   }).catch(err => {
       console.log(err)
     })
