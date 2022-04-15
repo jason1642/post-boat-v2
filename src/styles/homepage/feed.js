@@ -2,13 +2,19 @@ import styled from 'styled-components';
 
 
 export const Container = styled.div`
-  width: 80%;
+
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
   border-radius: 9px;
-
-  background-color: grey;
+  overflow-y: scroll;
+  max-height: 95vh;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  &::-webkit-scrollbar {
+  display: none;
+}
 `;
 

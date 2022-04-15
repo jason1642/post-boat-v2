@@ -9,7 +9,8 @@ const SiteRoutes = ({currentUser}) => {
     { path: '/login', element: currentUser.authenticated ? <Navigate to='/' replace /> : <Login /> },
     { path: '/register', element: currentUser.authenticated ? <Navigate to='/' replace /> : <Register /> },
     // { path: '/', element: <Header /> },
-    { path: '/', element: <HomePage currentUser={currentUser} />}
+    { path: '/', element: <HomePage currentUser={currentUser} /> },
+    {path: '/category/:category', element: <HomePage currentUser={currentUser} /> }
   ])
 }
 

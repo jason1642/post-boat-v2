@@ -42,6 +42,16 @@ postRouter.post('/create', async (req, res, next) => {
 
 })
   
+postRouter.get('/findAll', async (req, res) => {
+  try {
+    const posts = await Post.find({}).limit(100)
+    return res.send(posts)
+
+  } catch (err) {
+    res.status(404).send('An error has occurred while fetching posts.')
+  }
+})
+
 // Find one
 postRouter.get('/findOne/:_id', async (req, res, next) => {
   const post = await Post.findOne({ _id: req.params._id })

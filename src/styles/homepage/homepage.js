@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Main = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -10,7 +10,26 @@ export const Main = styled.div`
   margin: 0 auto;
   min-height: 100vh;
   border-radius: 9px;
+  max-height: 100%;
+  & * {
+    display: flex;
+  }
 `;
 export const Title = styled.h1`
-  
+  font-size: .8em;
 `
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 70%;
+`;
+
+export const Main = styled.div`
+  flex-direction: row;
+  /* display: flex; */
+  height: 100%;
+  width: 100%;
+`;

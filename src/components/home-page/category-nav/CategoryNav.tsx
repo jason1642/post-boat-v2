@@ -1,13 +1,16 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import {Container, Item} from '../../../styles/homepage/category-nav.js'
-
+import {Container, Item} from '../../../styles/homepage/category-nav.ts'
+import _ from 'lodash'
+import {useParams} from 'react-router-dom'
 interface ICategoryNavProps {
+  isSelected: boolean
 }
 
 const categoryArray = ['general', 'sports', 'gaming', 'programming', 'cooking']
 const CategoryNav: React.FunctionComponent<ICategoryNavProps> = (props) => {
-  
+  const {category} = useParams()
+  console.log(category)
   
   
   // Display names of different categories, highlight current one
@@ -15,8 +18,12 @@ const CategoryNav: React.FunctionComponent<ICategoryNavProps> = (props) => {
   // /general and / display the same posts
   return (
     <Container>
-      Categories
-      {categoryArray.map(ele => <Item to={'/category/' + ele}>{ele}</Item>)}
+      
+      {categoryArray.map(ele =>
+        <Item
+          color={category === ele ? 'green' : 'white'}
+          isSelected={category === ele ? true : false}
+          to={'/category/' + ele}>{_.capitalize(ele)}</Item>)}
     </Container>
   );
 };

@@ -1,19 +1,29 @@
 import * as React from 'react';
-import {Main, Title} from '../../styles/homepage/homepage.js'
+import {Main,Container, Title, Wrapper} from '../../styles/homepage/homepage.js'
 import CategoryNav from './category-nav/CategoryNav.tsx';
 import Feed from './feed/Feed.tsx'
+import SideMenu from './side-menu/SideMenu.tsx'
 interface IHomePageProps {
 }
 
 
-
+// Pass current user props
 const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
-  return (<Main>
-    <Title>Home page</Title>
-    <CategoryNav />
+  return (<Container>
+  
+    
+    <Main>
+      
+      <Wrapper>
+        <CategoryNav />
+        <Feed />
+      </Wrapper>
+      
+      <SideMenu />
 
-    <Feed />
-  </Main>);
+    </Main>
+    
+  </Container>);
 };
 
 export default HomePage;

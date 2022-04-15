@@ -10,6 +10,7 @@ export const lightTheme = {
   icon: '#444242',
   elementBackground: '#d2d2d2',
   buttonBackground: 'white',
+  cardBackground: 'lightgrey',
 }
 export const darkTheme = {
   body: '#363537',
@@ -23,5 +24,5 @@ export const darkTheme = {
   icon: 'white',
   elementBackground: '#282828',
   buttonBackground: 'darkgrey',
-
+  cardBackground: '#1a1a1b',
 }
