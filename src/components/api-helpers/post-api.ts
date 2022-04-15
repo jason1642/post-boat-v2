@@ -16,3 +16,15 @@ export const likePost = async (post_id: string, user_id: string) =>
   }).catch(err => {
       console.log(err)
     })
+
+export const savePost = async (post_id: string, user_id: string) => 
+  await api.post('/api/posts/save', {
+    post_id: post_id,
+    user_id: user_id
+  }).then(res => {
+    console.log(res)
+    return res
+  }).catch(err => {
+    console.log(err)
+    return false
+    })

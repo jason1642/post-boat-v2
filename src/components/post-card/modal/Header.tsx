@@ -2,23 +2,28 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import {Container, CategoryName, Title, TopRow, BottomRow,Span, Date } from '../../../styles/post/modal-header.js'
 import moment from 'moment'
+import {Link} from 'react-router-dom'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai/index.js'
+import { BsSave, BsSaveFill} from 'react-icons/bs/index.js'
 import _ from 'lodash'
+
 interface IHeaderProps {
   data: any,
   likePost: Function,
   currentUser: any,
+  savePost: Function,
 }
 interface LikedSaved {
   liked: boolean,
   saved: boolean
 }
-const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, currentUser}) => {
+const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost, currentUser}) => {
   const [likesNum, setLikesNum] = useState(data.liked_by.length)
   const [likedSaved, setLikedSaved] = useState<LikedSaved>({
     liked: false,
     saved: false
   })
+  const [savedNum, setSavedNum ] = useState(data.saved_by.length)
   useEffect(() => {
     if (currentUser._id) {
       const isLiked = data.liked_by.find((e:string) => e === currentUser._id)
@@ -26,9 +31,17 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, currentU
       isLiked ? setLikedSaved(prev => ({ ...prev, liked: true })) : setLikedSaved(prev=>({...prev, liked: false}))
       isSaved ? setLikedSaved(prev => ({ ...prev, saved: true })) : setLikedSaved(prev => ({ ...prev, saved: false }))
       
+
+
     }
+
+
+
     console.log(likedSaved)
-  },[])
+  }, [])
+  
+
+
   return (
     <Container>
 
@@ -59,12 +72,25 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, currentU
         
 
         <Span
-        
-        >{data.saved_by.length} {data.saved_by.length !== 1 ? 'Saves' : 'Save'}</Span>
+          onClick={() => {
+            savePost(data._id, currentUser._id).then(res => { setSavedNum(res.data.length) })
+
+            setLikedSaved(prev => ({ ...prev, saved: !likedSaved.saved }))
+          }}
+        >
+          
+          {likedSaved.saved  ?
+            <BsSaveFill style={{color: 'green', fontSize: '14px'}} /> :
+            <BsSave style={{ color: 'black', fontSize: '14px' }} />}{savedNum} {data.saved_by.length !== 1 ? 'Saves' : 'Save'}</Span>
         
 
 
-          <Span style={{justifySelf:'flex-end'}}>More posts from {data.category}</Span>
+        <Span
+          style={{ justifySelf: 'flex-end' }}>
+          <Link
+            style={{color: 'inherit',textDecoration: 'none'}}
+            to={`/category/` + data.category}
+          >More posts from /{data.category}</Link></Span>
       </BottomRow>
       
     </Container>

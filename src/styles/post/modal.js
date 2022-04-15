@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   /* max-width: 50%; */
   display: flex;
+  height: auto;
   z-index: 50;
   overflow-y: scroll;
 `;
@@ -23,7 +24,8 @@ export const Text = styled.p`
 
 
 export const Main = styled.div`
-
+  /* display: flex;
+  flex-direction: column; */
 `
 export const ImageContainer = styled.div`
   display: flex;

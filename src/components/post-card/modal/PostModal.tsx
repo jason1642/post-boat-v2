@@ -5,32 +5,32 @@ import { Container,  ImageContainer, Image, Main, Text } from '../../../styles/p
 import Modal from 'react-modal/dist/react-modal.js'
 import CommentSection from '../comment-section/CommentSection.tsx'
 import Header from './Header.tsx'
+import {PostModel} from '../../../type-interface.ts'
 interface IPostModalProps {
   modalIsOpen: boolean,
-  closeModal: any,
+  closeModal: Function,
   isOpen: boolean,
-  data: any,
-  likePost: any,
+  data: PostModel,
+  likePost: Function,
   currentUser: any,
+  savePost: Function
 
 }
 const customStyles = {
   content: {
-    top: '52%',
+    top: '50%',
     left: '50%',
     right: 'auto',
-    // bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     overflowY: 'scroll',
-    minHeight: '512px',
-    // height: '100%',
+    // minHeight: '712px',
     display: 'flex',
     flexDirection: 'column',
     minWidth: '60vw',
-    maxWidth: '70vw',
-    // position: 'absolute',
+    maxWidth: '60vw',
     marginTop: '10px',
+    height: '90%',
     backgroundColor: '#272729',
     opacity: '1',
     
@@ -40,7 +40,7 @@ const customStyles = {
     
   }
 };
-const PostModal: React.FunctionComponent<IPostModalProps> = ({currentUser, data, likePost, closeModal, modalIsOpen}) => {
+const PostModal: React.FunctionComponent<IPostModalProps> = ({currentUser, data, savePost, likePost, closeModal, modalIsOpen}) => {
   let subtitle;
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -60,6 +60,7 @@ const PostModal: React.FunctionComponent<IPostModalProps> = ({currentUser, data,
           currentUser={currentUser}
           likePost={likePost}
           data={data}
+          savePost={savePost}
         />
 
         <Main>
@@ -75,7 +76,9 @@ const PostModal: React.FunctionComponent<IPostModalProps> = ({currentUser, data,
           <Text>{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}</Text>
 
         </Main>
-        <CommentSection />
+        <CommentSection
+          data={data}
+        />
       </Modal>
     </Container>
   );

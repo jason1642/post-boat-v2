@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding: 10px;
-  width: 100%;
+  margin: 0;
+  /* width: 100%; */
   border: 1px solid black;
 `;
 
@@ -41,6 +42,7 @@ export const Span = styled.div`
   justify-content: flex-start;
   align-items: center;
   height: 100%;
+  gap: 5px;
   margin: 0 4px;
   &:hover{
     cursor: pointer;

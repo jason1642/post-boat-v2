@@ -111,6 +111,43 @@ postRouter.post('/like', async (req, res, next) => {
 })
 
 
+
+
+// Save/Unsave post
+postRouter.post('/save', async (req, res, next) => {
+  let user, post
+  try { await User.findOne({ _id: req.body.user_id }).then(ele => { user = ele }) } catch (err) { return res.status(404).send('User not found') }
+  // console.log('user is found')
+  try { await Post.findOne({ _id: req.body.post_id }).then(ele => { post = ele }) } catch(err){return res.status(404).send('Post not found.')}
+  // Type of value in liked_posts array is objects but look like strings, use ele.equals() to compare
+  const isAlreadySaved = user.saved_posts.find(ele => ele.equals(req.body.post_id))
+
+  if (isAlreadySaved) {
+    // Remove from liked array from both user & post
+    user.saved_posts.splice(isAlreadySaved, 1)
+    post.saved_by.splice(post.saved_by.find(ele=>ele===user._id), 1)
+  } else {
+    // If it doesnt alrady exists, push user ID to both
+    post.saved_by.push(user._id)
+    user.saved_posts.push(post._id)
+  }
+  user.save()
+  post.save()
+
+  res.send(post.saved_by)
+  
+})
+
+
+
+
+
+
+
+
+
+
+
 // Edit post
 postRouter.put('/edit', async (req, res, next) => {
   let post

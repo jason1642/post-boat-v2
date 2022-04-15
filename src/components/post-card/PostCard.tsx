@@ -4,7 +4,7 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai/index.js'
 import moment from 'moment'
 import {BottomRow, Text, ImageContainer, Image, Container,CreatedBy, Span, Main, TopRow, Title} from '../../styles/post/post-card.js'
 import PostModal from './modal/PostModal.tsx';
-import { likePost } from '../api-helpers/post-api.ts'
+import { likePost, savePost } from '../api-helpers/post-api.ts'
 import { useSelector, useDispatch } from 'react-redux';
 
 interface IPostCardProps {
@@ -67,6 +67,7 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({data}) => {
       </BottomRow>
       <PostModal
         currentUser={currentUser}
+        savePost={savePost}
         likePost={likePost}
         data={data}
         isOpen={modalIsOpen}
