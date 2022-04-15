@@ -4,6 +4,9 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai/index.js'
 import moment from 'moment'
 import {BottomRow, Text, ImageContainer, Image, Container,CreatedBy, Span, Main, TopRow, Title} from '../../styles/post/post-card.js'
 import PostModal from './PostModal.tsx';
+import { likePost } from '../api-helpers/post-api.ts'
+import { useSelector, useDispatch } from 'react-redux';
+
 interface IPostCardProps {
   data: any,
   num: Number,
@@ -18,23 +21,24 @@ const styles = {
   },
   
 }
-const PostCard: React.FunctionComponent<IPostCardProps> = ({data, num}) => {
+const PostCard: React.FunctionComponent<IPostCardProps> = ({data}) => {
   console.log(data)
-  let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
 
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const currentUser = useSelector((state: any) => state.currentUser);
+
+  useEffect(() => {
+    console.log(currentUser)
+  }, [])
+  
   function openModal() {
     setIsOpen(true);
   }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
-
   function closeModal() {
     setIsOpen(false);
-  }  return (
+  }
+  return (
     <Container>
       <TopRow>
         <CreatedBy>Posted by u/{data.author.username} {moment().startOf('day').fromNow(data.created_at)} ago</CreatedBy>
@@ -62,6 +66,8 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({data, num}) => {
         <Span>Send</Span>
       </BottomRow>
       <PostModal
+        currentUser={currentUser}
+        likePost={likePost}
         data={data}
         isOpen={modalIsOpen}
         closeModal={closeModal}

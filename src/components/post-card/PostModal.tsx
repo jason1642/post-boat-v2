@@ -5,11 +5,13 @@ import _ from 'lodash'
 import { Container, Date, Span, BottomRow, ImageContainer, Image, TopRow, CategoryName,  Main, Title, Header, Comment, Text } from '../../styles/post/modal.js'
 import Modal from 'react-modal/dist/react-modal.js'
 import CommentSection from './comment-section/CommentSection.tsx'
+
 interface IPostModalProps {
   modalIsOpen: boolean,
   closeModal: any,
   isOpen: boolean,
-  data: any
+  data: any,
+  likePost: any
 }
 const customStyles = {
   content: {
@@ -37,7 +39,7 @@ const customStyles = {
     
   }
 };
-const PostModal: React.FunctionComponent<IPostModalProps> = ({data, closeModal, modalIsOpen}) => {
+const PostModal: React.FunctionComponent<IPostModalProps> = ({data, likePost, closeModal, modalIsOpen}) => {
   let subtitle;
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -62,7 +64,8 @@ const PostModal: React.FunctionComponent<IPostModalProps> = ({data, closeModal, 
           </Title>
           <BottomRow>
           <Span>{data.comments.length} {data.comments.length !== 1 ? 'Comments': 'Comment'}</Span>
-          <Span>{data.liked_by.length} {data.liked_by.length !== 1 ? 'Likes': 'Like'}</Span>
+            <Span onClick={()=>likePost(data._id, currentUser._id)}
+            >{data.liked_by.length} {data.liked_by.length !== 1 ? 'Likes' : 'Like'}</Span>
           <Span>{data.saved_by.length} {data.saved_by.length !== 1 ? 'saves': 'save'}</Span>
             <Span style={{justifySelf:'flex-end'}}>More posts from {data.category}</Span>
           </BottomRow>
