@@ -17,7 +17,7 @@ const Container = styled.header`
 const Title = styled(Link)`
   text-decoration: none;
   color: ${({theme})=>theme.text};
-
+  padding-left: 10px;
 `
 const Wrapper = styled.div`
   display: flex;

@@ -8,12 +8,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 8px 0px;
+  margin: 4px 0px;
   background-color: ${({theme})=>theme.cardBackground};
   border: 1px solid black;
-  width: 75%;
+  width: 80%;
 
-  padding: 8px 12px;
+  padding: 8px 12px 3px 12px;
   /* min-height: 96px; */
   /* max-height: 512px; */
   border-radius: 8px;
@@ -32,20 +32,29 @@ export const TopRow = styled.div`
   height: 20%;
 `
 export const Title = styled.h3`
-  font-size: .9em;
+  font-size: 1em;
   padding: 3px 0px;
   font-weight: 600;
   display: flex;
   margin: 0;
 `
 export const CreatedBy = styled.div`
-  font-size: 8px;
+  font-size: 7px;
 `
 export const Main = styled.div`
+  
   max-height: 512px;
   margin: 5px 0;
+  &:hover{
+    cursor: pointer;
+  }
   /* height: 60%; */  
 `
+export const Text = styled.div`
+  font-size: .7em;
+  padding: 4px 0px;
+  line-height: 1.5em;
+`;
 export const ImageContainer = styled.div`
   max-width: 100%;
   height: 100%;
@@ -65,12 +74,17 @@ export const Image = styled.img`
 `
 export const BottomRow = styled.div`
   height: 10%;
-  padding: 4px;
+  /* padding: 4px; */
   gap: 5px;
   flex-direction: row;
-  font-size: .8em;
+  font-size: 10px;
   justify-self: flex-end;
+  align-self: flex-start;
+  margin-top: 4px;
 `;
 export const Span = styled.div`
 
+  &:hover{
+    cursor: pointer;
+  }
 `
