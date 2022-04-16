@@ -27,4 +27,25 @@ export const savePost = async (post_id: string, user_id: string) =>
   }).catch(err => {
     console.log(err)
     return false
-    })
+  })
+    
+// data = post_id, user_id, text, author: {user_id, username, profile_image}
+export const commentOnPost = async (data: any) => 
+  await api.post('/api/comment/post', data).then(res => {
+    console.log(res)
+    return res
+  }).catch(err => {
+    console.log(err)
+    return err
+  })
+
+// data = {user_id, post_id, comment_id}
+export const likeComment = async (data: any) => {
+  await api.post('/api/comment/like', data).then(res => {
+    console.log(res)
+    return res
+  }).catch(err => {
+    console.log(err)
+    return err
+  })
+}

@@ -6,6 +6,7 @@ export const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  /* background-color: purple; */
 `;
 export const Title = styled.div`
   display: flex;
@@ -19,13 +20,23 @@ export const FormBox = styled.form`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  width: 85%;
+  width: 90%;
 `
 export const TextInput = styled.textarea`
   width: 100%;
   padding: 10px;
+  min-height: 95px;
+  /* padding-bottom: 20px; */
+  resize: none;
 `;
 export const SubmitButton = styled.input`
-
+  padding: 5px 10px;
+  border-radius: 6px;
+  border-width: 0px;
+  margin: 6px;
+  align-self: flex-end;
+  &:hover{
+    cursor: pointer;
+  }
 `
 

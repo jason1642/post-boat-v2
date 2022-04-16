@@ -27,7 +27,7 @@ const Comment = mongoose.model('Comment', new mongoose.Schema({
   text: {
     type: String,
     minlength: 2,
-    maxlength: 230
+    maxlength: 330
   },
   liked_by:[{type: mongoose.Schema.Types.ObjectId, ref: 'Users'}],
   replies: {

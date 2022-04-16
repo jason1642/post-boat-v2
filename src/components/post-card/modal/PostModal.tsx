@@ -73,11 +73,12 @@ const PostModal: React.FunctionComponent<IPostModalProps> = ({currentUser, data,
               />
             </ImageContainer>
           }
-          <Text>{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}{data.text}</Text>
+          <Text>{data.text}{data.text}{data.text}</Text>
 
         </Main>
         <CommentSection
           data={data}
+          currentUser={currentUser}
         />
       </Modal>
     </Container>

@@ -22,7 +22,7 @@ const commentSchema = new mongoose.Schema({
   text: {
     type: String,
     minlength: 2,
-    maxlength: 230
+    maxlength: 330
   },
   post_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Posts' },
   liked_by:[{type: mongoose.Schema.Types.ObjectId, ref: 'Users'}],
