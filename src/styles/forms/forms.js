@@ -14,6 +14,9 @@ export const Form = styled.form`
   width: 70%;
   margin: 0 auto;
   margin-top: 10px;
+  @media(max-width: 480px){
+    width: 90%;
+  }
 
 `;
 export const Input = styled.input`
@@ -23,6 +26,10 @@ export const Input = styled.input`
   width: 85%;
   border-radius: 13px;
   border-width: 0px;
+  @media(max-width: 480px){
+    width: auto;
+    flex-grow: 2;
+  }
 `
 export const Label = styled.label`
   width: 66%;
@@ -32,14 +39,19 @@ export const Label = styled.label`
   /* border: 1px solid black; */
   gap: 5px;
   justify-content: space-between;
-
+  @media(max-width: 480px){
+    width: 90%;
+  }
 
 `
 export const Span = styled.div`
-  width: 15%;
+  width: 16%;
   /* margin: 0 3px; */
   text-align: right;
   padding-right: 3px;
+  @media(max-width: 480px){
+    font-size: 13px;
+  }
 `
 export const Title = styled.h1`
   color: ${({ theme }) => theme.text};

@@ -30,7 +30,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 70%;
+  width: 88%;
   @media (max-width: 480px){
     width: 100%;
   }

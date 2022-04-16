@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Form, Input, Title, SubmitButton} from '../../styles/forms/forms.js'
+import {Form, Input, Label, Title, Span, SubmitButton} from '../../styles/forms/forms.js'
 import { useState } from 'react';
 import _ from 'lodash'
 import { bindActionCreators } from 'redux'
@@ -72,13 +72,13 @@ const Login = (props) => {
       >
       <Title>Log in</Title>
 
-      {valueNames.map(name =><Input
+      {valueNames.map(name =><Label><Span>{_.capitalize(name)}</Span><Input
         type={name === 'username' ? 'text' : 'password'}
         value={userInput[name]}
         placeholder={_.capitalize(name)}
         onChange={handleInputChange}
         name={name}
-      />
+      /></Label> 
         )}
       
       <SubmitButton>Submit</SubmitButton>

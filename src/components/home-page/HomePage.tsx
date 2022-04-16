@@ -3,6 +3,7 @@ import {Main,Container, Title, Wrapper} from '../../styles/homepage/homepage.js'
 import CategoryNav from './category-nav/CategoryNav.tsx';
 import Feed from './feed/Feed.tsx'
 import SideMenu from './side-menu/SideMenu.tsx'
+import GuestSideMenu from './side-menu/GuestSideMenu.tsx'
 interface IHomePageProps {
   currentUser: any
 }
@@ -19,9 +20,13 @@ const HomePage: React.FunctionComponent<IHomePageProps> = ({currentUser}) => {
         <CategoryNav />
         <Feed />
       </Wrapper>
+      {
+        currentUser._id ?
       
-      <SideMenu currentUser={currentUser}/>
-
+          <SideMenu currentUser={currentUser} />
+          :
+          <GuestSideMenu />
+      }
     </Main>
     
   </Container>);
