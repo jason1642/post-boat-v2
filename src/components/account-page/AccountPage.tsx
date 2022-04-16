@@ -9,7 +9,6 @@ import Nav from './Nav.tsx';
 
 interface IAccountPageProps {
   currentUser: UserModel,
-
 }
 
 const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) => {
@@ -24,7 +23,7 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) 
 
         <Content>
 
-          <Outlet context={{currentUser}} />
+          <Outlet context={{currentUser, id}} />
           {/* 
           Routes: Posts, Comments
           Current user routes: Posts, Comments, Saved Posts,

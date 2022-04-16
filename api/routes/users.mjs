@@ -236,23 +236,38 @@ userRouter.post('/create-many-users', async (req, res) => {
 
   res.send(dataArray)
 })
+
+
 // Testing only
 userRouter.post('/create-many-posts', async (req, res) => {
   const users = await User.find({})
-  const dataArray = users.map((ele, i) => ({
+  const inputData = (id, username, num) => ({
     author: {
-      user_id: ele._id,
-      username: ele.username,
+      user_id: id,
+      username: username,
       profile_image:'testimage.jpg'
     },
-    title: 'Title for post number ' + i,
+    title: 'Title for post number ' + num,
     text: 'This is the text for the description of this post that i am testing ',
     category: 'general',
     images: ['oneimage.jpg']
-  }))
+  });
+  const dataArray = users.map((ele, i) => {
+    ele.created_posts.push(i)
+    return inputData(ele._id, ele.username, i)
+  })
   // console.log(users)
-  console.log(users)
+  // console.log(users)
   await Post.insertMany(dataArray)
+
+  users.forEach(ele => {
+    const didUserCreate = dataArray.find(x => x.author.user_id.equals(ele._id))
+    didUserCreate && ele.created_posts.push(didUserCreate._id)
+    
+    
+  })
+  console.log(users)
+  // await users.save()
   console.log(dataArray)
   return res.send(users)
 })
