@@ -26,8 +26,13 @@ export const TextInput = styled.textarea`
   width: 100%;
   padding: 10px;
   min-height: 95px;
+  color: ${({theme})=>theme.text};
+  background-color: ${({theme})=>theme.elementBackground};
   /* padding-bottom: 20px; */
   resize: none;
+  &:focus-visible{
+    /* border-width: 0px; */
+  }
 `;
 export const SubmitButton = styled.input`
   padding: 5px 10px;

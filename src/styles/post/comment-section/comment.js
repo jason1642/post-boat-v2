@@ -5,8 +5,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   /* border: 1px solid blue; */
-  background-color: #1a1a1b;
-  color: #c6c9cb;
+  background-color: ${({ theme }) => theme.commentBackground};
+  color: ${({theme})=>theme.text};
   margin: 3px 0px;
   padding: 7px 4px 7px 6px;
   border-radius: 7px;

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 // import _ from 'lodash'
-import { Container,  ImageContainer, Image, Main, Text } from '../../../styles/post/modal.js'
-import Modal from 'react-modal/dist/react-modal.js'
+import { ImageContainer, Image, Main, Text } from '../../../styles/post/modal.js'
+import { ReactModal as Modal } from '../../../styles/post/modal.js';
 import CommentSection from '../comment-section/CommentSection.tsx'
 import Header from './Header.tsx'
 import {PostModel} from '../../../type-interface.ts'
@@ -18,20 +18,22 @@ interface IPostModalProps {
 }
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    overflowY: 'scroll',
+    // top: '50%',
+    // left: '50%',
+    // right: 'auto',
+    // marginRight: '-50%',
+    // transform: 'translate(-50%, -50%)',
+    // overflowY: 'scroll',
     // minHeight: '712px',
     display: 'flex',
     flexDirection: 'column',
     minWidth: '60vw',
     maxWidth: '60vw',
     marginTop: '10px',
-    height: '90%',
-    backgroundColor: '#272729',
+    height: '95%',
+    border: '1px solid darkgrey',
+    
+    // backgroundColor: '#262626',
     opacity: '1',
     
   },
@@ -47,12 +49,14 @@ const PostModal: React.FunctionComponent<IPostModalProps> = ({currentUser, data,
     subtitle.style.color = 'black';
 }
   return (
-    <Container>
-      <Modal
+   
+    <Modal
+
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
+        // backgroundColor={}
         contentLabel="Example Modal"
       >
      
@@ -81,7 +85,6 @@ const PostModal: React.FunctionComponent<IPostModalProps> = ({currentUser, data,
           currentUser={currentUser}
         />
       </Modal>
-    </Container>
   );
 };
 

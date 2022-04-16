@@ -10,7 +10,7 @@ export const Container = styled.div`
   justify-content: space-between;
   margin: 4px 0px;
   background-color: ${({theme})=>theme.cardBackground};
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 80%;
 
   padding: 8px 12px 3px 12px;

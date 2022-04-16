@@ -11,6 +11,8 @@ export const lightTheme = {
   elementBackground: '#d2d2d2',
   buttonBackground: 'white',
   cardBackground: 'lightgrey',
+  modalBackground: 'white',
+  commentBackground: 'lightgrey',
 }
 export const darkTheme = {
   body: '#363537',
@@ -25,4 +27,6 @@ export const darkTheme = {
   elementBackground: '#282828',
   buttonBackground: 'darkgrey',
   cardBackground: '#1a1a1b',
+  modalBackground: '#272729',
+  commentBackground: '#333333'
 }

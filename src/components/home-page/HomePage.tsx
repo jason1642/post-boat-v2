@@ -4,11 +4,12 @@ import CategoryNav from './category-nav/CategoryNav.tsx';
 import Feed from './feed/Feed.tsx'
 import SideMenu from './side-menu/SideMenu.tsx'
 interface IHomePageProps {
+  currentUser: any
 }
 
 
 // Pass current user props
-const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
+const HomePage: React.FunctionComponent<IHomePageProps> = ({currentUser}) => {
   return (<Container>
   
     
@@ -19,7 +20,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = (props) => {
         <Feed />
       </Wrapper>
       
-      <SideMenu />
+      <SideMenu currentUser={currentUser}/>
 
     </Main>
     

@@ -1,22 +1,23 @@
 import styled from 'styled-components';
+import Modal from 'react-modal/dist/react-modal.js'
 
-export const Container = styled.div`
+
+export const ReactModal = styled(Modal)`
   /* max-width: 50%; */
-  display: flex;
-  height: auto;
-  z-index: 50;
-  overflow-y: scroll;
-`;
-export const CommentSection = styled.div`
-  
-`;
-export const Comment = styled.div`
-  
+  background-color: ${({theme})=>theme.modalBackground};
+  /* background-color: white; */
+  margin: 0 auto;
+  border-radius: 5px;
+  margin-top: 10px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+}
 `;
 
 export const Text = styled.p`
   line-height: 20px;
-  padding: 5px;
+  padding: 8px;
   font-size: 13px;
   
 `;

@@ -4,7 +4,9 @@ export const Container = styled.div`
   padding: 10px;
   margin: 0;
   /* width: 100%; */
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+
 `;
 
 export const TopRow = styled.div`
