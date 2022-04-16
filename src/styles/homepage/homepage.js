@@ -14,9 +14,15 @@ export const Container = styled.div`
   & * {
     display: flex;
   }
+  @media (max-width: 480px){
+    width: 100%;
+  }
 `;
 export const Title = styled.h1`
   font-size: .8em;
+  @media (max-width: 480px){
+    /* text-align: center; */
+  }
 `
 export const Wrapper = styled.div`
   display: flex;
@@ -25,6 +31,9 @@ export const Wrapper = styled.div`
   align-items: center;
   height: 100%;
   width: 70%;
+  @media (max-width: 480px){
+    width: 100%;
+  }
 `;
 
 export const Main = styled.div`
@@ -33,5 +42,7 @@ export const Main = styled.div`
   height: 100%;
   width: 100%;
   gap: 10px;
-
+  @media (max-width: 480px){
+    flex-direction: column;
+  }
 `;

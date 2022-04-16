@@ -12,8 +12,12 @@ export const Container = styled.div`
   /* height: 100%; */
   margin-top: 1em;
   flex-grow: 2;
+  height: 90vh;
   /* background-color: purple; */
   font-size: 10px;
+  @media (max-width: 480px){
+    display: none;
+  }
 `;
 
 export const Section = styled.div`

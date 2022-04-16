@@ -8,7 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100%;
-  border-radius: 9px;
+  /* border-radius: 9px; */
   overflow-y: scroll;
   max-height: 95vh;
   -ms-overflow-style: none;  /* IE and Edge */
@@ -16,5 +16,10 @@ export const Container = styled.div`
   &::-webkit-scrollbar {
   display: none;
 }
+@media (max-width: 480px){
+    width: 100%;
+    padding-top: 10px;
+    /* justify-content: center; */
+  }
 `;
 

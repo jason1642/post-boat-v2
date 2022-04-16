@@ -13,6 +13,13 @@ export const ReactModal = styled(Modal)`
   ::-webkit-scrollbar {
     display: none;
 }
+@media (max-width: 480px){
+    width: 95vw;
+    max-width: 95vw !important;
+    padding-top: 10px;
+    height: 90vh !important;
+    
+  }
 `;
 
 export const Text = styled.p`

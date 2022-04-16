@@ -25,11 +25,19 @@ export const Container = styled.div`
     margin: 0;
     padding: 0;
   }
+  @media (max-width: 480px){
+    width: 90%;
+  }
 `;
 
 export const TopRow = styled.div`
-  
+    border-radius: 8px;
+
   height: 20%;
+  @media (max-width: 480px){
+    width: 100%;
+    margin-left: 10px;
+  }
 `
 export const Title = styled.h3`
   font-size: 1em;
@@ -81,6 +89,10 @@ export const BottomRow = styled.div`
   justify-self: flex-end;
   align-self: flex-start;
   margin-top: 4px;
+  @media (max-width: 480px){
+    width: 100%;
+    margin-left: 10px;
+  }
 `;
 export const Span = styled.div`
 
