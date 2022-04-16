@@ -25,23 +25,25 @@ commentRouter.post('/post', async (req, res, next) => {
 // req: post_id, user_id, comment_id, 
 const likeComment = async (req, res) => {
   let user, post
+
   try { await User.findOne({ _id: req.body.user_id }).then(ele => { user = ele }) } catch (err) { return res.status(404).send('User not found') }
   // console.log('user is found')
   try { await Post.findOne({ _id: req.body.post_id }).then(ele => { post = ele }) } catch(err){return res.status(404).send('Post not found.')}
   // Type of value in liked_posts array is objects but look like strings, use ele.equals() to compare
-  const commentIndex = post.comments.findIndex(e => e.equals(req.body.comment_id))
-  // console.log(req.body.comment_id)
+  const commentIndex = post.comments.findIndex(e => e._id.equals(req.body.comment_id))
+  console.log(commentIndex)
   if(commentIndex === -1) return res.status(404).send('Cannot find comment') 
-  const isAlreadyLiked = user.liked_comments.find(ele => ele.equals(req.body.comment_id))
-  console.log(user.liked_comments)
-  if (isAlreadyLiked) {
+  const isAlreadyLiked = user.liked_comments.findIndex(ele =>ele.equals(req.body.comment_id))
+  if (isAlreadyLiked !== -1) {
+    console.log(isAlreadyLiked) 
+
     // Remove from liked array from both user & post
     user.liked_comments.splice(isAlreadyLiked, 1)
     post.comments[commentIndex].liked_by.splice(post.comments[commentIndex].liked_by.find(ele=>ele===user._id), 1)
   } else {
     // If it doesnt alrady exists, push user ID to both
     post.comments[commentIndex].liked_by.push(user._id)
-    user.liked_comments.push(post._id)
+    user.liked_comments.push(req.body.comment_id)
   }
   user.save()
   post.save()

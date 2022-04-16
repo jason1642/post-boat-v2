@@ -91,9 +91,9 @@ postRouter.post('/like', async (req, res, next) => {
   // console.log('user is found')
   try { await Post.findOne({ _id: req.body.post_id }).then(ele => { post = ele }) } catch(err){return res.status(404).send('Post not found.')}
   // Type of value in liked_posts array is objects but look like strings, use ele.equals() to compare
-  const isAlreadyLiked = user.liked_posts.find(ele => ele.equals(req.body.post_id))
-
-  if (isAlreadyLiked) {
+  const isAlreadyLiked = user.liked_posts.findIndex(ele => ele.equals(req.body.post_id))
+  console.log(isAlreadyLiked)
+  if (isAlreadyLiked !== -1) {
     // Remove from liked array from both user & post
     user.liked_posts.splice(isAlreadyLiked, 1)
     post.liked_by.splice(post.liked_by.find(ele=>ele===user._id), 1)
