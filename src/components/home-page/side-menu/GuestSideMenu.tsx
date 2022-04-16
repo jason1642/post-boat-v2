@@ -6,7 +6,7 @@ interface ISideMenuProps {
 }
 
 
-const SideMenu: React.FunctionComponent<ISideMenuProps> = () => {
+const GuestSideMenu: React.FunctionComponent<ISideMenuProps> = () => {
   return (
     <Container>
       <Section>
@@ -20,4 +20,4 @@ const SideMenu: React.FunctionComponent<ISideMenuProps> = () => {
   );
 };
 
-export default SideMenu;
+export default GuestSideMenu;

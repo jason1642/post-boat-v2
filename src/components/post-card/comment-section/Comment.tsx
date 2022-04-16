@@ -18,7 +18,7 @@ const Comment: React.FunctionComponent<ICommentProps> = ({ postData, commentData
   return (
     <Container>
       <Header>
-        <AuthorName>{currentUser.username} - </AuthorName>
+        <AuthorName>{commentData.author.username} - </AuthorName>
         <DateCreated>12 hours ago</DateCreated>
       </Header>
       <Body>
@@ -28,7 +28,7 @@ const Comment: React.FunctionComponent<ICommentProps> = ({ postData, commentData
 
         <Span
           
-        >12 Likes</Span>
+        >{commentData.liked_by.length} Likes</Span>
         <Span>Reply</Span>
         <Span
         onClick={() => {

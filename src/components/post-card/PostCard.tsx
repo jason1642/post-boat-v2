@@ -61,9 +61,10 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({data}) => {
       <BottomRow>
         <Span><AiOutlineHeart style={styles.heartIcon} /></Span>
         <Span>{data.comments.length} {data.comments.length !== 1 ? 'Comments': 'Comment'}</Span>
-        <Span>Save</Span>
-        <Span>Like</Span>
-        <Span>Send</Span>
+        <Span>{data.liked_by.length} Likes</Span>
+        
+        {currentUser._id && <Span>Send</Span>}
+
       </BottomRow>
       <PostModal
         currentUser={currentUser}

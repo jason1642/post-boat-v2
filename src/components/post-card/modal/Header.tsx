@@ -58,32 +58,45 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
         <Span>{data.comments.length} {data.comments.length !== 1 ? 'Comments': 'Comment'}</Span>
          
         
-        <Span onClick={() => {
-          likePost(data._id, currentUser._id).then(res => { setLikesNum(res.data.length) })
-
-          setLikedSaved(prev => ({ ...prev, liked: !likedSaved.liked }))
+        {currentUser._id ? <><Span
+          onClick={() => {
+            likePost(data._id, currentUser._id).then(res => { setLikesNum(res.data.length) })
+            setLikedSaved(prev => ({ ...prev, liked: !likedSaved.liked }))
           }
-        }>
-            {likedSaved.liked  ?
-            <AiFillHeart style={{color: 'red', fontSize: '16px'}} /> :
+          }>
+          {likedSaved.liked ?
+            <AiFillHeart style={{ color: 'red', fontSize: '16px' }} /> :
             <AiOutlineHeart style={{ color: 'red', fontSize: '16px' }} />}
           {likesNum} {data.liked_by.length !== 1 ? 'Likes' : 'Like'}
         </Span>
         
 
-        <Span
-          onClick={() => {
-            savePost(data._id, currentUser._id).then(res => { setSavedNum(res.data.length) })
-
-            setLikedSaved(prev => ({ ...prev, saved: !likedSaved.saved }))
-          }}
-        >
+          <Span
+            onClick={() => {
+              savePost(data._id, currentUser._id).then(res => { setSavedNum(res.data.length) })
+              setLikedSaved(prev => ({ ...prev, saved: !likedSaved.saved }))
+            }}
+          >
           
-          {likedSaved.saved  ?
-            <BsSaveFill style={{color: 'green', fontSize: '14px'}} /> :
-            <BsSave style={{ color: 'black', fontSize: '14px' }} />}{savedNum} {data.saved_by.length !== 1 ? 'Saves' : 'Save'}</Span>
+            {likedSaved.saved ?
+              <BsSaveFill style={{ color: 'green', fontSize: '14px' }} /> :
+              <BsSave style={{ color: 'black', fontSize: '14px' }} />}{savedNum} {data.saved_by.length !== 1 ? 'Saves' : 'Save'}
+          </Span>
         
-
+        </> : <>
+        <Span>
+          {likedSaved.liked ?
+            <AiFillHeart style={{ color: 'red', fontSize: '16px' }} /> :
+            <AiOutlineHeart style={{ color: 'red', fontSize: '16px' }} />}
+          {likesNum} {data.liked_by.length !== 1 ? 'Likes' : 'Like'}
+        </Span>
+        
+          <Span>
+            {likedSaved.saved ?
+              <BsSaveFill style={{ color: 'green', fontSize: '14px' }} /> :
+              <BsSave style={{ color: 'black', fontSize: '14px' }} />}{savedNum} {data.saved_by.length !== 1 ? 'Saves' : 'Save'}
+          </Span>
+        </>}
 
         <Span
           style={{ justifySelf: 'flex-end' }}>

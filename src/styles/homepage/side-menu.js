@@ -16,7 +16,7 @@ export const Container = styled.div`
   /* background-color: purple; */
   font-size: 10px;
   @media (max-width: 480px){
-    display: none;
+    display: none !important;
   }
 `;
 

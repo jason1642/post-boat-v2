@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import {Container, CommentContainer} from '../../../styles/post/comment-section/comment-section.js'
+// import { useState, useEffect } from 'react';
+import {Container, CommentContainer, GuestMessage} from '../../../styles/post/comment-section/comment-section.js'
 import Comment from './Comment.tsx';
 import  type {CommentModel} from '../../../types/comment-interface.ts'
 import type {PostModel} from '../../../types/post-interface.ts'
@@ -17,10 +17,17 @@ const CommentSection: React.FunctionComponent<ICommentSectionProps> = ({data, cu
 
   return (
     <Container>
-      <Form
+      {
+        currentUser._id ? <Form
         postData={data}
         currentUser={currentUser}
-      />
+        /> :
+          <GuestMessage>
+            Sign in to comment
+          </GuestMessage>
+          
+      }
+      
 
 
       <CommentContainer>
