@@ -1,19 +1,23 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 // title, image, details(creator name, date, likes, category), buttons(like, follow, save, )
 // Modal styling for full view with comment section\
 // Top and bottom nav
-export const Container = styled.div`
+interface Props{
+  cardPadding: string,
+  cardBackground: string,
+  
+}
+export const Container = styled.div<Props>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin: 4px 0px;
   background-color: ${({theme})=>theme.cardBackground};
-  /* border: 1px solid black; */
   width: 80%;
-
-  padding: 8px 12px 3px 12px;
+  padding: ${props=>props.cardPadding};
+  /* padding: 8px 4px 12px 13px/; */
   /* min-height: 96px; */
   /* max-height: 512px; */
   border-radius: 8px;
@@ -21,7 +25,7 @@ export const Container = styled.div`
   & > *{ 
     display: flex;
     flex-direction: column;
-    text-align: left;
+    text-align: ${({textAlign})=>textAlign || 'left'}
     margin: 0;
     padding: 0;
   }
@@ -30,10 +34,14 @@ export const Container = styled.div`
   }
 `;
 
+export const Wrapper = styled.div`
+   
+`;
+
 export const TopRow = styled.div`
     border-radius: 8px;
-
-  height: 20%;
+  margin-bottom: 5px;
+  
   @media (max-width: 480px){
     width: 100%;
     margin-left: 10px;
@@ -45,14 +53,18 @@ export const Title = styled.h3`
   font-weight: 600;
   display: flex;
   margin: 0;
+  width: 100%;
 `
 export const CreatedBy = styled.div`
   font-size: 7px;
+  width: 100%;
+  text-align: left;
 `
 export const Main = styled.div`
-  
+  min-height: 10px;
   max-height: 512px;
   margin: 5px 0;
+  flex-grow: 1;
   &:hover{
     cursor: pointer;
   }
@@ -81,7 +93,7 @@ export const Image = styled.img`
 
 `
 export const BottomRow = styled.div`
-  height: 10%;
+  min-height: 15px;
   /* padding: 4px; */
   gap: 5px;
   flex-direction: row;
@@ -89,13 +101,17 @@ export const BottomRow = styled.div`
   justify-self: flex-end;
   align-self: flex-start;
   margin-top: 4px;
+  width: 100%;
   @media (max-width: 480px){
     width: 100%;
     margin-left: 10px;
   }
 `;
 export const Span = styled.div`
-
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
   &:hover{
     cursor: pointer;
   }

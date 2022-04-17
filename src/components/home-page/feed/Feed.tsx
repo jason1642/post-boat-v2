@@ -36,7 +36,10 @@ const fetchPostsData = async (category: string | undefined) => {
       {!feedData || feedData.length === 0 ?
         'There are no posts yet.' :
         feedData.map((ele, i: number) =>
-          <PostCard key={i} data={ele} />)}
+          <PostCard
+            cardPadding="8px 12px 3px 12px"
+            key={i}
+            data={ele} />)}
     </Container>
   );
 };
