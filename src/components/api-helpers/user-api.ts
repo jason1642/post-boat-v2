@@ -24,6 +24,12 @@ export const createUser = async (input:UserInput) =>
     return err;
   });
 
+export const getUserComments = async (user_id) => 
+  await api.get('/api/comment/getAllByUserId/' + user_id).then(res => {
+    console.log(res)
+  }).catch(err => {
+    console.log(err)
+  })
 
 
   export const removeToken = () => {

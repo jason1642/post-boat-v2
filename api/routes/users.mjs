@@ -57,14 +57,14 @@ const createUser = async (req,res) => {
   user.password = await bcrypt.hash(user.password, salt);
     await user.save();
     // console.log('RUNNING SAVE')
-
+ 
   secret = process.env.TOKEN_SECRET ? process.env.TOKEN_SECRET : global.TokenSecret
     const token = jwt.sign({ _id: user._id }, secret);
     
   return res.header('x-auth-token', token).send(_.assign(_.pick(user, ['_id', 'username', 'email', 'password', 'created_at', 'bio']), {token: token}));
  
-  } catch ({errors}) {
-    console.log(errors.username)
+  } catch (errors) {
+    console.log(errors)
     let errorMessages = []
       Object.keys(errors).forEach(key => errorMessages.push(errors[key].properties.message))
     // console.log(errors)
@@ -101,7 +101,7 @@ const getOneUser = async (req,res) => {
   } else {
     // console.log(res)
     res.send(_.pick(user, ['_id', 'username', 'email', 'bio', 'category_subscriptions', 'following',
-      'followers', 'liked_posts', 'liked_comments', 'saved_posts', 'created_at', 'updated_at']));
+      'followers', 'liked_posts', 'created_comments', 'liked_comments', 'saved_posts', 'created_at', 'updated_at']));
   }
 }
 userRouter.get('/:id', getOneUser)

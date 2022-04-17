@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai/index.js'
 import moment from 'moment'
-import { BottomRow, Wrapper, Text, ImageContainer, Image, Container, CreatedBy, Span, Main, TopRow, Title } from '../../styles/post/post-card.ts'
+import { BottomRow, Text, ImageContainer, Image, Container, CreatedBy, Span, Main, TopRow, Title } from '../../styles/post/post-card.ts'
 import PostModal from './modal/PostModal.tsx';
 import { likePost, savePost } from '../api-helpers/post-api.ts'
 import { useSelector, useDispatch } from 'react-redux';

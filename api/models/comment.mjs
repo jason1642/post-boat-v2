@@ -12,9 +12,9 @@ const snakeCaseStamps = {
 //   text: {type: String, minlength: 1, maxlength: 200}
 // }, snakeCaseStamps)
 
-const Comment = mongoose.model('Comment', new mongoose.Schema({
+const commentSchema = new mongoose.Schema({
   _id: {
-    type:mongoose.Schema.Types.ObjectId
+    type: mongoose.Schema.Types.ObjectId
   },
   author: {
     type: {
@@ -22,20 +22,21 @@ const Comment = mongoose.model('Comment', new mongoose.Schema({
       username: { type: String },
       profile_image: { type: String }
     },
-  _id: false
+    _id: false
   },
   text: {
     type: String,
     minlength: 2,
     maxlength: 330
   },
+  post_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Posts' },
   liked_by:[{type: mongoose.Schema.Types.ObjectId, ref: 'Users'}],
   replies: {
-    type: [this]
+    type: [this],
+    default: []
   }
-
-}, snakeCaseStamps));
-
+}, snakeCaseStamps)
 
 
-export default Comment;
+
+export default commentSchema
