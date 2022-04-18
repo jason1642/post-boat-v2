@@ -13,12 +13,14 @@ const UserComments: React.FunctionComponent<IUserCommentsProps> = (props) => {
   const { currentUser, paramsUserData }: any = useOutletContext()
     // user comments on TITLE on CATEGORY
     // Post author
+  const [commentData, setCommentData] = useState(undefined)
     //Comment - header: likes timestamp
     // - body full text
     // - footer reply share delete(if yours)
     useEffect(() => {
       getManyPostsFromCommentArray(paramsUserData.created_comments).then(res => {
         console.log(res.data)
+        setCommentData(res.data)
       })
     }, []);
   
@@ -29,9 +31,10 @@ const UserComments: React.FunctionComponent<IUserCommentsProps> = (props) => {
       {/* The current user is {currentUser.username} */}
 
       {
-        paramsUserData && paramsUserData.created_comments.map(ele =>
+        commentData && commentData.map((ele) =>
           <UserPageCommentCard
-            data={ele}
+            commentData={ele[0]}
+            postData={ele[1]}
           />)
       } 
     </Main>

@@ -82,7 +82,7 @@ postRouter.post('/getManyPostsByComments', async (req, res) => {
   // 1 - create array of post ids by mapping the array of full comment data
   // 2 - find posts that have the ids, no duplicates
   // 3 - for each comment there initially was, create a new array of arrays consisting
-  // of a comment and its corresponding posts
+  // of a comment and its corresponding posts and returns it
  return async.waterfall([
    async () => {
      const postIdArray = req.body.commentArray.map(r=>r.post_id)

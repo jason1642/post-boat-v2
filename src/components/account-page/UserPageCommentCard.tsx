@@ -4,20 +4,21 @@ import {Body, BottomRow, CommentContainer, Span, TopRow} from '../../styles/acco
 
 
 interface IUserPageCommentCardProps {
-  data: any,
+  commentData: any, 
+  postData: any,
 }
 
-const UserPageCommentCard: React.FunctionComponent<IUserPageCommentCardProps> = ({data}) => {
+const UserPageCommentCard: React.FunctionComponent<IUserPageCommentCardProps> = ({commentData, postData}) => {
   return (
     <CommentContainer>
       <TopRow>
         <Span>
-          {data.author.username} commented on {}
+          {commentData.author.username} commented on {postData.title}
         </Span>
       </TopRow>
       <Body>
 
-      {data.text}
+      {commentData.text}
       </Body>
       <BottomRow>
         <Span>Reply</Span>
