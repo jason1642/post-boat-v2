@@ -4,7 +4,8 @@ import Category from '../models/category.mjs';
 import _ from 'lodash';
 import mongoose from 'mongoose';
 import User from '../models/user.mjs';
-
+import async from 'async'
+import { callbackify } from 'util';
 
 const postRouter = express.Router();
 
@@ -75,23 +76,32 @@ postRouter.get('/findAllByUser/:_id', async (req, res, next) => {
 // Get all posts info from comment array of post ids
 // req: commentArray
 // Returns array of  comment + post arrays
+// Example [[{commentdata}, {potdata}], [{commentdata, postdata}]]
 postRouter.post('/getManyPostsByComments', async (req, res) => {
-  let postCommentArray = []
 
-  return await Post.find({
-  _id:{$in: req.body.commentArray}
-  }).then(async fetchedPosts => {
-    await req.body.commentArray.forEach(ele => {
-        console.log(fetchedPosts)
-        postCommentArray.push(fetchedPosts.find(e => e._id === ele.post_id))
-  })
-  }).then(x => {
-    console.log(postCommentArray)
-    return res.send(postCommentArray)
-  })
+  // 1 - create array of post ids by mapping the array of full comment data
+  // 2 - find posts that have the ids, no duplicates
+  // 3 - for each comment there initially was, create a new array of arrays consisting
+  // of a comment and its corresponding posts
+ return async.waterfall([
+   async () => {
+     const postIdArray = req.body.commentArray.map(r=>r.post_id)
+     const posts = await Post.find({ _id: { $in: postIdArray } }).lean()
+     return posts
+   },
+     (fetchedPosts) => {
+       return res.send(req.body.commentArray.map(ele =>
+         [ele, fetchedPosts
+           .find(e => {
+          return e._id.equals(ele.post_id)
+       })]))
+    }
+ ],(error, result)=> {
+      console.log(result)
+    })
 
-  // return res.send(postCommentArray)
-  // return res.send(postCommentArray)
+
+
 
 })
 
