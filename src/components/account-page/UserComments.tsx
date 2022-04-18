@@ -32,6 +32,7 @@ const UserComments: React.FunctionComponent<IUserCommentsProps> = (props) => {
 
       {
         commentData && commentData.map((ele) =>
+        
           <UserPageCommentCard
             commentData={ele[0]}
             postData={ele[1]}

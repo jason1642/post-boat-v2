@@ -4,8 +4,9 @@ export const Container = styled.div`
   display: flex;
   width: 85%;
   padding: 2px 10px;
+  margin-top: 4px;
   border-radius: 4px;
-  background-color: darkslategrey;
+  background-color: ${({theme})=>theme.elementBackground};
 `;
 
 export const Item = styled(Link)`
