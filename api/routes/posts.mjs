@@ -71,6 +71,33 @@ postRouter.get('/findAllByUser/:_id', async (req, res, next) => {
 }) 
 
 
+
+// Get all posts info from comment array of post ids
+// req: commentArray
+// Returns array of  comment + post arrays
+postRouter.post('/getManyPostsByComments', async (req, res) => {
+  let postCommentArray = []
+
+  return await Post.find({
+  _id:{$in: req.body.commentArray}
+  }).then(async fetchedPosts => {
+    await req.body.commentArray.forEach(ele => {
+        console.log(fetchedPosts)
+        postCommentArray.push(fetchedPosts.find(e => e._id === ele.post_id))
+  })
+  }).then(x => {
+    console.log(postCommentArray)
+    return res.send(postCommentArray)
+  })
+
+  // return res.send(postCommentArray)
+  // return res.send(postCommentArray)
+
+})
+
+
+
+
 // Delete
 postRouter.delete('/delete', async (req, res) => 
   res.send(await Post.deleteOne({ name: req.body._id }, {})

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = process.env.Node_ENV === 'production' ? 'http://localhost:3820' : 'http://localhost:3820zrty';
+const baseUrl = process.env.Node_ENV === 'production' ? 'http://localhost:3820' : 'http://localhost:3820';
 const api = axios.create({
   baseURL: 'http://localhost:3820'
 })
@@ -31,6 +31,8 @@ export const getUserComments = async (user_id) =>
     console.log(err)
   })
 
+export const getUserInfoById = async (user_id:string) => 
+  await api.get('/api/user/' + user_id).then(res=> res).catch(err=>err)
 
   export const removeToken = () => {
     // Accepts type string, number, boolean

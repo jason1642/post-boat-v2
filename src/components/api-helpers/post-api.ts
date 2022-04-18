@@ -1,9 +1,24 @@
 import axios from 'axios'
 
-const baseUrl = process.env.Node_ENV === 'production' ? 'http://localhost:3820' : 'http://localhost:3820zrty';
+const baseUrl = process.env.Node_ENV === 'production' ? 'http://localhost:3820' : 'http://localhost:3820';
 const api = axios.create({
-  baseURL: 'http://localhost:3820'
+  baseURL: baseUrl
 })
+
+
+export const getAllPostsByUser = async (user_id:string) => 
+  await api.get('/api/posts/findAllByUser/' + user_id)
+    .then(res => res)
+    .catch(err => err)
+
+
+
+// Get all posts by a given array of ids
+export const getManyPostsFromCommentArray= async (commentArr: Array<any>) => 
+  await api.post('/api/posts/getManyPostsByComments',
+    { commentArray: commentArr }).then(res => res).catch(err => err)
+
+
 
 // like and unlike
 export const likePost = async (post_id: string, user_id: string) =>

@@ -27,7 +27,7 @@ function App() {
   
   const handleVerify = async () => {
     await verifyUser().then(e => {
-      console.log(e)
+      // console.log(e)
       currentUser.authenticated ?
     setDidAuthenticate(true) :
     setDidAuthenticate(false);
@@ -41,14 +41,14 @@ function App() {
   
     handleVerify()
     
-    console.log(currentUser)
+    // console.log(currentUser)
   }, [])
   
   // returns an object with action methods from imported action folder
   // should be deconstructed
   // Can be used to manipulate the state, given a function with the parameter of the value being used to change the state 
 useEffect(() => {
-  console.log(currentUser)
+  // console.log(currentUser)
 
     verifyUser()
 }, []);

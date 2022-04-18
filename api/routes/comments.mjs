@@ -30,6 +30,8 @@ commentRouter.post('/post', async (req, res, next) => {
 
 
 
+
+
 // Get all comments from a user by id
 const getUserComments = async (req, res) => {
   let user

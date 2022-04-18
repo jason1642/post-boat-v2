@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {CommentContainer} from '../../styles/account-page/user-comments.js'
+import {Body, BottomRow, CommentContainer, Span, TopRow} from '../../styles/account-page/user-comments.js'
 
 
 interface IUserPageCommentCardProps {
@@ -10,8 +10,21 @@ interface IUserPageCommentCardProps {
 const UserPageCommentCard: React.FunctionComponent<IUserPageCommentCardProps> = ({data}) => {
   return (
     <CommentContainer>
-      This is a comment
+      <TopRow>
+        <Span>
+          {data.author.username} commented on {}
+        </Span>
+      </TopRow>
+      <Body>
+
       {data.text}
+      </Body>
+      <BottomRow>
+        <Span>Reply</Span>
+        <Span>Likes</Span>
+        <Span></Span>
+
+      </BottomRow>
     </CommentContainer>
   );
 };

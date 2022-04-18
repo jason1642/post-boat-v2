@@ -5,9 +5,8 @@ import type UserModel from '../../types/user-interface.js'
 import SideMenu from './SideMenu.tsx';
 import { Link,  Outlet, useParams } from 'react-router-dom';
 import Nav from './Nav.tsx';
-import axios from 'axios'
-
-
+import { getAllPostsByUser } from '../api-helpers/post-api.ts';
+import {getUserInfoById} from '../api-helpers/user-api.ts'
 interface IAccountPageProps {
   currentUser: UserModel,
 }
@@ -15,12 +14,12 @@ interface IAccountPageProps {
 const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) => {
   const { id } = useParams();
   const [postData, setPostData] = useState([])
-  const [paramsUserData, setParamsUserData] = useState([])
+  const [paramsUserData, setParamsUserData] = useState()
 
   useEffect(() => {
     console.log(id)
-    axios.get('http://localhost:3820/api/posts/findAllByUser/' + id).then(res => {
-      console.log(res.data)
+    getAllPostsByUser(id).then(res => {
+      // console.log(res.data, 'posts created by user')
       setPostData(res.data)
     }).catch(err => {
       console.log(err)
@@ -29,13 +28,13 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) 
 
 
    useEffect(() => {
-      axios.get('http://localhost:3820/api/user/' + id)
-        .then(res => {
-          console.log(res.data)
-          setParamsUserData(res.data)
-        }).catch(err => {
-          console.log(err)
-        })
+    
+     getUserInfoById(id).then(res => {
+      //  console.log(res.data)
+       setParamsUserData(res.data)
+     }).catch(err => {
+       console.log(err)
+     })
     }, []);
 
 
@@ -49,14 +48,14 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) 
 
         <Content>
           {
-            paramsUserData ?
+            paramsUserData && postData ?
           
               <Outlet context={{
                 currentUser,
                 postData,
                 paramsUserData
               }} />
-              : <>User Data Not Foubd,</>
+              : <>User Data Not Found,</>
           }
           {/* 
           Routes: Posts, Comments

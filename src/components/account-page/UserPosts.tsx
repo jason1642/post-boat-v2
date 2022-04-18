@@ -11,10 +11,11 @@ interface IUserPostsProps {
 
 
 const UserPosts: React.FunctionComponent<IUserPostsProps> = () => {
-  const { currentUser, postData }: any = useOutletContext()
+  const { currentUser, postData, paramsUserData }: any = useOutletContext()
   // const [postData, setPostData] = useState([])
 
   
+
 
   return (
     <Container
