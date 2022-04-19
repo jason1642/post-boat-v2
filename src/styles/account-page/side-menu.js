@@ -7,6 +7,7 @@ export const Container = styled.aside`
   background-color: ${({theme})=>theme.cardBackground};
   border-radius: 8px;
   padding: 15px 5px;
+  height: 75vh;
   flex-grow: 2;
 `;
 export const Item = styled.div`

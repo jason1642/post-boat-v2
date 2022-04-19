@@ -1,20 +1,24 @@
+import _ from 'lodash';
 import * as React from 'react';
 // import { useState, useEffect } from 'react';
 import {Container, Item} from '../../styles/account-page/nav.js'
 
 interface INavProps {
-  userId: string,
+  paramsId: string,
 }
-
-const Nav: React.FunctionComponent<INavProps> = ({userId}) => {
+const itemsArray = ['posts', 'comments']
+const Nav: React.FunctionComponent<INavProps> = ({paramsId}) => {
 
   return (
     <Container>
-      <Item to={`/user/${userId}/posts`}>Posts</Item>
-      <Item to={`/user/${userId}/comments`}>Comments</Item>
-      {/* <Item to={`/user/${userId}/comments`}></Item>
-      <Item to={`/user/${userId}/comments`}></Item>
-      <Item to={`/user/${userId}/comments`}></Item> */}
+
+      {itemsArray.map(ele=><Item
+        style={{borderBottom:'1px solid white'}}
+        to={`/user/${paramsId}/${ele}`}>{_.capitalize(ele)}</Item> )}
+
+
+
+
     </Container>
   );
 };

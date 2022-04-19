@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 // PAGE SECTION COT
 export const Main = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
   flex-direction: column;
   padding: 5px;
   width: 100%;
 `;
-
-
 
 
 

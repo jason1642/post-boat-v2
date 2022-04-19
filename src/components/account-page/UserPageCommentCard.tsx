@@ -15,7 +15,7 @@ const UserPageCommentCard: React.FunctionComponent<IUserPageCommentCardProps> = 
     <CommentContainer>
       <TopRow>
         <BoldTitle style={{paddingLeft:'4px'}}>{commentData.author.username}</BoldTitle>
-        <Span style={{color: 'darkgrey'}}>commented on</Span>
+        <Span>commented on</Span>
           <BoldTitle>{postData.title}</BoldTitle>
         <Span>In category:</Span>
           <BoldTitle>{_.capitalize(postData.category)}</BoldTitle>

@@ -41,8 +41,8 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ theme, themeToggler, cu
       <Toggle theme={theme} toggleTheme={themeToggler} />
         {
           currentUser.authenticated ?
-            <Nav theme={theme} />
-            : <GuestNav theme={theme} />
+            <Nav currentUser={currentUser} theme={theme} />
+            : <GuestNav currentUser={currentUser} theme={theme} />
 
     }
     </Wrapper>

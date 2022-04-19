@@ -30,6 +30,7 @@ const SiteRoutes = ({currentUser}) => {
       element: <AccountPage currentUser={currentUser} />,
       children: [
         { path: 'posts', element: <UserPosts /> },
+        { path: '', element: <UserPosts /> },
         { path: 'comments', element: <UserComments />}
       ]
     },

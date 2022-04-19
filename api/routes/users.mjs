@@ -56,7 +56,7 @@ const createUser = async (req,res) => {
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
     await user.save();
-    // console.log('RUNNING SAVE')
+    console.log('RUNNING SAVE')
  
   secret = process.env.TOKEN_SECRET ? process.env.TOKEN_SECRET : global.TokenSecret
     const token = jwt.sign({ _id: user._id }, secret);
@@ -67,7 +67,7 @@ const createUser = async (req,res) => {
     console.log(errors)
     let errorMessages = []
       Object.keys(errors).forEach(key => errorMessages.push(errors[key].properties.message))
-    // console.log(errors)
+    console.log(errors)
     const errorObject = {
       errors: errorMessages
     }

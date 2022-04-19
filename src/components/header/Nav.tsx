@@ -17,6 +17,7 @@ import {
 } from 'react-icons/io5/index.js'
 interface INavProps {
   theme: string,
+  currentUser: any,
 }
 
 
@@ -29,7 +30,7 @@ const handleLogout = ( ) => {
   window.location.reload();
 }
 
-const Nav: React.FunctionComponent<INavProps> = ({ theme }) => {
+const Nav: React.FunctionComponent<INavProps> = ({ theme, currentUser }) => {
   
   
 
@@ -39,7 +40,7 @@ const Nav: React.FunctionComponent<INavProps> = ({ theme }) => {
       <Item to={'/'} >
         {theme === 'light' ? <AiFillHome/> : <AiOutlineHome />} 
       </Item>
-      <Item to={'/'} >
+      <Item to={`/user/${currentUser._id}`} >
         {theme === 'light' ? <IoPersonSharp /> : <IoPersonOutline />}
       </Item>
       

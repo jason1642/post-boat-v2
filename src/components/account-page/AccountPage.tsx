@@ -28,8 +28,7 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) 
 
 
    useEffect(() => {
-    
-     getUserInfoById(id).then(res => {
+      getUserInfoById(id).then(res => {
       //  console.log(res.data)
        setParamsUserData(res.data)
      }).catch(err => {
@@ -41,7 +40,7 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) 
   return (
     <Container>
       <Nav
-        userId={id}
+        paramsId={id}
       />
 
       <Main>
