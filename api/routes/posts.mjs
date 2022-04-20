@@ -5,7 +5,6 @@ import _ from 'lodash';
 import mongoose from 'mongoose';
 import User from '../models/user.mjs';
 import async from 'async'
-import { callbackify } from 'util';
 
 const postRouter = express.Router();
 
@@ -23,21 +22,24 @@ postRouter.post('/create', async (req, res, next) => {
   let user
   let category = await Category.findOne({ name: req.body.category });
    await User.findOne({ _id: req.body.author.user_id }).then(ele=>{ user = ele})
-  
+  console.log(user)
   if (!category || !user) return res.status(404).send('Category or User does not exist.')
-  let post = new Post(_.assign(_.pick(req.body, ['title', 'text', 'images', 'category']), {
+  let post = new Post(_.assign(
+    _.pick(req.body, ['title', 'text', 'images', 'category']), {
     author: {
       user_id: req.body.author.user_id,
       username: req.body.author.username,
       profile_image: req.body.author.profile_image
     }, _id: new mongoose.Types.ObjectId() 
   }))
+
+
   category.posts.push({ post_id: post._id, author_id: post.user_id });
   user.created_posts.push({ post_id: post._id });
   await category.save()
   await user.save()
   await post.save()
-  console.log(post)
+  // console.log(post)
 
   return res.send(post)
 
@@ -54,10 +56,11 @@ postRouter.get('/findAll', async (req, res) => {
 })
 
 // Find one
-postRouter.get('/findOne/:_id', async (req, res, next) => {
-  const post = await Post.findOne({ _id: req.params._id })
-  if(!post) return res.status(404).send('Cannot find post.')
-  res.send(post)  
+postRouter.get('/:_id', async (req, res, next) => {
+  if (!mongoose.isValidObjectId(req.params._id)) return res.status(400).send('Invalid ID')
+  let post
+  try { await Post.findOne({ _id: req.params._id }).then(ele => post = ele) } catch (err) { return res.status(404).send('Cannot find post')}
+  return res.send(post)  
 
 })
 
@@ -66,9 +69,11 @@ postRouter.get('/findAllByUser/:_id', async (req, res, next) => {
   let posts
   if (!mongoose.isValidObjectId(req.params._id))return res.status(400).send('Invalid ID')
   
-  await User.findOne({ _id: req.params._id }) 
-  await Post.find({ 'author.user_id': req.params._id })
+  try { await User.findOne({ _id: req.params._id }) } catch (e) { return res.status(404).send('User not found') }
+  
+  await Post.find({ 'author.user_id': req.params._id }).then(e=>posts=e)
   // if (!posts) return res.status(404).send('Cannot find post.')
+  console.log(posts)
   return res.send(posts)
 }) 
 

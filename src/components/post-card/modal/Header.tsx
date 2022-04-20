@@ -25,7 +25,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
   })
   const [savedNum, setSavedNum ] = useState(data.saved_by.length)
   useEffect(() => {
-    if (currentUser._id) {
+    if (currentUser && currentUser._id) {
       const isLiked = data.liked_by.find((e:string) => e === currentUser._id)
       const isSaved = data.saved_by.find((c:string) => c === currentUser._id)
       isLiked ? setLikedSaved(prev => ({ ...prev, liked: true })) : setLikedSaved(prev=>({...prev, liked: false}))
@@ -58,7 +58,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
         <Span>{data.comments.length} {data.comments.length !== 1 ? 'Comments': 'Comment'}</Span>
          
         
-        {currentUser._id ? <><Span
+        {currentUser && currentUser._id? <><Span
           onClick={() => {
             likePost(data._id, currentUser._id).then(res => { setLikesNum(res.data.length) })
             setLikedSaved(prev => ({ ...prev, liked: !likedSaved.liked }))

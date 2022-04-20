@@ -15,7 +15,7 @@ export const Container = styled.div`
 
 export const Body = styled.p`
   font-size: 14px;
-
+  text-align: left;
 `
 
 export const Header = styled.div`

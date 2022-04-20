@@ -10,7 +10,7 @@ const CurrentUserSideMenu: React.FunctionComponent<ICurrentUserSideMenuProps> = 
   return (
     <Container>
       <Title>u/{currentUser.username}</Title>
-      <Item>Joined {moment().startOf('day').fromNow(currentUser.created_at)} ago</Item>
+      <Item>Joined {moment(currentUser.created_at).fromNow()}</Item>
       <Item>Followers: {currentUser.followers.length}</Item>
       <Item>Following: {currentUser.following.length}</Item>
       <Button>Follow</Button>

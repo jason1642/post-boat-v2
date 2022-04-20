@@ -37,6 +37,9 @@ const Nav: React.FunctionComponent<INavProps> = ({ theme, currentUser }) => {
   // Log in and register buttons are in ./GuestNav.tsx
   return (
     <List>
+      <Item to={'/create-post'} >
+        Create Post
+        </Item>
       <Item to={'/'} >
         {theme === 'light' ? <AiFillHome/> : <AiOutlineHome />} 
       </Item>

@@ -6,11 +6,19 @@ const api = axios.create({
 })
 
 
+export const createPost = async (data) =>
+  api.post('/api/posts/create', data).then(res=> res).catch(err=>err)
+
+
+
+
 export const getAllPostsByUser = async (user_id:string) => 
   await api.get('/api/posts/findAllByUser/' + user_id)
     .then(res => res)
     .catch(err => err)
 
+export const getOnePost = async (id) => 
+  await api.get(`/api/posts/${id}`).then(res=>res).catch(err=>err)
 
 
 // Get all posts by a given array of ids

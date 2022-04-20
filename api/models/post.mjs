@@ -13,7 +13,7 @@ const Post = mongoose.model('Post', new mongoose.Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId
   },
-  author: {
+  author: { 
     type: {
       user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Users', required: true },
       username: { type: String, required: true },
@@ -29,7 +29,7 @@ const Post = mongoose.model('Post', new mongoose.Schema({
   images: {
     type: [{
       type:
-        String,
+        String, 
       maxItems: 8
     }]
   },

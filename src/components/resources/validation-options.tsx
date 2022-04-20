@@ -44,3 +44,24 @@ export const ErrorComponent: React.FunctionComponent<IErrorMessageProps> = ({mes
     </ErrorMessage>
   )
 }
+
+
+
+export const createPostOptions = {
+  title: {
+    required: 'A title is required',
+    minLength: {value: 5, message:'Title length must be 5 characters or more'},
+    maxLength: {value: 100, message: 'Title cannot exceed 100 characters'}
+  },
+  category: { requried: 'A category is required' },
+  text: {
+    minLength: {
+      value: 10,
+      message: 'Text must be 10 characters or more'
+    }, maxLength: {
+      value: 400,
+      message: 'Text cannot exceed 400 characters'
+    } },
+  images: {required: false}
+
+}

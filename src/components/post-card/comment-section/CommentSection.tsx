@@ -1,6 +1,6 @@
 import * as React from 'react';
 // import { useState, useEffect } from 'react';
-import {Container, CommentContainer, GuestMessage} from '../../../styles/post/comment-section/comment-section.js'
+import {Container, CommentContainer, GuestMessage, Title} from '../../../styles/post/comment-section/comment-section.js'
 import Comment from './Comment.tsx';
 import  type {CommentModel} from '../../../types/comment-interface.ts'
 import type {PostModel} from '../../../types/post-interface.ts'
@@ -8,15 +8,17 @@ import Form from './Form.tsx'
 
 interface ICommentSectionProps {
   data: PostModel,
-  currentUser: any
+  currentUser: any,
+  width: string,
 }
 
-const CommentSection: React.FunctionComponent<ICommentSectionProps> = ({data, currentUser}) => {
+const CommentSection: React.FunctionComponent<ICommentSectionProps> = ({data, currentUser, width}) => {
   
   
 
   return (
-    <Container>
+    <Container width={width}>
+      <Title>Comments ({data.comments.length})</Title>
       {
         currentUser._id ? <Form
         postData={data}

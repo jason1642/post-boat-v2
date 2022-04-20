@@ -16,7 +16,7 @@ const UserPosts: React.FunctionComponent<IUserPostsProps> = () => {
 
   
 
-
+  // console.log(postData)
   return (
     <Container
     >

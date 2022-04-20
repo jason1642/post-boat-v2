@@ -22,15 +22,17 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser, p
   useEffect(() => {
     getAllPostsByUser(id).then(res => {
       setPostData(res.data)
+      // console.log(res)
     }).catch(err => {
       console.log(err)
     })
 
-  }, []);
+  }, [paramsUserData]);
 
   useEffect(() => {
     
   }, []);
+    // Must have id as dependency to refresh page upon going to the same path with a different id
    useEffect(() => {
       getUserInfoById(id).then(res => {
       //  console.log(res.data)
@@ -38,7 +40,7 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser, p
      }).catch(err => {
        console.log(err)
      })
-    }, []);
+    }, [id]);
 
 
   return (

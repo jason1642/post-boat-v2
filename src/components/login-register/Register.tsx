@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { Form, Input, SubmitSuccessfulMessage, Title, SubmitButton, Span, Label } from '../../styles/forms/forms.js'
 import { createUser } from '../api-helpers/user-api.ts'
 import _ from 'lodash'
-import { registerOptions } from './validation-options.tsx';
+import { registerOptions } from '../resources/validation-options.tsx';
 import { useForm } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message';
 // Error components for a styled component within the render proprerty in error message
-import {ErrorComponent} from './validation-options.tsx'
+import {ErrorComponent} from '../resources/validation-options.tsx'
 
 
 interface IRegisterProps {

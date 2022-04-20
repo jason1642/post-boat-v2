@@ -10,6 +10,7 @@ export const ReactModal = styled(Modal)`
   border-radius: 5px;
   margin-top: 10px;
   overflow-y: auto;
+  padding: 10px;
   ::-webkit-scrollbar {
     display: none;
 }

@@ -1,15 +1,48 @@
 import styled from 'styled-components';
 
+
 export const Container = styled.div`
+   display: flex;
   padding: 10px;
-  box-sizing: border-box;
-  margin: 0;
-  width: 100%;
-  text-align: left;
-  /* border: 1px solid black; */
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+  width: 85%;
+  margin: 0 auto;
+  justify-content: space-between;
+  gap: 25px;
+`;
+export const Main = styled.div`
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  width: 65%;
+  align-items: center;
+  /* background-color: royalblue; */
+
 
 `;
+export const ImageContainer = styled.div`
+  display: flex;
+   max-width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  max-height: 312px;
+  margin: 14px auto;
+`;
+
+export const Image = styled.img`
+  max-height: 312px;
+  max-width: 50%;
+  /* width: 100%; */
+  
+  object-fit: contain;
+  position: relative;
+`;
+
+
+
+
+
+
 
 export const TopRow = styled.div`
   display: flex;
@@ -18,7 +51,7 @@ export const TopRow = styled.div`
   align-items: flex-end;
 `;
 export const Title = styled.div`
-  font-size: 20px;
+  font-size: 1.5em;
   margin: 0;
   padding: 10px 0px;
 `;
@@ -51,4 +84,14 @@ export const Span = styled.div`
   &:hover{
     cursor: pointer;
   }
+`;
+
+
+export const Text = styled.p`
+  line-height: 20px;
+  padding: 8px;
+  width: 100%;
+  font-size: 13px;
+  text-align: left;
+
 `;

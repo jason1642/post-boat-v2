@@ -5,14 +5,17 @@ import HomePage from "./home-page/HomePage.tsx";
 import AccountPage from "./account-page/AccountPage.tsx";
 import UserPosts from "./account-page/UserPosts.tsx";
 import UserComments from "./account-page/UserComments.tsx";
+import CreatePost from "./post-page/create-post/CreatePost.tsx";
 import { useEffect } from "react";
-const SiteRoutes = ({currentUser}) => {
+import PostPage from "./post-page/PostPage.tsx";
+
+const SiteRoutes = ({ currentUser }) => {
   const location1 = useLocation()
   const match = useMatch('/user/:id')
   useEffect(() => {
     // console.log(location1)
     // console.log(match)
-  },[])
+  }, [])
   return useRoutes([
     {
       path: '/login',
@@ -29,6 +32,14 @@ const SiteRoutes = ({currentUser}) => {
     {
       path: '/category/:category',
       element: <HomePage currentUser={currentUser} />
+    },
+    {
+      path: '/post/:id',
+      element: <PostPage currentUser={currentUser} />
+    },
+    {
+      path: '/create-post',
+      element: <CreatePost currentUser={currentUser}/>
     },
     {
       path: '/user/:id',

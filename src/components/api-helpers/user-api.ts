@@ -34,7 +34,7 @@ export const getUserComments = async (user_id) =>
 export const getUserInfoById = async (user_id:string) => 
   await api.get('/api/user/' + user_id).then(res=> res).catch(err=>err)
 
-  export const removeToken = () => {
+export const removeToken = () => {
     // Accepts type string, number, boolean
     api.defaults.headers.common.authorization = false;
   };

@@ -95,14 +95,13 @@ userRouter.get('/get-all', getAllUsers)
 // Find one user /:id
 const getOneUser = async (req,res) => { 
   if (!mongoose.isValidObjectId(req.params.id)) return res.status(401).send('ID input is empty');
-  const user = await User.findOne({ _id: req.params.id });
-  if (!user) {
-    return res.status(400).send('User doesn\t exist');
-  } else {
+  let user
+  try { await User.findOne({ _id: req.params.id }).then(ele=>user=ele) } catch(err) { return res.status(404).send('User not found')}
+
     // console.log(res)
-    res.send(_.pick(user, ['_id', 'username', 'email', 'bio', 'category_subscriptions', 'following',
+  return res.send(_.pick(user, ['_id', 'username', 'email', 'bio', 'category_subscriptions', 'following',
       'followers', 'liked_posts', 'created_comments', 'liked_comments', 'saved_posts', 'created_at', 'updated_at']));
-  }
+  
 }
 userRouter.get('/:id', getOneUser)
 

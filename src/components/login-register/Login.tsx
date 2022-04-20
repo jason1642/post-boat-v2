@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Form, Input, Label, Title, Span, SubmitButton} from '../../styles/forms/forms.js'
-import { ErrorComponent } from './validation-options.tsx';
+import { ErrorComponent } from '../resources/validation-options.tsx';
 import _ from 'lodash'
 import { bindActionCreators } from 'redux'
 import { useDispatch} from 'react-redux';
@@ -9,7 +9,7 @@ import { useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import {useForm} from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
-import { loginOptions } from './validation-options.tsx';
+import { loginOptions } from '../resources/validation-options.tsx';
 const valueNames = ['username', 'password',]
 
 const Login = (props) => {

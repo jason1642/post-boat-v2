@@ -3,13 +3,20 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-
+  width: ${({width})=> width ? width : 'auto'};
   /* background-color: green; */
   font-size: 40px;
   height: 100%;
   /* border: 1px solid white; */
 `;
-
+export const Title = styled.div`
+  font-size: 18px;
+  width: 90%;
+  text-align: center;
+  border-top: 1px solid black;
+  padding: 10px;
+  margin: 10px 0px;
+`
 export const CommentContainer = styled.div`
   display: flex;
   flex-direction: column;

@@ -34,6 +34,20 @@ export const Input = styled.input`
     padding: 10px;
   }
 `
+export const DropDownContainer = styled.div`
+  /* border: 1px solid white; */
+  display: flex;
+  width: 50%;
+  font-size: 14px;
+  gap: 5px;
+`
+export const Select = styled.select`
+
+
+`
+export const Option = styled.option`
+  
+`;
 export const Label = styled.label`
   width: 50%;
   display: flex;
@@ -100,7 +114,7 @@ export const ErrorMessage = styled.div`
 `
 
 export const SubmitSuccessfulMessage = styled.div`
-  background-color: green;
+  background-color: darkgreen;
   display: flex;
   flex-direction: column;
   /* transition: ; */
