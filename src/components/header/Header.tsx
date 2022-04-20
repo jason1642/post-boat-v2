@@ -37,7 +37,8 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ theme, themeToggler, cu
         { theme === 'light' ? <IoBoatSharp /> : <IoBoatOutline/>  }
         BOAT
       </Title>
-    <Wrapper>
+      <Wrapper>
+        <div style={{fontSize:"8px"}}>Sailing as {currentUser.username}</div>
       <Toggle theme={theme} toggleTheme={themeToggler} />
         {
           currentUser.authenticated ?

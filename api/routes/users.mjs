@@ -63,7 +63,7 @@ const createUser = async (req,res) => {
     
   return res.header('x-auth-token', token).send(_.assign(_.pick(user, ['_id', 'username', 'email', 'password', 'created_at', 'bio']), {token: token}));
  
-  } catch (errors) {
+  } catch (errors) { 
     console.log(errors)
     let errorMessages = []
       Object.keys(errors).forEach(key => errorMessages.push(errors[key].properties.message))
@@ -94,7 +94,7 @@ userRouter.get('/get-all', getAllUsers)
 
 // Find one user /:id
 const getOneUser = async (req,res) => { 
-  if (!req.params.id) res.status(401).send('ID input is empty');
+  if (!mongoose.isValidObjectId(req.params.id)) return res.status(401).send('ID input is empty');
   const user = await User.findOne({ _id: req.params.id });
   if (!user) {
     return res.status(400).send('User doesn\t exist');

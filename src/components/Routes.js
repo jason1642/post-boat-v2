@@ -1,13 +1,18 @@
-import { useRoutes, Navigate } from "react-router-dom";
+import { useRoutes, Navigate, useLocation, useMatch } from "react-router-dom";
 import Login from "./login-register/Login.tsx";
 import Register from "./login-register/Register.tsx";
 import HomePage from "./home-page/HomePage.tsx";
 import AccountPage from "./account-page/AccountPage.tsx";
 import UserPosts from "./account-page/UserPosts.tsx";
 import UserComments from "./account-page/UserComments.tsx";
+import { useEffect } from "react";
 const SiteRoutes = ({currentUser}) => {
-  
-  
+  const location1 = useLocation()
+  const match = useMatch('/user/:id')
+  useEffect(() => {
+    // console.log(location1)
+    // console.log(match)
+  },[])
   return useRoutes([
     {
       path: '/login',

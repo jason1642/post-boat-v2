@@ -3,30 +3,34 @@ import { useState, useEffect } from 'react';
 import {Container, Main, Content} from '../../styles/account-page/account-page.js'
 import type UserModel from '../../types/user-interface.js'
 import SideMenu from './SideMenu.tsx';
-import { Link,  Outlet, useParams } from 'react-router-dom';
+import { Outlet, useMatch, useParams } from 'react-router-dom';
 import Nav from './Nav.tsx';
 import { getAllPostsByUser } from '../api-helpers/post-api.ts';
-import {getUserInfoById} from '../api-helpers/user-api.ts'
+import { getUserInfoById } from '../api-helpers/user-api.ts'
+import CurrentUserSideMenu from './/CurrentUserSideMenu.tsx'
 interface IAccountPageProps {
   currentUser: UserModel,
+  props: any,
 }
 
-const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) => {
+const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser, props}) => {
   const { id } = useParams();
+  const match = useMatch('/user/:id')
   const [postData, setPostData] = useState([])
   const [paramsUserData, setParamsUserData] = useState()
 
   useEffect(() => {
-    console.log(id)
     getAllPostsByUser(id).then(res => {
-      // console.log(res.data, 'posts created by user')
       setPostData(res.data)
     }).catch(err => {
       console.log(err)
     })
+
   }, []);
 
-
+  useEffect(() => {
+    
+  }, []);
    useEffect(() => {
       getUserInfoById(id).then(res => {
       //  console.log(res.data)
@@ -64,8 +68,14 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) 
 
 
       </Content>
-
-        <SideMenu />
+        {
+          currentUser._id === id ?
+           <CurrentUserSideMenu currentUser={ currentUser} />
+            : paramsUserData ?
+            <SideMenu
+              paramsUserData={paramsUserData}
+            /> :<>404 NOT FOUND</>
+        }
       </Main>
 
     </Container>

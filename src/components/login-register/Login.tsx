@@ -1,35 +1,34 @@
 import * as React from 'react';
 import {Form, Input, Label, Title, Span, SubmitButton} from '../../styles/forms/forms.js'
-import { useState } from 'react';
+import { ErrorComponent } from './validation-options.tsx';
 import _ from 'lodash'
 import { bindActionCreators } from 'redux'
 import { useDispatch} from 'react-redux';
 import { userActions } from '../../redux/index.ts';
 import { useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
-
-
+import {useForm} from 'react-hook-form'
+import { ErrorMessage } from '@hookform/error-message'
+import { loginOptions } from './validation-options.tsx';
 const valueNames = ['username', 'password',]
 
 const Login = (props) => {
-  const navigate = useNavigate()
-  const [userInput, setUserInput] = useState({
-    username: '',
-    password: '',
 
-  })
+  const {register, formState: {errors}, handleSubmit } = useForm()
+  const onErrors = errors => console.error(errors)
+
+
+  const navigate = useNavigate()
+ 
   const dispatch = useDispatch()
   const { logInUser } = bindActionCreators(userActions, dispatch);
 
-  const handleInputChange = (e) => {
-    setUserInput(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }))
-  }
-  const handleLogin = async () => {
+
+
+  const onFormSubmit = async data => {
     let timerInterval
-    await logInUser(userInput).then(res => {
+    console.log(data)
+    await logInUser(data).then(res => {
       if (res.payload.authenticated) {   
         Swal.fire({
           title: 'Successfully logged in!!',
@@ -62,25 +61,32 @@ const Login = (props) => {
           }
         })
       }
-    })}
+    })
+  };
+
+
   return (
     <Form
-      onSubmit={async (e) => {
-        e.preventDefault()
-        await handleLogin()
-      }}
+      onSubmit={handleSubmit(onFormSubmit, onErrors)}
+  
       >
       <Title>Log in</Title>
 
-      {valueNames.map(name =><Label><Span>{_.capitalize(name)}</Span><Input
+      {valueNames.map(name => <Label>
+        <Span>{_.capitalize(name)}</Span>
+        <Input
+        {...register(name, loginOptions[name])}
         type={name === 'username' ? 'text' : 'password'}
-        value={userInput[name]}
         placeholder={_.capitalize(name)}
-        onChange={handleInputChange}
         name={name}
-      /></Label> 
+      />
+         <ErrorMessage
+          name={name}
+          errors={errors}
+          render={({ message }) => <ErrorComponent message={message} />}
+        />
+      </Label> 
         )}
-      
       <SubmitButton>Submit</SubmitButton>
 
     </Form>

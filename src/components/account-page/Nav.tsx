@@ -12,9 +12,11 @@ const Nav: React.FunctionComponent<INavProps> = ({paramsId}) => {
   return (
     <Container>
 
-      {itemsArray.map(ele=><Item
-        style={{borderBottom:'1px solid white'}}
-        to={`/user/${paramsId}/${ele}`}>{_.capitalize(ele)}</Item> )}
+      {itemsArray.map((ele, i) =>
+        <Item
+          key={i}
+          style={{borderBottom:'1px solid white'}}
+          to={`/user/${paramsId}/${ele}`}>{_.capitalize(ele)}</Item> )}
 
 
 

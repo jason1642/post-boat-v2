@@ -63,11 +63,12 @@ postRouter.get('/findOne/:_id', async (req, res, next) => {
 
 // Find all by user ID
 postRouter.get('/findAllByUser/:_id', async (req, res, next) => {
-  try { await User.findOne({ _id: req.params._id }) } catch(e){return res.status(404).send('User not found')}
+  let posts
+  if (!mongoose.isValidObjectId(req.params._id))return res.status(400).send('Invalid ID')
   
-  const posts = await Post.find({ 'author.user_id': req.params._id })
-  console.log(posts)
-  if (!posts) return res.status(404).send('Cannot find post.')
+  await User.findOne({ _id: req.params._id }) 
+  await Post.find({ 'author.user_id': req.params._id })
+  // if (!posts) return res.status(404).send('Cannot find post.')
   return res.send(posts)
 }) 
 

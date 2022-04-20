@@ -31,14 +31,13 @@ const customStyles = {
     maxWidth: '60vw',
     marginTop: '10px',
     height: '95%',
-    border: '1px solid darkgrey',
-    
+    outline: 'none',
     // backgroundColor: '#262626',
     opacity: '1',
     
   },
   overlay: {
-    // backgroundColor: 'grey',
+    backgroundColor: 'transparent',
     
   }
 };
@@ -56,7 +55,6 @@ const PostModal: React.FunctionComponent<IPostModalProps> = ({currentUser, data,
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
-        // backgroundColor={}
         contentLabel="Example Modal"
       >
      

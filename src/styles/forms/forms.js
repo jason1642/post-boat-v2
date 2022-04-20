@@ -103,7 +103,7 @@ export const SubmitSuccessfulMessage = styled.div`
   background-color: green;
   display: flex;
   flex-direction: column;
-  transition: ;
+  /* transition: ; */
   align-items: center;
   justify-content: space-evenly;
   /* padding-top: 40px; */

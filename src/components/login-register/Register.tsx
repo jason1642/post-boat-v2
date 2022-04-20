@@ -27,7 +27,6 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
       setDidSubmit(true)
     })
   };
-
   const onErrors = errors => console.error(errors);
 
   return (
