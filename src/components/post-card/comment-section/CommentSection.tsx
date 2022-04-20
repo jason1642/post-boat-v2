@@ -39,7 +39,7 @@ const CommentSection: React.FunctionComponent<ICommentSectionProps> = ({data, cu
           currentUser={currentUser}
           key={i}
           // commentModel={CommentModel}
-        commentData={ele} />)}
+        commentData={ele} />).reverse()}
       </CommentContainer>
     </Container>
   );

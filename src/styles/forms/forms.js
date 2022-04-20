@@ -110,7 +110,7 @@ export const ErrorMessage = styled.div`
   justify-content: space-around;
   /* align-items: flex-end; */
   /* align-self: flex-start; */
-  font-size: .7em;
+  font-size: 10px;
 `
 
 export const SubmitSuccessfulMessage = styled.div`

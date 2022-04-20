@@ -65,3 +65,15 @@ export const createPostOptions = {
   images: {required: false}
 
 }
+
+export const commentOptions = {
+  comment: {
+    required: 'Please enter a comment',
+    minLength: {
+      value: 2,
+      message: 'Comment must be atleast two characters'},
+    maxLength: {
+      value: 300,
+      message: 'Comment cannot exceed 300 characters'}
+  }
+}

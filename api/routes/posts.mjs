@@ -39,7 +39,7 @@ postRouter.post('/create', async (req, res, next) => {
   await category.save()
   await user.save()
   await post.save()
-  // console.log(post)
+  // console.log(post)  
 
   return res.send(post)
 

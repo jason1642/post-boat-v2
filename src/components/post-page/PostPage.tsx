@@ -59,7 +59,7 @@ const PostPage: React.FunctionComponent<IPostPageProps> = ({ currentUser }) => {
     </Main>
       
 
-      <SideMenu paramsUserData={userData}/>
+      <SideMenu onPostPage={true} paramsUserData={userData}/>
 
     </Container>
   );
