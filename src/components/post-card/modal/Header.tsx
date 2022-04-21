@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {Container, CategoryName, Title, TopRow, BottomRow,Span, Date } from '../../../styles/post/modal-header.js'
+import {Container, CreatedBy, CategoryName, Title, TopRow, BottomRow,Span, Date } from '../../../styles/post/modal-header.js'
 import moment from 'moment'
 import {Link} from 'react-router-dom'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai/index.js'
 import { BsSave, BsSaveFill} from 'react-icons/bs/index.js'
 import _ from 'lodash'
-
 interface IHeaderProps {
   data: any,
   likePost: Function,
@@ -47,7 +46,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
 
       <TopRow>
         <CategoryName>/{_.capitalize(data.category)}</CategoryName>
-        <Date>Posted by u/{data.author.username} {moment().startOf('day').fromNow(data.created_at)} ago</Date>
+        <CreatedBy to={`/user/${data.author.user_id}`}>Posted by u/{data.author.username} {moment().startOf('day').fromNow(data.created_at)} ago</CreatedBy>
       </TopRow>
 
       <Title>

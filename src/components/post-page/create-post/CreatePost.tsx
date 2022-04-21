@@ -80,7 +80,7 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = ({currentUser}) =>
      : 
      (<SubmitSuccessfulMessage>
         Successfully created post. Thank you for using PostBoat!
-        <Link to={`/posts/${postId}`}>View Post</Link>
+        <Link to={`/post/${postId}`}>View Post</Link>
       </SubmitSuccessfulMessage>)
   );
 };

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Container, Main, Span, Image, Text, ImageContainer, TopRow, BottomRow, CategoryName, Date, Title } from '../../styles/post/single-post-page.js'
-import SideMenu from '../account-page/SideMenu.tsx'
+import SideMenu from '../side-menu/SideMenu.tsx'
 import { getOnePost } from '../api-helpers/post-api.ts'
 import { useParams } from 'react-router-dom'
 import { getUserInfoById } from '../api-helpers/user-api.ts'

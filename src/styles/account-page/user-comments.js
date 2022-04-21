@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Link} from 'react-router-dom'
 // PAGE SECTION COT
 export const Main = styled.div`
   /* border: 1px solid black; */
@@ -35,14 +36,23 @@ export const CommentContainer = styled.div`
 
 export const TopRow = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
   border-radius: 8px 8px 0px 0px;
   height: 22px;
-  color: ${({theme})=>theme.text};
   width: 100%;
+  color: ${({theme})=>theme.text};
+  max-width: 100%;
 `;
-
+export const LeftSide = styled.div`
+  display: flex;
+  max-width: 80%;
+`;
+export const RightSide = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
 export const Body = styled.div`
   text-align: left;
   font-size: 13px;
@@ -56,28 +66,34 @@ export const BottomRow = styled.div`
   color: ${({theme})=>theme.text};
   border-radius: 0px 0px 8px 8px;
 `
-export const BoldTitle = styled.span`
-  display: inline-flex;
+export const BoldTitle = styled(Link)`
+  display: inline-block;
   font-size: 10px;
-  justify-content: flex-start;
-  align-items: center;
+  /* justify-content: center; */
+  align-items: flex-start;
   font-weight: 600;
   overflow: hidden; 
-  max-width: 45%;
-  word-wrap: break-word;
+  /* max-width: 50%; */
+    /* word-wrap: break-word; */
   padding: 0;
   margin: 0%;
-  max-height: 3.6em;
+  /* max-height: 3.6em; */
   line-height: 1.8em;
   height: 100%;
   text-align: left;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
+  white-space: nowrap;
+  text-decoration: none;
+  color: ${({theme})=>theme.text};
 `
 export const Span = styled.div`
   display: inline-flex;
-  font-size: 10px;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%;
-  padding: 0px 2px;
+  font-size: 9px;
+  /* width: 100px; */
+  justify-content: flex-start; 
+  align-items: center; 
+  /* width: auto; */
+  /* height: 100%; */
+  white-space: nowrap;
+  padding: 0px 3px;
 `

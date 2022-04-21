@@ -154,14 +154,21 @@ const getAllFollowingInfo =  async (req, res, next) => {
   return res.send(following)
 }
 userRouter.get('/all-following/:id', getAllFollowingInfo)
+ 
 
-
+// req: usersArray[ids]
+const findManyUsers = async (req, res) => {
+  let users
+  try { await User.find({ _id: { $in: req.body.user_id_array } }).lean().then(ele => { users = ele }) } catch (err) {return res.status(404).send('Cant find users')}
+  return res.send(users)
+}
+userRouter.post('/find-many-users', findManyUsers)
 
 // Follow/unfollow a user
 const followUser =  async (req, res, next) => {
   let targetUser, user
-  try { await User.findOne({ _id: req.body.target_user_id }).then(ele => targetUser = ele) } catch (err) { res.status(404).send('Target user not found.') }
-  try {await User.findOne({_id: req.body.user_id}).then(ele=>user=ele)} catch(err) {res.status(404).send("cannot find user.")}
+  try { await User.findOne({ _id: req.body.target_user_id }).then(ele => targetUser = ele) } catch (err) { return res.status(404).send('Target user not found.') }
+  try {await User.findOne({_id: req.body.user_id}).then(ele=>user=ele)} catch(err) { return res.status(404).send("cannot find user.")}
   
   const isFollowing = targetUser.followers.find(e => e.equals(user._id))
   
@@ -174,7 +181,7 @@ const followUser =  async (req, res, next) => {
   }
   await targetUser.save()
   await user.save()
-  res.send(user)
+  return res.send(targetUser)
 }
 userRouter.post('/follow', followUser)
 

@@ -11,11 +11,11 @@ export const Container = styled.aside`
   height: 75vh;
   flex-grow: 2;
   gap: 3px;
-`;
+`; 
 export const Item = styled.div`
   display: flex;
   font-size: 12px;
-  
+  mareeeeeeegin-top: 3px;
 `
 
 export const Title = styled.div`
@@ -36,4 +36,17 @@ export const LinkButton = styled(Link)`
   &:hover{
     color: blue;
   }
+`
+
+
+export const FollowButton = styled.div`
+  /* backgr */
+`
+
+export const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
 `

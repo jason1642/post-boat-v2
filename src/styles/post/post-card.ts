@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // title, image, details(creator name, date, likes, category), buttons(like, follow, save, )
 // Modal styling for full view with comment section\
@@ -7,7 +7,7 @@ import styled from 'styled-components';
 interface Props{
   cardPadding: string,
   cardBackground: string,
-  
+  textAlign: string,
 }
 export const Container = styled.div<Props>`
   display: flex;
@@ -25,7 +25,7 @@ export const Container = styled.div<Props>`
   & > *{ 
     display: flex;
     flex-direction: column;
-    text-align: ${({textAlign})=>textAlign || 'left'}
+    text-align: ${({textAlign})=>textAlign || 'left'};
     margin: 0;
     padding: 0;
   }
@@ -54,11 +54,18 @@ export const Title = styled.h3`
   display: flex;
   margin: 0;
   width: 100%;
+  text-align: left;
 `
-export const CreatedBy = styled.div`
+export const CreatedBy = styled(Link)`
   font-size: 7px;
   width: 100%;
   text-align: left;
+  text-decoration: none;
+  color: ${({ theme }) => theme.text};
+  &:hover{
+    cursor: pointer;
+    color: orange;
+  }
 `
 export const Main = styled.div`
   min-height: 10px;

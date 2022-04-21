@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const baseUrl = process.env.Node_ENV === 'production' ? 'http://localhost:3820' : 'http://localhost:3820';
 const api = axios.create({
-  baseURL: 'http://localhost:3820'
+  baseURL: baseUrl
 })
 
 
@@ -31,6 +31,10 @@ export const getUserComments = async (user_id) =>
     console.log(err)
   })
 
+export const getmanyUsers = async (userIdArray: Array<string>) => 
+  await api.post('/api/user/find-many-users', userIdArray).then(res=>res).catch(err=>err)
+
+
 export const getUserInfoById = async (user_id:string) => 
   await api.get('/api/user/' + user_id).then(res=> res).catch(err=>err)
 
@@ -45,3 +49,8 @@ export const removeToken = () => {
 // 
 // 
 // 
+
+
+
+export const followUser = async (user_id: string, target_user_id: string) => 
+  await api.post('api/user/follow', {user_id: user_id, target_user_id: target_user_id}).then(res=>res).catch(err=>err)

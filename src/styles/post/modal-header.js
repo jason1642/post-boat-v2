@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
 export const Container = styled.div`
   padding: 10px;
   box-sizing: border-box;
@@ -10,7 +10,27 @@ export const Container = styled.div`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 5px 0 rgba(0, 0, 0, 0.1);
 
 `;
-
+export const CreatedBy = styled(Link)`
+  font-size: 9px;
+  width: 100%;
+  text-align: left;
+  text-decoration: none;
+  color: ${({ theme }) => theme.text};
+  &:hover{
+    cursor: pointer;
+    color: orange;
+  }
+`
+export const Main = styled.div`
+  min-height: 10px;
+  max-height: 512px;
+  margin: 5px 0;
+  flex-grow: 1;
+  &:hover{
+    cursor: pointer;
+  }
+  /* height: 60%; */  
+`
 export const TopRow = styled.div`
   display: flex;
   width: 100%;

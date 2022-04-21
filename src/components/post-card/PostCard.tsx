@@ -43,13 +43,12 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({data, cardPadding}) 
   return (
     <Container
       cardPadding={cardPadding}
+      textAlign={'center'}
     >
-      <TopRow
-      onClick={openModal}
-      >
-        <CreatedBy>Posted by u/<b>{data.author.username}</b> {moment().startOf('day').fromNow(data.created_at)} ago</CreatedBy>
+      <TopRow>
+        <CreatedBy to={`/user/${data.author.user_id}`}>Posted by u/<b>{data.author.username}</b>&nbsp;{moment().startOf('day').fromNow(data.created_at)} ago</CreatedBy>
         <Title
-          
+          onClick={openModal}
         >{data.title}</Title>
       </TopRow>
 
