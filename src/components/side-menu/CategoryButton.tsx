@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {Section, Title, SubscribeButton} from '../../styles/account-page/side-menu.js'
+import {Section, Title, SubscribeButton, Span, LinkButton} from '../../styles/account-page/side-menu.js'
 import { subscribeToCategory, getCategoryByName } from '../api-helpers/user-api.ts'
 import Button from '@mui/material/Button';
 
@@ -12,7 +12,7 @@ interface ICategoryButtonProps {
 
 const CategoryButton: React.FunctionComponent<ICategoryButtonProps> = ({postData, currentUser}) => {
   const [isSubscribed, setIsSubscribed] = useState<boolean>(false)
-
+  const [categoryData, setCategoryData] = useState<any>(undefined)
   const handleSubscribeToCommunity = async () => {
     await subscribeToCategory(currentUser._id, postData.category).then(res => {
       console.log(res)
@@ -22,19 +22,20 @@ const CategoryButton: React.FunctionComponent<ICategoryButtonProps> = ({postData
 
   useEffect(() => {
     getCategoryByName(postData.category).then(res => {
+      setCategoryData(res.data)
       if (currentUser.category_subscriptions.find(e => e === res.data._id)) {
         setIsSubscribed(true)
       }
     })
   }, []);
   return <Section>
-  <Title>Community: </Title>
-    <Button
-      variant='contained'
-      sx={{ width: 140, fontSize: 9 }} 
+    <LinkButton to={`/category/${postData.category}`}>Community: /{postData.category}</LinkButton>
+
+    {categoryData && <Span>{categoryData.followers.length} members</Span>}
+    <SubscribeButton
     onClick={handleSubscribeToCommunity}
     >
-    {isSubscribed ? 'Unsubscribe from' : 'Subscribe to'}  {postData.category}</Button>
+    {isSubscribed ? 'Unsubscribe' : 'Subscribe'}</SubscribeButton>
 </Section>;
 };
 

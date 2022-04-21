@@ -42,7 +42,7 @@ export const LinkButton = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.text};
   &:hover{
-    color: blue;
+    color: #44b2ff;
   }
 `
 
@@ -74,14 +74,26 @@ export const ListItem = styled(Link)`
 export const Section = styled.div`
   display: flex;
   flex-direction: column;
-  
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-top: 15px;
+  gap: 7px;
 `
 
 export const SubscribeButton = styled.div`
   background-color: grey;
-
+  width: 60%;
+  border-radius: 8px;
+  background-color: darkslateblue;
+  font-size: 12px;
+  margin: 0 auto;
+  padding: 5px 9px;
   &:hover{
     cursor: pointer;
 
   }
 `
+
+export const Span = styled.div`
+  font-size: 12px;
+`;

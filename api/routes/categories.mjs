@@ -59,14 +59,14 @@ categoryRouter.get('/all', async(req, res, next) => {
 
 // FIND ONE
 categoryRouter.get('/name/:name', async (req, res, next) => {
-  const category = await Category.find({ name: req.params.name });
-  if (!category) return res.status(404).send('Category does not exist.')
+  let category
+  try { await Category.findOne({ name: req.params.name }).lean().then(e => category = e) } catch(err) {return res.status(404).send('Category not found')}
   return res.send(category)
 })
 // FIND ONE
 categoryRouter.get('/id/:id', async (req, res, next) => {
   let category
-  try { await Category.find({ _id: req.params.id }).then(ele => category = ele) }
+  try { await Category.findOne({ _id: req.params.id }).then(ele => category = ele) }
   catch (err) { return res.status(404).send('Category does not exist') }
   return res.send(category)
 })
