@@ -14,6 +14,10 @@ const optionsData = {
   comments: {
     name: 'comments',
     path: '/user/:id/comments'
+  },
+  saved: {
+  name: 'saved',
+    path: '/user/:id/saved'
   }
 }
 

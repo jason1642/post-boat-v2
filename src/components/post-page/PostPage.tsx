@@ -36,11 +36,10 @@ const PostPage: React.FunctionComponent<IPostPageProps> = ({ currentUser }) => {
 
   return (
     
-    !postData || !userData ? 
-      <>404 Not Found</> : 
+    postData && userData ? 
+      
     <Container>
      
-      
         <Main>
           <Header
             currentUser={currentUser}
@@ -59,9 +58,12 @@ const PostPage: React.FunctionComponent<IPostPageProps> = ({ currentUser }) => {
     </Main>
       
 
-      <SideMenu onPostPage={true} paramsUserData={userData}/>
+        <SideMenu postData={postData} currentUser={currentUser} onPostPage={true} paramsUserData={userData}/>
 
-    </Container>
+      </Container>
+    : <>404 Not Found</> 
+
+
   );
 };
 

@@ -2,7 +2,7 @@ import Category from '../models/category.mjs';
 import express from 'express';
 import mongoose from 'mongoose';
 import _ from 'lodash';
-
+import User from '../models/user.mjs'
 const categoryRouter = express.Router();
 
 //api/category
@@ -22,6 +22,31 @@ categoryRouter.post('/create', async (req, res, next) => {
 
 })
 
+// req: user_id, category_name
+const followCategory = async (req, res) => {
+  let user, category
+  try { await User.findOne({ _id: req.body.user_id }).then(ele => {user = ele}) } catch (err) { return res.status(404).send('Cannot find user') }
+  try {await Category.findOne({name: req.body.category_name}).then(e=>category=e) } catch (err) {return res.status(404).send('Category does not exist')}
+  const isSubscribed = user.category_subscriptions.findIndex(id => id.equals(category._id))
+  if (isSubscribed === -1) {
+    user.category_subscriptions.push(category._id)
+    console.log(user.category_subscriptions)
+
+    category.followers.push(user._id)
+  } else {
+    user.category_subscriptions.splice(isSubscribed, 1)
+    category.followers.splice(category.followers.findIndex(x=> x === user._id), 1)
+  }
+  await user.save()
+  await category.save()
+  // console.log(category)
+  return res.send(user)
+}
+categoryRouter.post('/follow-category', followCategory)
+
+
+
+
 // FIND ALL
 categoryRouter.get('/all', async(req, res, next) => {
   const allCategories = await Category.find({});
@@ -33,9 +58,16 @@ categoryRouter.get('/all', async(req, res, next) => {
 })
 
 // FIND ONE
-categoryRouter.get('/:name', async (req, res, next) => {
+categoryRouter.get('/name/:name', async (req, res, next) => {
   const category = await Category.find({ name: req.params.name });
   if (!category) return res.status(404).send('Category does not exist.')
+  return res.send(category)
+})
+// FIND ONE
+categoryRouter.get('/id/:id', async (req, res, next) => {
+  let category
+  try { await Category.find({ _id: req.params.id }).then(ele => category = ele) }
+  catch (err) { return res.status(404).send('Category does not exist') }
   return res.send(category)
 })
 

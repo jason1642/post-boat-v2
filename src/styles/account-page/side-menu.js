@@ -15,9 +15,17 @@ export const Container = styled.aside`
 export const Item = styled.div`
   display: flex;
   font-size: 12px;
-  mareeeeeeegin-top: 3px;
+  margin-top: 3px;
 `
-
+export const ItemButton = styled.div`
+  display: flex;
+  font-size: 12px;
+  margin-top: 3px;
+  &:hover{
+    cursor: pointer;
+    color: lightblue;
+  }
+`
 export const Title = styled.div`
 
 `
@@ -49,4 +57,31 @@ export const List = styled.div`
   width: 100%;
   height: 100%;
 
+`
+export const ListItem = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.text};
+  background-color: #8080802b;
+  border-radius: 4px;
+  padding: 5px 0px;
+  &:hover{
+    color: orange;
+  }
+` 
+
+
+
+export const Section = styled.div`
+  display: flex;
+  flex-direction: column;
+  
+`
+
+export const SubscribeButton = styled.div`
+  background-color: grey;
+
+  &:hover{
+    cursor: pointer;
+
+  }
 `

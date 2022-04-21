@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import _ from 'lodash';
 import { verifyUser } from '../middleware/verify.mjs';
 import Post from '../models/post.mjs';
-
+import Category from '../models/category.mjs'
 const userRouter = express.Router();
 const randomStrings = [
   'anon',
@@ -164,6 +164,10 @@ const findManyUsers = async (req, res) => {
 }
 userRouter.post('/find-many-users', findManyUsers)
 
+
+
+
+
 // Follow/unfollow a user
 const followUser =  async (req, res, next) => {
   let targetUser, user
@@ -277,8 +281,7 @@ userRouter.post('/create-many-posts', async (req, res) => {
   console.log(dataArray)
   return res.send(users)
 })
-
-
+// req: user_id, category_name
 
 
 export default userRouter; 

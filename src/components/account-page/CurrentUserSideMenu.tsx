@@ -13,7 +13,7 @@ const CurrentUserSideMenu: React.FunctionComponent<ICurrentUserSideMenuProps> = 
       <Item>Joined {moment(currentUser.created_at).fromNow()}</Item>
       <Item>Followers: {currentUser.followers.length}</Item>
       <Item>Following: {currentUser.following.length}</Item>
-      <Button>Follow</Button>
+
     </Container>
   ) ;
 };

@@ -1,16 +1,18 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {Container, Title, Item, LinkButton, FollowButton} from '../../styles/account-page/side-menu.js'
+import {Container, Title, Item, LinkButton, ItemButton, Section, SubscribeButton, FollowButton} from '../../styles/account-page/side-menu.js'
 import moment from 'moment'
 import Button from '@mui/material/Button';
-import { followUser } from '../api-helpers/user-api.ts'
+import { followUser, subscribeToCategory } from '../api-helpers/user-api.ts'
 import FollowList from './FollowList.tsx'
+import CategoryButton from './CategoryButton.tsx'
 // import {RiUserFollowFill, RiUserUnfollowFill} from 'react-icons/ri/index.js'
 // import { Link } from 'react-router-dom';
 interface ISideMenuProps {
   currentUser: any,
   paramsUserData: any,
   onPostPage: boolean,
+  postData: any,
 }
 
 
@@ -24,16 +26,16 @@ const ButtonRender = (isFollowing:boolean, handleFollow: Function) => {
   )
 }
 
-const SideMenu: React.FunctionComponent<ISideMenuProps> = ({paramsUserData, onPostPage, currentUser }) => {
+const SideMenu: React.FunctionComponent<ISideMenuProps> = ({paramsUserData, onPostPage, currentUser, postData }) => {
+  
   const [isFollowing, setIsFollowing] = useState(false)
   const [followersNum, setFollowersNum] = useState<number>(paramsUserData.followers.length)
-  const [followingList, setFollowingList] = useState<boolean>(true)
+  const [followingList, setFollowingList] = useState<boolean>(false)
   const [followerList, setFollowerList] = useState<boolean>(false)
-  // Follow button, change icon toggle
-  // console.log(paramsUserData)
+
   const handleFollow = async () => {
     await followUser(currentUser._id, paramsUserData._id).then(res => {
-      console.log(res)
+      // console.log(res)
       setIsFollowing(!isFollowing)
       setFollowersNum(res.data.followers.length)
     }).catch(err => {
@@ -45,6 +47,8 @@ const SideMenu: React.FunctionComponent<ISideMenuProps> = ({paramsUserData, onPo
     setFollowingList(false)
 }
 
+ 
+// console.log(onPostPage, postData)
   useEffect(() => {
     const isUserFollowing = currentUser.following.find(uid => uid === paramsUserData._id)
     console.log(isUserFollowing)
@@ -54,7 +58,7 @@ const SideMenu: React.FunctionComponent<ISideMenuProps> = ({paramsUserData, onPo
     <Container>
       {
         followingList ? <FollowList title=" is Following" type={'following'} data={paramsUserData} handleListClose={handleListClose}/> : 
-          followerList ? <FollowList title="'s Followers'" type={'followers'} data={paramsUserData} handleListClose={handleListClose} /> :
+          followerList ? <FollowList title="'s Followers" type={'followers'} data={paramsUserData} handleListClose={handleListClose} /> :
             <>
       {onPostPage ?
         <LinkButton to={`/user/${paramsUserData._id}`}>u/{paramsUserData.username} </LinkButton>
@@ -63,8 +67,8 @@ const SideMenu: React.FunctionComponent<ISideMenuProps> = ({paramsUserData, onPo
 
     }
       <Item>Joined {moment(paramsUserData.created_at).fromNow()}</Item>
-      <Item onClick={()=>setFollowerList(true)}>Followers: {followersNum}</Item>
-      <Item onClick={()=> setFollowingList(true)}>Following: {paramsUserData.following.length}</Item>
+              <ItemButton  onClick={()=>setFollowerList(true)}>Followers: {followersNum}</ItemButton>
+      <ItemButton onClick={()=> setFollowingList(true)}>Following: {paramsUserData.following.length}</ItemButton>
 
       {currentUser._id && paramsUserData._id !== currentUser._id ?
         ButtonRender(isFollowing, handleFollow) : <></>}
@@ -73,6 +77,13 @@ const SideMenu: React.FunctionComponent<ISideMenuProps> = ({paramsUserData, onPo
         
       }
       
+
+      {
+        onPostPage && postData && 
+        <CategoryButton
+          currentUser={currentUser}
+          postData={postData} />
+      }
     </Container>
   );
 };

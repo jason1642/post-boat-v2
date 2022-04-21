@@ -32,7 +32,7 @@ export const getUserComments = async (user_id) =>
   })
 
 export const getmanyUsers = async (userIdArray: Array<string>) => 
-  await api.post('/api/user/find-many-users', userIdArray).then(res=>res).catch(err=>err)
+  await api.post('/api/user/find-many-users', {user_id_array: userIdArray}).then(res=>res).catch(err=>err)
 
 
 export const getUserInfoById = async (user_id:string) => 
@@ -49,6 +49,25 @@ export const removeToken = () => {
 // 
 // 
 // 
+
+export const subscribeToCategory = async (user_id, category_name) => 
+  await api.post('/api/category/follow-category', {user_id, category_name}).then(res=>res).catch(err=>err)
+
+export const getCategoryById = async (id:string) => 
+  await api.get('/api/category/id/' + id).then(res => res).catch(err => err)
+
+export const getCategoryByName = async (name: string) => 
+  await api.get('/api/category/name/' + name).then(res => res).catch(err => err)
+  
+
+
+
+
+
+
+
+
+
 
 
 
