@@ -47,6 +47,7 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) 
   return (
     <Container>
       <Nav
+        currentUser={currentUser}
         paramsId={id}
       />
 

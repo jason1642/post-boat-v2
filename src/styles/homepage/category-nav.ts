@@ -17,7 +17,7 @@ export const Container = styled.div`
 `;
 // If category name matches params category, turn green
 export const Item = styled(Link)<Props>`
-  color: ${({color})=>color};
+  color: ${({color, theme})=>color ? color : theme.text};
   text-decoration: none;
   padding: 4px;
   font-size: .8em;

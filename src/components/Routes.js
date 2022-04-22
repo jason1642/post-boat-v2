@@ -1,4 +1,4 @@
-import { useRoutes, Navigate } from "react-router-dom";
+import { useRoutes, Navigate} from "react-router-dom";
 import Login from "./login-register/Login.tsx";
 import Register from "./login-register/Register.tsx";
 import HomePage from "./home-page/HomePage.tsx";
@@ -36,14 +36,14 @@ const SiteRoutes = ({ currentUser }) => {
       path: '/create-post',
       element: <CreatePost currentUser={currentUser}/>
     },
-    {
+    { 
       path: '/user/:id',
       element: <AccountPage currentUser={currentUser} />,
       children: [
         { path: 'posts', element: <UserPosts /> },
         { path: '', element: <UserPosts /> },
         { path: 'comments', element: <UserComments /> },
-        { path: 'saved', element:<SavedPosts />}
+        { path: 'saved', element: <SavedPosts /> }
       ]
     },
   ])

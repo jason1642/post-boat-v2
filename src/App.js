@@ -10,6 +10,7 @@ import { lightTheme, darkTheme } from "./styles/dark-mode/themes.js"
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {actionCreators, userActions } from './redux/index.ts'
+import { useParams } from "react-router-dom";
 
 
 
@@ -17,7 +18,7 @@ function App() {
   const [theme, themeToggler] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
-
+  const allParams = useParams()
   const currentUser = useSelector((state) => state.currentUser)
   const dispatch = useDispatch()
   const [didAutheticate, setDidAuthenticate] = useState(true)
@@ -37,8 +38,8 @@ function App() {
   }
   
   useEffect(() => {
-
-  
+    console.log(allParams)
+    
     handleVerify()
     
     // console.log(currentUser)

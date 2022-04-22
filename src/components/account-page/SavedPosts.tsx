@@ -2,12 +2,13 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Container } from '../../styles/account-page/user-posts.js'
 import PostCard from '../post-card/PostCard.tsx'
-import { useOutletContext } from 'react-router-dom';
+import { Navigate, useOutletContext, useParams } from 'react-router-dom';
 import { getManyPostsFromIdArray } from '../api-helpers/post-api.ts'
 interface ISavedPostsProps {
 }
 
 const SavedPosts: React.FunctionComponent<ISavedPostsProps> = () => {
+  const {id} = useParams()
   const { currentUser }: any = useOutletContext()
   const [savedPosts, setSavedPosts] = useState([])
   useEffect(() => {
@@ -17,7 +18,7 @@ const SavedPosts: React.FunctionComponent<ISavedPostsProps> = () => {
     }).catch(err=>console.log(err))
   }, []);
 
-  return (
+  return currentUser._id === id ?  (
     <Container>
     
       {
@@ -30,7 +31,8 @@ const SavedPosts: React.FunctionComponent<ISavedPostsProps> = () => {
           <>You have no posts saved</>
       }
     </Container>
-  );
+  ) :
+    <Navigate to={`/user/${id}`} replace />
 };
 
 export default SavedPosts;

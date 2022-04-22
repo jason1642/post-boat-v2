@@ -52,7 +52,8 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
 
   useEffect(() => {
     console.log(data, likedSaved)
-    if (currentUser.liked_posts.find(pId => pId === data._id))
+    if (currentUser._id){
+      if(currentUser.liked_posts.find(pId => pId === data._id))
       setLikedSaved(prev => ({
         ...prev,
         likes: {
@@ -60,7 +61,6 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
           is_liked: true
         }
       }))
-    
     if (currentUser.saved_posts.find(sId => sId === data._id))
       setLikedSaved(prev => ({
         ...prev, 
@@ -69,6 +69,9 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
           is_saved: true
         }
       }))
+  }
+    
+    
     // console.log(likedSaved)
     
   }, [])
