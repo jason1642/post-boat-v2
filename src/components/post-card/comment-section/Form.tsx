@@ -36,7 +36,7 @@ const Form: React.FunctionComponent<IFormProps> = ({ postData, currentUser }) =>
   return (
     <Container>
       <Title>Comment as {currentUser.username}</Title>
-      <FormBox onSubmit={handleSubmit(onSubmit, onErrors)}>
+      <FormBox onSubmit={()=>handleSubmit(onSubmit, onErrors)}>
 
         <TextInput
           {...register('comment', commentOptions.comment)}

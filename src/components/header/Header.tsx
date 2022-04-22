@@ -38,7 +38,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ theme, themeToggler, cu
         BOAT
       </Title>
       <Wrapper>
-        <div style={{fontSize:"8px"}}>Sailing as {currentUser.username}</div>
+      {currentUser.authenticated && <div style={{fontSize:"8px"}}>Sailing as {currentUser.username}</div>}
       <Toggle theme={theme} toggleTheme={themeToggler} />
         {
           currentUser.authenticated ?

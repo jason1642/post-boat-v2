@@ -1,6 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom'
 import { removeToken } from '../api-helpers/user-api.ts'
 import {List, Item} from '../../styles/nav.js'
 import {

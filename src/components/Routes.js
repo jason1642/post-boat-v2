@@ -1,4 +1,4 @@
-import { useRoutes, Navigate, useLocation, useMatch } from "react-router-dom";
+import { useRoutes, Navigate } from "react-router-dom";
 import Login from "./login-register/Login.tsx";
 import Register from "./login-register/Register.tsx";
 import HomePage from "./home-page/HomePage.tsx";
@@ -6,16 +6,11 @@ import AccountPage from "./account-page/AccountPage.tsx";
 import UserPosts from "./account-page/UserPosts.tsx";
 import UserComments from "./account-page/UserComments.tsx";
 import CreatePost from "./post-page/create-post/CreatePost.tsx";
-import { useEffect } from "react";
 import PostPage from "./post-page/PostPage.tsx";
+import SavedPosts from './account-page/SavedPosts.tsx'
 
 const SiteRoutes = ({ currentUser }) => {
-  const location1 = useLocation()
-  const match = useMatch('/user/:id')
-  useEffect(() => {
-    // console.log(location1)
-    // console.log(match)
-  }, [])
+
   return useRoutes([
     {
       path: '/login',
@@ -47,7 +42,8 @@ const SiteRoutes = ({ currentUser }) => {
       children: [
         { path: 'posts', element: <UserPosts /> },
         { path: '', element: <UserPosts /> },
-        { path: 'comments', element: <UserComments />}
+        { path: 'comments', element: <UserComments /> },
+        { path: 'saved', element:<SavedPosts />}
       ]
     },
   ])

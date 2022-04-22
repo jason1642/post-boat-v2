@@ -11,12 +11,14 @@ interface IHeaderProps {
   likePost: Function,
   currentUser: any,
   savePost: Function,
+  closeModal: Function,
+
 }
 interface LikedSaved {
   liked: boolean,
   saved: boolean
 }
-const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost, currentUser}) => {
+const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost, currentUser, closeModal}) => {
   const [likesNum, setLikesNum] = useState(data.liked_by.length)
   const [likedSaved, setLikedSaved] = useState<LikedSaved>({
     liked: false,
@@ -29,9 +31,6 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
       const isSaved = data.saved_by.find((c:string) => c === currentUser._id)
       isLiked ? setLikedSaved(prev => ({ ...prev, liked: true })) : setLikedSaved(prev=>({...prev, liked: false}))
       isSaved ? setLikedSaved(prev => ({ ...prev, saved: true })) : setLikedSaved(prev => ({ ...prev, saved: false }))
-      
-
-
     }
 
 
@@ -71,6 +70,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
         
 
           <Span
+            style={{width: '60px'}}
             onClick={() => {
               savePost(data._id, currentUser._id).then(res => { setSavedNum(res.data.length) })
               setLikedSaved(prev => ({ ...prev, saved: !likedSaved.saved }))
@@ -78,12 +78,12 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
           >
           
             {likedSaved.saved ?
-              <BsSaveFill style={{ color: 'green', fontSize: '14px' }} /> :
-              <BsSave style={{ color: 'black', fontSize: '14px' }} />}{savedNum} {data.saved_by.length !== 1 ? 'Saves' : 'Save'}
+              <BsSaveFill style={{ color: 'green', fontSize: '14px'}} /> :
+              <BsSave style={{ color: 'black', fontSize: '14px' }} />}{savedNum +  ' ' + (savedNum !== 1 ? 'Saves' : `Save`)}
           </Span>
         
         </> : <>
-        <Span>
+        <Span style={{width: '60px'}}>
           {likedSaved.liked ?
             <AiFillHeart style={{ color: 'red', fontSize: '16px' }} /> :
             <AiOutlineHeart style={{ color: 'red', fontSize: '16px' }} />}
@@ -92,14 +92,15 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
         
           <Span>
             {likedSaved.saved ?
-              <BsSaveFill style={{ color: 'green', fontSize: '14px' }} /> :
-              <BsSave style={{ color: 'black', fontSize: '14px' }} />}{savedNum} {data.saved_by.length !== 1 ? 'Saves' : 'Save'}
+              <BsSaveFill style={{ color: 'green', fontSize: '14px',}} /> :
+                <BsSave style={{ color: 'black', fontSize: '14px' }} />}{savedNum + (savedNum === 1 ? 'Saves' : 'Save ')} 
           </Span>
         </>}
 
         <Span
-          style={{ justifySelf: 'flex-end' }}>
+          style={{ justifySelf: 'flex-end', margin:'0' }}>
           <Link
+            onClick={()=>closeModal()}
             style={{color: 'inherit',textDecoration: 'none'}}
             to={`/category/` + data.category}
           >More posts from /{data.category}</Link></Span>

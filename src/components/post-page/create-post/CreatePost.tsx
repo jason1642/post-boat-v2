@@ -38,7 +38,7 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = ({currentUser}) =>
     }).catch(err=>console.log(err))
   }
   const onErrors = errors => console.error(errors);
-
+console.log(didSubmit)
   return (
     !didSubmit ?
     <Form

@@ -26,6 +26,9 @@ export const getManyPostsFromCommentArray= async (commentArr: Array<any>) =>
   await api.post('/api/posts/getManyPostsByComments',
     { commentArray: commentArr }).then(res => res).catch(err => err)
 
+export const getManyPostsFromIdArray = async (id_array: Array<string>) => 
+  await api.post('/api/posts/get-many-posts-by-id-array', {id_array}).then(res=>res).catch(err=>err)
+
 
 
 // like and unlike

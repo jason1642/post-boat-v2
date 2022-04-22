@@ -31,14 +31,12 @@ const styles = {
     color: 'red',
     height: '100%',
     width: '18px',
-   
   },
-  
 }
 const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }) => {
 
 
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   const currentUser = useSelector((state: any) => state.currentUser);
 
   const [likedSaved, setLikedSaved] = useState<LikedSaved>({
@@ -52,9 +50,8 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
     }
   })
 
-  
-
   useEffect(() => {
+    console.log(data, likedSaved)
     if (currentUser.liked_posts.find(pId => pId === data._id))
       setLikedSaved(prev => ({
         ...prev,
@@ -63,7 +60,17 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
           is_liked: true
         }
       }))
-    console.log(likedSaved)
+    
+    if (currentUser.saved_posts.find(sId => sId === data._id))
+      setLikedSaved(prev => ({
+        ...prev, 
+        saves: {
+          ...prev.saves,
+          is_saved: true
+        }
+      }))
+    // console.log(likedSaved)
+    
   }, [])
   
   function openModal() {
@@ -73,9 +80,9 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
     setIsOpen(false);
   }
 
-  const handleSetState = (name: string, property: string, length?) => {
+  const handleSetState = (name: string, property: string, length?:number) => {
     // ex : name = likes, isnamed = is_liked: string
-    if (length) {
+    if (isNaN(length) === false) {
       setLikedSaved(prev => {
         return ({
           ...prev,
@@ -87,7 +94,7 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
       })
     } else {
       setLikedSaved(prev => {
-        console.log(prev[name][property])
+        // console.log(prev[name][property])
         return ({
           ...prev,
           [name]: {
@@ -97,12 +104,9 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
         })
       })
     }
-    console.log(likedSaved)
+    // console.log(likedSaved)
   }
-  useEffect(() => {
-    console.log(likedSaved)
-  }, [likedSaved]);
-  // console.log(data)
+  // console.log(data, likedSaved)
   return (
     <Container
       cardPadding={cardPadding}
@@ -115,9 +119,7 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
         >{data.title}</Title>
       </TopRow>
 
-      <Main
-        onClick={openModal}
-      >
+      <Main onClick={openModal}>
         {data.images.length === 0 ?
           <Text>{data.text} </Text>
           :
@@ -130,16 +132,13 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
     </Main>
 
 
-      <BottomRow
-        // onClick={() => handleSetState('likes', 'is_liked')}
-        
-        // onClick={openModal}
-      >
+      <BottomRow>
         <Span onClick={() => {
           currentUser._id && likePost(data._id, currentUser._id).then(res => {
-            // console.log(res)
+            console.log(res.data.length)
             handleSetState('likes', 'total_likes', res.data.length)
             handleSetState('likes', 'is_liked')
+            console.log(likedSaved.likes.total_likes)
           })
           
         }}>
@@ -148,7 +147,16 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
         <Span>{likedSaved.likes.total_likes} Likes</Span>
         <Span>{data.comments.length} {data.comments.length !== 1 ? 'Comments': 'Comment'}</Span>
         
-        {currentUser._id && <Span>Send</Span>}
+        {currentUser._id &&
+          <Span
+            style={{backgroundColor: 'grey', padding: '2px 5px',borderRadius: '8px', color: 'black',}}
+            onClick={() => {
+              currentUser._id && savePost(data._id, currentUser._id).then(res => {
+                handleSetState('saves', 'total_saves', res.data.length)
+                handleSetState('saves', 'is_saved')
+              })
+            }}
+          >{ likedSaved.saves.is_saved ? 'Unsave' : 'Save'}</Span>}
 
         </BottomRow>
       <PostModal

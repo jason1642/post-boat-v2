@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 
 interface Props {
-  isSelected: boolean,
   color: string
 }
 
@@ -18,7 +17,7 @@ export const Container = styled.div`
 `;
 // If category name matches params category, turn green
 export const Item = styled(Link)<Props>`
-  color: ${({color, theme, isSelected})=>isSelected ? color :theme.text};
+  color: ${({color})=>color};
   text-decoration: none;
   padding: 4px;
   font-size: .8em;

@@ -10,22 +10,22 @@ interface IFeedProps {
 const api = axios.create({
   baseURL: 'http://localhost:3820'
 })
-
-const Feed: React.FunctionComponent<IFeedProps> = (props) => {
-const fetchPostsData = async (category: string | undefined) => {
-  const posts = category ? await api.get('/api/posts/findAllByCategory/' + category)
+const fetchPostsData = async (category: string | undefined) => 
+   category ? await api.get('/api/posts/findAllByCategory/' + category)
     .then(e => e.data)
     : await api.get('/api/posts/findAll').then(ele => ele.data)
   // console.log(posts)
-  setFeedData(posts)
   
-}
-  const [feedData, setFeedData] = useState<any>([])
+  
+
+const Feed: React.FunctionComponent<IFeedProps> = (props) => {
+
+  const [feedData, setFeedData] = useState<any>()
   const { category } = useParams()
   
   useEffect(() => {
-    fetchPostsData(category)
-    
+    fetchPostsData(category).then(res=>{setFeedData(res)})
+    console.log(feedData)
       
   }, [category]);
 
@@ -33,13 +33,15 @@ const fetchPostsData = async (category: string | undefined) => {
   return (
     <Container>
       {/* {console.log(feedData.length)} */}
-      {!feedData || feedData.length === 0 ?
-        'There are no posts yet.' :
+      {feedData && feedData.length > 0 ?
+        
         feedData.map(ele =>
           <PostCard
             cardPadding="8px 12px 3px 12px"
             key={ele._id}
-            data={ele} />)}
+            data={ele} />):
+      'There are no posts yet.' 
+      }
     </Container>
   );
 };

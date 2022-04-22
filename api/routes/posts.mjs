@@ -73,7 +73,7 @@ postRouter.get('/findAllByUser/:_id', async (req, res, next) => {
   
   await Post.find({ 'author.user_id': req.params._id }).then(e=>posts=e)
   // if (!posts) return res.status(404).send('Cannot find post.')
-  console.log(posts)
+  // console.log(posts)
   return res.send(posts)
 }) 
 
@@ -183,7 +183,27 @@ postRouter.post('/save', async (req, res, next) => {
 
 
 
+const getManyPostsByIdArray = async (req, res) => {
+  let posts
+  try { await Post.find({ _id: { $in: req.body.id_array } }).then(e => posts = e) } catch (err) { return res.status(404).send('No posts were found') }
+  console.log(posts)
+  return res.send(posts)
 
+}
+postRouter.post('/get-many-posts-by-id-array', getManyPostsByIdArray)
+
+
+// req params: user id
+const getAllSavedByUser = async (req, res) => {
+  let user, savedPostsArray = []
+  try {
+    await User.findOne({ _id: req.params.id }).then(async ele => {
+      await Post.find({_id: {$in: ele.saved_posts}}).then(e=>savedPostsArray=e).lean()
+  }) } catch (err) { return res.status(404).send('User not foud') }
+  
+  res.send(savedPostsArray)
+}
+postRouter.get('/get-all-saved-by-user/:id', getAllSavedByUser)
 
 
 

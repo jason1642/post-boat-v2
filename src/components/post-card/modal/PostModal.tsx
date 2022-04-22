@@ -62,7 +62,8 @@ const PostModal: React.FunctionComponent<IPostModalProps> = ({currentUser, data,
           currentUser={currentUser}
           likePost={likePost}
           data={data}
-          savePost={savePost}
+        savePost={savePost}
+        clostModal={closeModal}
         />
 
         <Main>

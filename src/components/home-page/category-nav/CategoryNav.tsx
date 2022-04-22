@@ -1,10 +1,9 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import {Container, Item} from '../../../styles/homepage/category-nav.ts'
 import _ from 'lodash'
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+
 interface ICategoryNavProps {
-  isSelected: boolean
 }
 
 const categoryArray = ['general', 'sports', 'gaming', 'programming', 'cooking']
@@ -23,7 +22,6 @@ const CategoryNav: React.FunctionComponent<ICategoryNavProps> = (props) => {
         <Item
           key={ele}
           color={category === ele ? 'green' : 'white'}
-          isSelected={category === ele ? true : false}
           to={'/category/' + ele}>{_.capitalize(ele)}</Item>)}
     </Container>
   );
