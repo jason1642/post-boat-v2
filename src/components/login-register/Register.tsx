@@ -37,8 +37,8 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
 
       }}>Register</Title>
 
-      {valueNames.map((name,i) =>
-        <Label key={i}>
+      {valueNames.map(name =>
+        <Label key={name}>
           <Span>{_.capitalize(name)}</Span>
           <Input
             {...register(name, registerOptions[name])}

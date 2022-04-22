@@ -26,7 +26,7 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = ({currentUser}) =>
   const onSubmit = async data => {
     console.log(currentUser._id)
     await createPost(_.assign(data, {
-      author: {
+      author: { 
         user_id: currentUser._id,
         username: currentUser.username,
         profile_image: '',
@@ -44,8 +44,8 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = ({currentUser}) =>
     <Form
       onSubmit={handleSubmit(onSubmit, onErrors)}> 
         <Title>Create Post</Title>
-      {inputNames.map((name, i) =>
-        <Label key={i}>
+      {inputNames.map(name =>
+        <Label key={name}>
           <Span>{_.capitalize(name)}</Span>
       <Input
         {...register(name, createPostOptions[name])}
@@ -66,10 +66,10 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = ({currentUser}) =>
         Category
       <Select {...register('category')} name='category'>
 
-        {categoryNames.map((ele, i) =>
+        {categoryNames.map(ele =>
             <Option
             value={ele}
-            key={i}
+            key={ele}
             >{_.capitalize(ele)}</Option>
           )}
       </Select>

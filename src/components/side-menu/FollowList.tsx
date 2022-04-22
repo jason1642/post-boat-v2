@@ -34,7 +34,10 @@ const FollowList: React.FunctionComponent<IFollowListProps> = ({type, title, dat
       <Button onClick={()=>handleListClose()}>Back</Button>
       <Title style={{marginBottom: '10px'}}>{data.username}{title}</Title>
       {
-        usersArray.length > 0 && usersArray.map(ele=><ListItem to={`/user/${ele._id}`}>{ele.username}</ListItem>)
+        usersArray.length > 0 && usersArray.map(ele =>
+          <ListItem
+            key={ele._id}
+            to={`/user/${ele._id}`}>{ele.username}</ListItem>)
       }
     </List>
   );

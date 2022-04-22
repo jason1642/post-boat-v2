@@ -16,7 +16,7 @@ const fetchPostsData = async (category: string | undefined) => {
   const posts = category ? await api.get('/api/posts/findAllByCategory/' + category)
     .then(e => e.data)
     : await api.get('/api/posts/findAll').then(ele => ele.data)
-  console.log(posts)
+  // console.log(posts)
   setFeedData(posts)
   
 }
@@ -35,10 +35,10 @@ const fetchPostsData = async (category: string | undefined) => {
       {/* {console.log(feedData.length)} */}
       {!feedData || feedData.length === 0 ?
         'There are no posts yet.' :
-        feedData.map((ele, i: number) =>
+        feedData.map(ele =>
           <PostCard
             cardPadding="8px 12px 3px 12px"
-            key={i}
+            key={ele._id}
             data={ele} />)}
     </Container>
   );

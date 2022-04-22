@@ -29,11 +29,11 @@ const UserComments: React.FunctionComponent<IUserCommentsProps> = (props) => {
 
     <Main>
       {/* The current user is {currentUser.username} */}
-
       {
-        commentData && commentData.map((ele) =>
+        commentData && commentData.map(ele =>
         
           <UserPageCommentCard
+            key={ele[1]._id}
             commentData={ele[0]}
             postData={ele[1]}
           />)

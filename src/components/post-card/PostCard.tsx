@@ -5,7 +5,7 @@ import moment from 'moment'
 import { BottomRow, Text, ImageContainer, Image, Container, CreatedBy, Span, Main, TopRow, Title } from '../../styles/post/post-card.ts'
 import PostModal from './modal/PostModal.tsx';
 import { likePost, savePost } from '../api-helpers/post-api.ts'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 interface IPostCardProps {
   data: any,
@@ -14,6 +14,18 @@ interface IPostCardProps {
   cardPadding: string,
   textAlign: string,
 }
+
+interface LikedSaved {
+  likes: {
+    is_liked: boolean,
+    total_likes: number
+  }
+  saves: {
+    is_saved: boolean, 
+    total_saves: number
+  }
+}
+
 const styles = {
   heartIcon: {
     color: 'red',
@@ -23,15 +35,35 @@ const styles = {
   },
   
 }
-const PostCard: React.FunctionComponent<IPostCardProps> = ({data, cardPadding}) => {
-  // console.log(data)
+const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }) => {
 
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const currentUser = useSelector((state: any) => state.currentUser);
 
+  const [likedSaved, setLikedSaved] = useState<LikedSaved>({
+    likes: {
+      is_liked: false,
+      total_likes: data.liked_by.length
+    },
+    saves: {
+      is_saved: false,
+      total_saves: data.saved_by.length
+    }
+  })
+
+  
+
   useEffect(() => {
-    // console.log(currentUser)
+    if (currentUser.liked_posts.find(pId => pId === data._id))
+      setLikedSaved(prev => ({
+        ...prev,
+        likes: {
+          ...prev.likes,
+          is_liked: true
+        }
+      }))
+    console.log(likedSaved)
   }, [])
   
   function openModal() {
@@ -40,6 +72,37 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({data, cardPadding}) 
   function closeModal() {
     setIsOpen(false);
   }
+
+  const handleSetState = (name: string, property: string, length?) => {
+    // ex : name = likes, isnamed = is_liked: string
+    if (length) {
+      setLikedSaved(prev => {
+        return ({
+          ...prev,
+          [name]: {
+            ...prev[name],
+            [property]: length
+          }
+        })
+      })
+    } else {
+      setLikedSaved(prev => {
+        console.log(prev[name][property])
+        return ({
+          ...prev,
+          [name]: {
+            ...prev[name],
+            [property]: !prev[name][property]
+          }
+        })
+      })
+    }
+    console.log(likedSaved)
+  }
+  useEffect(() => {
+    console.log(likedSaved)
+  }, [likedSaved]);
+  // console.log(data)
   return (
     <Container
       cardPadding={cardPadding}
@@ -68,10 +131,21 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({data, cardPadding}) 
 
 
       <BottomRow
-        onClick={openModal}
+        // onClick={() => handleSetState('likes', 'is_liked')}
+        
+        // onClick={openModal}
       >
-        <Span><AiOutlineHeart style={styles.heartIcon} /></Span>
-        <Span>{data.liked_by.length} Likes</Span>
+        <Span onClick={() => {
+          currentUser._id && likePost(data._id, currentUser._id).then(res => {
+            // console.log(res)
+            handleSetState('likes', 'total_likes', res.data.length)
+            handleSetState('likes', 'is_liked')
+          })
+          
+        }}>
+          {likedSaved.likes.is_liked ? <AiFillHeart style={styles.heartIcon} /> : <AiOutlineHeart style={styles.heartIcon} />}
+          </Span>
+        <Span>{likedSaved.likes.total_likes} Likes</Span>
         <Span>{data.comments.length} {data.comments.length !== 1 ? 'Comments': 'Comment'}</Span>
         
         {currentUser._id && <Span>Send</Span>}

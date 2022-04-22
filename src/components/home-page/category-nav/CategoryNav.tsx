@@ -21,6 +21,7 @@ const CategoryNav: React.FunctionComponent<ICategoryNavProps> = (props) => {
       
       {categoryArray.map(ele =>
         <Item
+          key={ele}
           color={category === ele ? 'green' : 'white'}
           isSelected={category === ele ? true : false}
           to={'/category/' + ele}>{_.capitalize(ele)}</Item>)}

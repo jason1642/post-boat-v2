@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import {useForm} from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
 import { loginOptions } from '../resources/validation-options.tsx';
+
 const valueNames = ['username', 'password',]
 
 const Login = (props) => {
@@ -72,7 +73,7 @@ const Login = (props) => {
       >
       <Title>Log in</Title>
 
-      {valueNames.map(name => <Label>
+      {valueNames.map(name => <Label key={name}>
         <Span>{_.capitalize(name)}</Span>
         <Input
         {...register(name, loginOptions[name])}

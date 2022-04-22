@@ -22,10 +22,10 @@ const UserPosts: React.FunctionComponent<IUserPostsProps> = () => {
     >
       {
         postData.length > 0 ?
-          postData.map((ele, i) =>
+          postData.map(ele =>
             <PostCard
               cardPadding="8px 12px 10px 10px"
-              key={i}
+              key={ele._id}
               data={ele}
             />
           )

@@ -18,7 +18,7 @@ const HomePage: React.FunctionComponent<IHomePageProps> = ({currentUser}) => {
       
       <Wrapper>
         <CategoryNav />
-        <Feed />
+        <Feed currentUser={currentUser}/>
       </Wrapper>
       {
         currentUser._id ?

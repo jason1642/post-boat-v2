@@ -33,11 +33,11 @@ const CommentSection: React.FunctionComponent<ICommentSectionProps> = ({data, cu
 
 
       <CommentContainer>
-      {data.comments.map((ele: CommentModel, i: number) =>
+      {data.comments.map((ele: CommentModel)=>
         <Comment
           postData={data}
           currentUser={currentUser}
-          key={i}
+          key={ele._id}
           // commentModel={CommentModel}
         commentData={ele} />).reverse()}
       </CommentContainer>

@@ -1,13 +1,13 @@
 import User from '../models/user.mjs';
 import express from 'express';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt'; 
+import jwt from 'jsonwebtoken'; 
 import mongoose from 'mongoose';
 import _ from 'lodash';
 import { verifyUser } from '../middleware/verify.mjs';
 import Post from '../models/post.mjs';
 import Category from '../models/category.mjs'
-const userRouter = express.Router();
+const userRouter = express.Router(); 
 const randomStrings = [
   'anon',
   'anon',

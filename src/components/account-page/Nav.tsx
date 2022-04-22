@@ -37,7 +37,10 @@ const Nav: React.FunctionComponent<INavProps> = ({paramsId}) => {
           style={{borderBottom: match && '1px solid white'}}
         to={`/user/${paramsId}/${optionsData.comments.name}`}>
         {_.capitalize(optionsData.comments.name)}</Item> 
-
+        {/* <Item
+          style={{borderBottom: match && '1px solid white'}}
+        to={`/user/${paramsId}/${optionsData.comments.name}`}>
+        {_.capitalize(optionsData.comments.name)}</Item>  */}
 
 
 
