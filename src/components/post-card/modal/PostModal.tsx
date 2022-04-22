@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
 // import _ from 'lodash'
 import { ImageContainer, Image, Main, Text } from '../../../styles/post/modal.js'
 import { ReactModal as Modal } from '../../../styles/post/modal.js';

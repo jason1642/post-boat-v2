@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
 import {Container, Title, FormBox, SubmitButton, TextInput } from '../../../styles/post/comment-section/form.js'
 import {commentOnPost} from '../../api-helpers/post-api.ts'
 import { useForm } from 'react-hook-form'

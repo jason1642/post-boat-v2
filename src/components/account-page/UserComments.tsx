@@ -9,7 +9,7 @@ interface IUserCommentsProps {
 }
 
 const UserComments: React.FunctionComponent<IUserCommentsProps> = (props) => {
-  const { currentUser, paramsUserData }: any = useOutletContext()
+  const {  paramsUserData }: any = useOutletContext()
     // user comments on TITLE on CATEGORY
     // Post author
   const [commentData, setCommentData] = useState(undefined)

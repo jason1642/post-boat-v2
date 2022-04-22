@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Main,Container, Title, Wrapper} from '../../styles/homepage/homepage.js'
+import {Main,Container,  Wrapper} from '../../styles/homepage/homepage.js'
 import CategoryNav from './category-nav/CategoryNav.tsx';
 import Feed from './feed/Feed.tsx'
 import SideMenu from './side-menu/SideMenu.tsx'

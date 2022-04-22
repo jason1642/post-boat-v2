@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Container } from '../../styles/account-page/user-posts.js'
 import PostCard from '../post-card/PostCard.tsx'
-import { useOutlet, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import { getManyPostsFromIdArray } from '../api-helpers/post-api.ts'
 interface ISavedPostsProps {
 }

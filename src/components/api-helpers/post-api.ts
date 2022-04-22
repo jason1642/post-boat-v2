@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = process.env.Node_ENV === 'production' ? 'http://localhost:3820' : 'http://localhost:3820';
+const baseUrl = process.env.Node_ENV === 'production' ? 'https://post-boat.herokuapp.com' : 'http://localhost:3820';
 const api = axios.create({
   baseURL: baseUrl
 })
@@ -16,6 +16,13 @@ export const getAllPostsByUser = async (user_id:string) =>
   await api.get('/api/posts/findAllByUser/' + user_id)
     .then(res => res)
     .catch(err => err)
+
+
+    
+export const getAllByCategoryName = async (category: string | undefined) => 
+  category ? await api.get('/api/posts/findAllByCategory/' + category)
+  .then(e => e.data)
+  : await api.get('/api/posts/findAll').then(ele => ele.data)
 
 export const getOnePost = async (id) => 
   await api.get(`/api/posts/${id}`).then(res=>res).catch(err=>err)
