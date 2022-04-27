@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import validator from 'validator'
 import commentSchema from './comment.mjs';
+import chatSchema from './chat.mjs';
 const snakeCaseStamps = {
   timestamps: {
     createdAt: 'created_at',
@@ -51,6 +52,7 @@ const User = mongoose.model('User', new mongoose.Schema({
   },
   created_comments: { type: [commentSchema], default: [] },
   saved_posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Posts' }],
+  private_messages: { type: [chatSchema], default: [] },
   // posts: {
   preferences: {
     type: {

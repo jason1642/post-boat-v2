@@ -34,7 +34,7 @@ const Login = (props) => {
         Swal.fire({
           title: 'Successfully logged in!!',
           html: '...redirecting you to the home page now',
-          timer: 2000,
+          timer: 1000,
           timerProgressBar: true,
           didOpen: () => {
             Swal.showLoading()

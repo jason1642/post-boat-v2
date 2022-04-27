@@ -8,6 +8,7 @@ import UserComments from "./account-page/UserComments.tsx";
 import CreatePost from "./post-page/create-post/CreatePost.tsx";
 import PostPage from "./post-page/PostPage.tsx";
 import SavedPosts from './account-page/SavedPosts.tsx'
+import Messenger from "./messenger/Messenger.tsx";
 
 const SiteRoutes = ({ currentUser }) => {
 
@@ -46,6 +47,10 @@ const SiteRoutes = ({ currentUser }) => {
         { path: 'saved', element: <SavedPosts /> }
       ]
     },
+    {
+      path: '/messenger',
+      element: <Messenger currentUser={currentUser} />
+    }
   ])
 }
 

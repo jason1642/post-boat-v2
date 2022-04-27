@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import {Container, Main, Content} from '../../styles/account-page/account-page.js'
 import type UserModel from '../../types/user-interface.js'
+// @ts-ignore
 import SideMenu from '../side-menu/SideMenu.tsx';
 import { Outlet, useMatch, useParams } from 'react-router-dom';
 import Nav from './Nav.tsx';

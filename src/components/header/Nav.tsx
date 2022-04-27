@@ -45,7 +45,7 @@ const Nav: React.FunctionComponent<INavProps> = ({ theme, currentUser }) => {
         {theme === 'light' ? <IoPersonSharp /> : <IoPersonOutline />}
       </Item>
       
-      <Item to={'/'} >
+      <Item to={'/messenger'} >
         {theme === 'light' ? <AiFillMessage /> : <AiOutlineMessage />}
       </Item>
 
