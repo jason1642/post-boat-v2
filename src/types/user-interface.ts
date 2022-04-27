@@ -12,7 +12,8 @@ interface UserModel{
   created_posts: Array<any>,
   liked_posts: Array<any>,
   liked_comments: Array<any>,
-  saved_posts:Array<any>
+  saved_posts: Array<any>,
+  private_messages: Array<any>,
 }
 
 export default UserModel
