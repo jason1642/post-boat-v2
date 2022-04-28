@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 const messageRouter = express.Router()
 
 // /api/messages/send-private-message/
-
+console.log()
 class chatClass {
   constructor(sender_id, recipient_id, object_id) {
     this._id = object_id;

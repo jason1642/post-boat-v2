@@ -7,6 +7,12 @@ import categoryRouter from './routes/categories.mjs'
 import commentRouter from './routes/comments.mjs';
 import messageRouter from './routes/messages.mjs';
 import authRouter from './routes/auth.mjs';
+
+
+
+
+
+
 const app = express();
 // db.connect()
 app.use(express.json());
@@ -17,6 +23,24 @@ app.use('/api/posts', postRouter)
 app.use('/api/category', categoryRouter)
 app.use('/api/comment', commentRouter)
 app.use('/api/messages', messageRouter)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // error handler
@@ -34,4 +58,4 @@ app.use(function (err, req, res, next) {
   });
 });
   
-export default app;
+export {app}

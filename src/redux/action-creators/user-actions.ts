@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {  LOG_OUT_USER,VERIFY_USER_SUCCESS, VERIFY_USER_FAIL, LOG_IN_FAIL, REGISTER_USER, REGISTER_ERROR, REGISTER_SUCCESS, LOG_IN_SUCCESS } from "../constants";
-const baseUrl = process.env.Node_ENV === 'production' ? 'https://post-boat.herokuapp.com' : 'http://localhost:3820';
+const baseUrl = process.env.Node_ENV === 'production' ? 'https://post-boat.herokuapp.com' : 'http://localhost:3880';
 const api = axios.create({
   baseURL: baseUrl,
 });
