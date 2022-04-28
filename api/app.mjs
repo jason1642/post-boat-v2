@@ -1,43 +1,25 @@
 import express from 'express';
 import cors from 'cors';
-// import db from './database.mjs'
-import userRouter from './routes/users.mjs';
-import postRouter from './routes/posts.mjs';
+import authRouter from './routes/auth.mjs';
 import categoryRouter from './routes/categories.mjs'
 import commentRouter from './routes/comments.mjs';
 import messageRouter from './routes/messages.mjs';
-import authRouter from './routes/auth.mjs';
-
+import postRouter from './routes/posts.mjs';
+import userRouter from './routes/users.mjs';
 
 
 
 
 
 const app = express();
-// db.connect()
 app.use(express.json());
 app.use(cors());
 app.use('/api/auth', authRouter)
-app.use('/api/user', userRouter)
-app.use('/api/posts', postRouter)
 app.use('/api/category', categoryRouter)
 app.use('/api/comment', commentRouter)
 app.use('/api/messages', messageRouter)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.use('/api/posts', postRouter)
+app.use('/api/user', userRouter)
 
 
 

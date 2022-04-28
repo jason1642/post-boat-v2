@@ -54,14 +54,15 @@ export const subscribeToCategory = async (user_id, category_name) =>
   await api.post('/api/category/follow-category', {user_id, category_name}).then(res=>res).catch(err=>err)
 
 export const getCategoryById = async (id:string) => 
-  await api.get('/api/category/id/' + id).then(res => res).catch(err => err)
+  await api.get(`/api/category/id/${id}`).then(res => res).catch(err => err)
 
 export const getCategoryByName = async (name: string) => 
-  await api.get('/api/category/name/' + name).then(res => res).catch(err => err)
+  await api.get(`/api/category/name/${name}`).then(res => res).catch(err => err)
   
 
 
-
+export const getChatListUserInfo = async (user_id: string) => 
+  await api.get(`/api/messages/${user_id}`)
 
 
 

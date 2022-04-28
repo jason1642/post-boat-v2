@@ -3,8 +3,12 @@ import { useState, useEffect } from 'react';
 import Container from '@mui/material/Container'
 import type UserModel from '../../types/user-interface.ts'
 import ChatList from './ChatList.tsx'
-import MessageDisplay from './MessageDisplay.tsx'
+import Main from './current-chat/Main.tsx'
 import io from 'socket.io-client'
+
+
+
+
 interface IMessengerProps {
   currentUser: UserModel
 }
@@ -30,6 +34,7 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   useEffect(() => {
     const newSocket = io(url, { transports: ['websocket']})
     setSocket(newSocket)
+    console.log(newSocket)
     return () => {
       newSocket.close()
     }
@@ -42,10 +47,10 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   return currentUser ? (
      <Container style={styles.container} >
       <ChatList currentUser={currentUser}/>
-      <MessageDisplay currentUser={currentUser}/> 
+      <Main currentUser={currentUser}/> 
     </Container>
   ) : 
-    (<>wewqe</>)
+    (<div>wewqe</div>)
 };
 
 export default Messenger;

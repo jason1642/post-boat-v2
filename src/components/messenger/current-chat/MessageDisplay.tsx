@@ -13,19 +13,17 @@ const styles = {
   },
   
 }
-const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentUser}) => {
+const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({}) => {
 
   useEffect(() => {
-    console.log(currentUser)
+    // console.log(currentUser)
   }, []);
-
+ 
   return (
     <Container style={styles.container}>
-      <div>This is the message display</div>
-      {currentUser.private_messages.length === 0 ? <>You have no chats yet</>
-        :
-        currentUser.private_messages.map(ele=><>A chat with a specific user</>)
-        }
+     
+      <div>Messages</div>
+      
     </Container>
   );
 };
