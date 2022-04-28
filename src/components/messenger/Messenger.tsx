@@ -20,30 +20,32 @@ const styles = {
 
 
 const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
-  const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState<any>(null);
   const url = window.location.hostname === 'localhost' ? 'http://localhost:3880' : 'https://circle-chat1.herokuapp.com'
+
+
+
+
   
   useEffect(() => {
-    // console.log(url)
-    // var HOST = window.location.origin.replace(/^http/, 'ws')
-    const newSocket = io(url, { transports: ["websocket"] } );
-    setSocket(newSocket);
-    console.log(newSocket)
-    return () => 
-      newSocket.close();
-    
+    const newSocket = io(url, { transports: ['websocket']})
+    setSocket(newSocket)
+    return () => {
+      newSocket.close()
+    }
   }, []);
 
   useEffect(() => {
-    // console.log(socket.connected)
-  }, [socket]);
+
+  }, []);
   
-  return (
-     <Container style={styles.container}  >
-      <ChatList />
-      <MessageDisplay /> 
+  return currentUser ? (
+     <Container style={styles.container} >
+      <ChatList currentUser={currentUser}/>
+      <MessageDisplay currentUser={currentUser}/> 
     </Container>
-  );
+  ) : 
+    (<>wewqe</>)
 };
 
 export default Messenger;

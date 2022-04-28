@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 const messageRouter = express.Router()
 
-// /api/messages/send-private-message/
+
 console.log()
 class chatClass {
   constructor(sender_id, recipient_id, object_id) {
@@ -14,6 +14,7 @@ class chatClass {
     this.messages = []
   }
 }
+// /api/messages/send-private-message/
 // req: user_id, recipient_id, message, 
 const sendPrivateMessage = async (req, res) => {
   let sender, recipient
@@ -61,6 +62,24 @@ const sendPrivateMessage = async (req, res) => {
 }
 
 messageRouter.post('/send-private-message', sendPrivateMessage)
+
+
+const getActiveChatsInfo = async (req, res, next) => {
+  let user, infoArray
+  try{ await User.findOne({_id: req.params.id}).lean().then(r=> user = r) } catch (err) {return res.status(404).send('User not found.')}
+  console.log(user)
+  await User.find({ _id: { $in: user.private_messages.map(c => c.recipient) } }).lean().then(x => infoArray = x)
+  console.log(infoArray)
+  return res.send(infoArray)
+}
+
+messageRouter.get('/:id', getActiveChatsInfo)
+
+
+
+
+
+
 
 
 
