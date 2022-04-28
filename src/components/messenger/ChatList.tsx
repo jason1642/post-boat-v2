@@ -9,6 +9,7 @@ interface IChatListProps {
 const styles = {
   container: {
     border: '1px solid white',
+    width: '25%',
   },
   
 }
@@ -16,7 +17,7 @@ const ChatList: React.FunctionComponent<IChatListProps> = (props) => {
   return (
     <Container style={styles.container}>
       
-    This is the right side chat list of all current chats 
+    This is the left side chat list of all current chats 
 
     </Container>)
 };

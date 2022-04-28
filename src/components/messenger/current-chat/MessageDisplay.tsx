@@ -10,6 +10,7 @@ const styles = {
     border: '1px solid white',
     display: 'flex',
     flexDirection: 'column',
+    
   },
   
 }
@@ -17,6 +18,7 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({}) => {
 
   useEffect(() => {
     // console.log(currentUser)
+    
   }, []);
  
   return (

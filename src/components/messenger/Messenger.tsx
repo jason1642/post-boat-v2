@@ -18,14 +18,15 @@ const styles = {
   display: 'flex',
   flexDirection: 'row',
   marginTop: '20px',
-  border: '1px solid white',
+  border: '1px solid red',
+  maxWidth: '1280px'
   },
 }
 
-
 const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
-  const [socket, setSocket] = useState<any>(null);
   const url = window.location.hostname === 'localhost' ? 'http://localhost:3880' : 'https://circle-chat1.herokuapp.com'
+  const [socket, setSocket] = useState<any>(null);
+  const [currentChat, setCurrentChat] = useState()
 
 
 
@@ -41,7 +42,8 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   }, []);
 
   useEffect(() => {
-
+    // Get list of users info from private_messages list
+    // Create handleCurrentChat to get latest chat by default, based on updated_on date from object
   }, []);
   
   return currentUser ? (
