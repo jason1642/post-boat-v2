@@ -14,6 +14,6 @@ text-decoration: none;
 /* border: ${({ theme }) => theme.border}; */
 padding: 6px;
 height: 100%;
-/* font-size: 12px; */
+font-size: 1.2rem;
 margin: 0;
 `

@@ -10,7 +10,8 @@ const styles = {
     border: '1px solid white',
     display: 'flex',
     flexDirection: 'column',
-    
+    flex: '1 1 auto',
+    height: 'auto',
   },
   
 }

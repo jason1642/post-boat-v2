@@ -35,14 +35,17 @@ const TextInput: React.FunctionComponent<ITextInputProps> = (props) => {
 
            
       <TextField
+        sx={{opacity: '1', backgroundColor: '#a8a7a7e8', padding: '5px', borderRadius: '10px',}}
         helperText={isInvalid && 'Message cannot exceed 200 characters.'}
         error={isInvalid}
-            variant='standard'
-            placeholder='Send a message.'
-            {...register('message', { maxLength: 300 })}
-          />
+        fullWidth={true}
+        disableUnderline={true}
+        variant='standard'
+        placeholder='Send a message.'
+        {...register('message', { maxLength: 300 })}
+      />
 
-    <Submit type='submit' />
+    <Submit type='submit' value='Send'/>
   </FormContainer>);
 };
 

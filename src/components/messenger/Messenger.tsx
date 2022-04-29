@@ -16,10 +16,12 @@ interface IMessengerProps {
 const styles = {
   container: {
   display: 'flex',
+  position: 'relative',
   flexDirection: 'row',
-  marginTop: '20px',
+  marginTop: '10px',
   border: '1px solid red',
-  maxWidth: '1280px'
+  height: '85%',
+  fontSize: '1.4rem',
   },
 }
 
@@ -47,7 +49,9 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   }, []);
   
   return currentUser ? (
-     <Container style={styles.container} >
+    <Container
+      maxWidth='xl'
+      style={styles.container} >
       <ChatList currentUser={currentUser}/>
       <Main currentUser={currentUser}/> 
     </Container>
