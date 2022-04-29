@@ -16,7 +16,7 @@ const TextInput: React.FunctionComponent<ITextInputProps> = (props) => {
   const { register, watch, handleSubmit, formState: {errors} } = useForm() 
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
   const [isInvalid, setIsInvalid] = useState<boolean>(false)
-  console.log(errors)
+  // console.log(errors)
 
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const TextInput: React.FunctionComponent<ITextInputProps> = (props) => {
         helperText={isInvalid && 'Message cannot exceed 200 characters.'}
         error={isInvalid}
         fullWidth={true}
-        disableUnderline={true}
+        // disableUnderline={true}
         variant='standard'
         placeholder='Send a message.'
         {...register('message', { maxLength: 300 })}

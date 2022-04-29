@@ -5,6 +5,7 @@ import type UserModel from '../../types/user-interface.ts'
 import ChatList from './ChatList.tsx'
 import Main from './current-chat/Main.tsx'
 import io from 'socket.io-client'
+import { getChatListUserInfo } from '../api-helpers/user-api.ts';
 
 
 
@@ -28,8 +29,9 @@ const styles = {
 const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   const url = window.location.hostname === 'localhost' ? 'http://localhost:3880' : 'https://circle-chat1.herokuapp.com'
   const [socket, setSocket] = useState<any>(null);
+  const [chatListUsersData, setChatListUsersData] = useState<Array<any>>()
   const [currentChat, setCurrentChat] = useState()
-
+  
 
 
 
@@ -46,13 +48,17 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   useEffect(() => {
     // Get list of users info from private_messages list
     // Create handleCurrentChat to get latest chat by default, based on updated_on date from object
+    getChatListUserInfo(currentUser._id).then(res => {
+      setChatListUsersData(res.data)
+      console.log(res.data)
+    }, (err)=>console.log(err))
   }, []);
   
   return currentUser ? (
     <Container
       maxWidth='xl'
       style={styles.container} >
-      <ChatList currentUser={currentUser}/>
+      <ChatList chatListUsersData={chatListUsersData} currentUser={currentUser}/>
       <Main currentUser={currentUser}/> 
     </Container>
   ) : 
