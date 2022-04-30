@@ -1,32 +1,54 @@
 import * as React from 'react';
-import Container from '@mui/material/Container'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import Typography from '@mui/material/Typography'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import ListItemText from '@mui/material/ListItemText'
 import { UserListSkeleton } from './Skeletons.jsx'
-import ListUserCard from './ListUserCard.tsx'
-import axios from 'axios'
+// import ListUserCard from './ListUserCard.tsx'
+// import axios from 'axios'
+import Avatar  from '@mui/material/Avatar';
 
 
 interface IChatListProps {
   chatListUsersData: any,
+  handleChangeCurrentChat: Function,
 }
 const styles = {
   container: {
     border: '1px solid white',
-    width: '25%',
+    minWidth: '20%',
     padding: '5px',
   },
   
 }
-const ChatList: React.FunctionComponent<IChatListProps> = ({ chatListUsersData }) => {
+const ChatList: React.FunctionComponent<IChatListProps> = ({ handleChangeCurrentChat, chatListUsersData }) => {
   console.log(chatListUsersData)
   return (
-    <Container style={styles.container}>
+    <List style={styles.container}>
       
       {
         chatListUsersData.length > 0 ? 
-          chatListUsersData.map(ele => <ListUserCard key={ele._id} userData={ele} />)
+          chatListUsersData.map(ele =>
+            <ListItem
+              onClick={()=>handleChangeCurrentChat(ele)}
+              alignItems='flex-start' >
+              <ListItemAvatar>
+                <Avatar sx={{ bgcolor: ele.preferences.avatar_color }}>{ele.username.split('')[0].toUpperCase()}</Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={ele.username}
+                secondary={<Typography
+                >Last online: Now</Typography>}
+              
+              />
+            </ListItem>
+            
+            // <ListUserCard key={ele._id} userData={ele} />
+          )
           : <UserListSkeleton />
     }
-    </Container>)
+    </List>)
 };
 
 export default ChatList;

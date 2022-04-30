@@ -9,20 +9,21 @@ interface IListUserCardProps {
 
 
 const ListUserCard: React.FunctionComponent<IListUserCardProps> = ({ userData }) => {
-  console.log(userData)
+  const { preferences, username } = userData;
+  // console.log(userData)
   return (
     <Container>
       <AvatarWrapper>
         
       <Badge color='success' variant='dot' overlap='circular' badgeContent={''} >
-      <Avatar sx={{ bgcolor: 'purple' }}>{userData.username.split('')[0].toUpperCase()}</Avatar>
+      <Avatar sx={{ bgcolor:  preferences.avatar_color}}>{username.split('')[0].toUpperCase()}</Avatar>
 
       </Badge>
       </AvatarWrapper>
       <InfoBox>
 
         <TopRow>
-          {userData.username}
+          {username}
       </TopRow>
         <BottomRow>
           Last online: Now

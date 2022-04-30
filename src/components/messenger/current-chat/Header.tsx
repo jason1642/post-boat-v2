@@ -9,7 +9,7 @@ interface IHeaderProps {
 }
 
 const Header: React.FunctionComponent<IHeaderProps> = ({currentChat}) => {
-  console.log(currentChat)
+  // console.log(currentChat)
   return (<HeaderContainer>
       {/* color=success if online */}
     {/* <ProfilePicture>

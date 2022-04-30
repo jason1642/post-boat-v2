@@ -35,7 +35,6 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   
 
 
-
   
   useEffect(() => {
     const newSocket = io(url, { transports: ['websocket']})
@@ -57,11 +56,19 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
     }, (err)=>console.log(err))
   }, []);
   
+
+  const handleChangeCurrentChat = async (selectedUser: any) => {
+    setCurrentChat(selectedUser)
+    console.log(selectedUser)
+  }
+
+
+
   return currentUser ? (
     <Container
       maxWidth='xl'
       style={styles.container} >
-      {chatListUsersData ? <ChatList chatListUsersData={chatListUsersData} currentUser={currentUser} /> : <>No chats found</>}
+      {chatListUsersData ? <ChatList handleChangeCurrentChat={handleChangeCurrentChat} chatListUsersData={chatListUsersData} currentUser={currentUser} /> : <>No chats found</>}
       {currentChat ? <Main currentChat={currentChat} currentUser={currentUser} /> : <>No current chat</>}
     </Container>
   ) : 

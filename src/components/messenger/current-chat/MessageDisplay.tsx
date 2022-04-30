@@ -19,18 +19,20 @@ const styles = {
 const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentChat, currentUser}) => {
   const [messageHistory, setMessageHistory] = useState<Array<any>>()
   useEffect(() => {
-    console.log(currentChat)
+    // console.log(currentChat)
     getMessageHistory(currentUser._id, currentChat._id).then(res => {
-      console.log(res)
-      setMessageHistory(res.data)
+      console.log(res.data.messages)
+      setMessageHistory(res.data.messages)
     }, err => console.log(err))
 
-  }, []);
+  }, [currentChat]);
  
   return (
     <Container style={styles.container}>
      
-      <div>Messages</div>
+      {
+        messageHistory ? messageHistory.map(ele => <div>{ele.text}</div>) : <>No messages</>
+      }
       
     </Container>
   );
