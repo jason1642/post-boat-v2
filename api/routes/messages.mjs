@@ -68,9 +68,9 @@ messageRouter.post('/send-private-message', sendPrivateMessage)
 const getActiveChatsInfo = async (req, res, next) => {
   let user, infoArray
   try{ await User.findOne({_id: req.params.id}).lean().then(r=> user = r) } catch (err) {return res.status(404).send('User not found.')}
-  console.log(user)
+  // console.log(user)
   try { await User.find({ _id: { $in: user.private_messages.map(c => c.recipient) } }).lean().select('username bio email preferences').then(x => infoArray = x) } catch (err) { return res.status(404).send('No private messages were found.')}
-  console.log(infoArray)
+  // console.log(infoArray)
   return res.send(infoArray)
 }
 
@@ -78,15 +78,22 @@ messageRouter.get('/:id', getActiveChatsInfo)
 
 
 // req: user_id, recipient_id
+// Assumes recipient is already in users chat list
 const getMessageHistory = async (req, res) => {
-  let messagesArray = []
+  let messagesArray
+    console.log(req.body.user_id)
+
   try {
     await User.findOne({ _id: req.body.user_id }).lean().select('private_messages').then(ele => {
-      messagesArray = messagesArray.find(obj => obj._id === req.body.recipient_id)
-  console.log(obj)
+      console.log(ele.private_messages[0])
+      messagesArray = ele.private_messages.find(obj => obj.recipient.equals(req.body.recipient_id))
   return res.send(messagesArray)
 
-  }) } catch(err) { return res.status(404).send('No messages found.')}
+    })
+  } catch (err) {
+    console.log(err)
+    return res.status(404).send('No messages found.')
+  }
 
 
 } 

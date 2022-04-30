@@ -20,7 +20,7 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
   const [messageHistory, setMessageHistory] = useState<Array<any>>()
   useEffect(() => {
     console.log(currentChat)
-    getMessageHistory(currentUser._id, currentChat.recipient).then(res => {
+    getMessageHistory(currentUser._id, currentChat._id).then(res => {
       console.log(res)
       setMessageHistory(res.data)
     }, err => console.log(err))
