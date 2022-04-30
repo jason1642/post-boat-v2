@@ -1,6 +1,7 @@
 import * as React from 'react';
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
 import Typography from '@mui/material/Typography'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
@@ -30,7 +31,8 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({ handleChangeCurrent
       {
         chatListUsersData.length > 0 ? 
           chatListUsersData.map(ele =>
-            <ListItem
+            <ListItemButton
+              // sx={{'&:hover': {cursor: 'pointer'}}}
               onClick={()=>handleChangeCurrentChat(ele)}
               alignItems='flex-start' >
               <ListItemAvatar>
@@ -42,7 +44,7 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({ handleChangeCurrent
                 >Last online: Now</Typography>}
               
               />
-            </ListItem>
+            </ListItemButton>
             
             // <ListUserCard key={ele._id} userData={ele} />
           )

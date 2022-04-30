@@ -80,15 +80,21 @@ messageRouter.get('/:id', getActiveChatsInfo)
 // req: user_id, recipient_id
 // Assumes recipient is already in users chat list
 const getMessageHistory = async (req, res) => {
-  let messagesArray
+  let messagesObj
     console.log(req.body.user_id)
 
   try {
     await User.findOne({ _id: req.body.user_id }).lean().select('private_messages').then(ele => {
       console.log(ele.private_messages[0])
-      messagesArray = ele.private_messages.find(obj => obj.recipient.equals(req.body.recipient_id))
-  return res.send(messagesArray)
+      messagesObj = ele.private_messages.find(obj => obj.recipient.equals(req.body.recipient_id))
+  // return res.send(messagesObj)
 
+    }).then(async e => {
+      await User.findOne({ _id: req.body.recipient_id }).lean().select('username bio email').then(r => {
+        messagesObj = _.assign(messagesObj, r)
+        console.log(messagesObj)
+        return res.send(messagesObj)
+      } )
     })
   } catch (err) {
     console.log(err)
