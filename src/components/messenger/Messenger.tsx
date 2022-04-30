@@ -22,7 +22,8 @@ const styles = {
   marginTop: '10px',
   border: '1px solid red',
   height: '85%',
-  fontSize: '1.4rem',
+    fontSize: '1.4rem',
+  width: '95%',
   },
 }
 
@@ -49,8 +50,10 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
     // Get list of users info from private_messages list
     // Create handleCurrentChat to get latest chat by default, based on updated_on date from object
     getChatListUserInfo(currentUser._id).then(res => {
-      setChatListUsersData(res.data)
       console.log(res.data)
+      setChatListUsersData(res.data)
+
+      setCurrentChat(res.data[0])
     }, (err)=>console.log(err))
   }, []);
   
@@ -58,8 +61,8 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
     <Container
       maxWidth='xl'
       style={styles.container} >
-      <ChatList chatListUsersData={chatListUsersData} currentUser={currentUser}/>
-      <Main currentUser={currentUser}/> 
+      {chatListUsersData ? <ChatList chatListUsersData={chatListUsersData} currentUser={currentUser} /> : <>No chats found</>}
+      {currentChat ? <Main currentChat={currentChat} currentUser={currentUser} /> : <>No current chat</>}
     </Container>
   ) : 
     (<div>wewqe</div>)

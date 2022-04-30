@@ -5,6 +5,8 @@ import TextInput from './TextInput.tsx'
 // import Container from '@mui/material/Container'
 import styled from 'styled-components';
 interface IMainProps {
+  currentChat: any,
+  currentUser: any,
 }
 
 
@@ -16,10 +18,10 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const Main: React.FunctionComponent<IMainProps> = (props) => {
+const Main: React.FunctionComponent<IMainProps> = ({currentChat, currentUser}) => {
   return (<Container >
-    <Header />
-    <MessageDisplay /> 
+    <Header currentChat={currentChat}/>
+    <MessageDisplay currentUser={currentUser} currentChat={currentChat} /> 
     <TextInput />
   </Container>);
 };

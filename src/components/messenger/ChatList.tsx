@@ -1,5 +1,7 @@
 import * as React from 'react';
 import Container from '@mui/material/Container'
+import { UserListSkeleton } from './Skeletons.jsx'
+import ListUserCard from './ListUserCard.tsx'
 import axios from 'axios'
 
 
@@ -10,18 +12,19 @@ const styles = {
   container: {
     border: '1px solid white',
     width: '25%',
+    padding: '5px',
   },
   
 }
-const ChatList: React.FunctionComponent<IChatListProps> = ({chatListUsersData}) => {
+const ChatList: React.FunctionComponent<IChatListProps> = ({ chatListUsersData }) => {
+  console.log(chatListUsersData)
   return (
     <Container style={styles.container}>
       
-    This is the left side chat list of all current chats 
       {
         chatListUsersData.length > 0 ? 
-          chatListUsersData.map(ele => <div>ele.</div>)
-          : <div>None found</div>
+          chatListUsersData.map(ele => <ListUserCard key={ele._id} userData={ele} />)
+          : <UserListSkeleton />
     }
     </Container>)
 };

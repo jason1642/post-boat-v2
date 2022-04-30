@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-
 import { useForm, SubmitHandler } from 'react-hook-form'
 import TextField from '@mui/material/TextField'
 import { FormContainer, UserInput, Submit } from '../../../styles/messenger/messenger.js'
-
+import Button from '@mui/material/Button'
 interface ITextInputProps {
 
 }
@@ -45,7 +44,7 @@ const TextInput: React.FunctionComponent<ITextInputProps> = (props) => {
         {...register('message', { maxLength: 300 })}
       />
 
-    <Submit type='submit' value='Send'/>
+    <Button size='large' variant="contained">Send</Button>
   </FormContainer>);
 };
 

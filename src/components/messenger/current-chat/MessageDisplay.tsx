@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Container from '@mui/material/Container'
-
+import {getMessageHistory} from '../../api-helpers/user-api.ts'
 interface IMessageDisplayProps {
   currentUser: any,
+  currentChat: any,
 }
 const styles = {
   container: {
@@ -15,11 +16,15 @@ const styles = {
   },
   
 }
-const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({}) => {
-
+const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentChat, currentUser}) => {
+  const [messageHistory, setMessageHistory] = useState<Array<any>>()
   useEffect(() => {
-    // console.log(currentUser)
-    
+    console.log(currentChat)
+    getMessageHistory(currentUser._id, currentChat.recipient).then(res => {
+      console.log(res)
+      setMessageHistory(res.data)
+    }, err => console.log(err))
+
   }, []);
  
   return (

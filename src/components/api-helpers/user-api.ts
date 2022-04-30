@@ -64,7 +64,8 @@ export const getCategoryByName = async (name: string) =>
 export const getChatListUserInfo = async (user_id: string) => 
   await api.get(`/api/messages/${user_id}`)
 
-
+export const getMessageHistory = async (user_id: string, recipient_id: string) => 
+  await api.post(`/api/messages/history`, {user_id, recipient_id})
 
 
 

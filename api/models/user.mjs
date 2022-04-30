@@ -42,6 +42,8 @@ const User = mongoose.model('User', new mongoose.Schema({
     maxlength: 300,
     default: ''
   },
+  active: { type: Boolean, default: false }, 
+  last_online: {type: Date,},
   category_subscriptions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
@@ -57,7 +59,7 @@ const User = mongoose.model('User', new mongoose.Schema({
   preferences: {
     type: {
       dark_mode: { type: Boolean, default: false },
-      
+      avatar_color: {type: String, default: '#3174e8'},
     },
     default: {
       preferences: {
@@ -69,6 +71,9 @@ const User = mongoose.model('User', new mongoose.Schema({
   // }
   // comments: [{typ}]
 }, snakeCaseStamps));
+
+
+// Implement last_online, active, preferences: avatar_color
 
 
 export default User;

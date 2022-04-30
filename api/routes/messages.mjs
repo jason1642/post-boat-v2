@@ -69,7 +69,7 @@ const getActiveChatsInfo = async (req, res, next) => {
   let user, infoArray
   try{ await User.findOne({_id: req.params.id}).lean().then(r=> user = r) } catch (err) {return res.status(404).send('User not found.')}
   console.log(user)
-  try { await User.find({ _id: { $in: user.private_messages.map(c => c.recipient) } }).lean().then(x => infoArray = x) } catch (err) { return res.status(404).send('No private messages were found.')}
+  try { await User.find({ _id: { $in: user.private_messages.map(c => c.recipient) } }).lean().select('username bio email preferences').then(x => infoArray = x) } catch (err) { return res.status(404).send('No private messages were found.')}
   console.log(infoArray)
   return res.send(infoArray)
 }
@@ -77,9 +77,20 @@ const getActiveChatsInfo = async (req, res, next) => {
 messageRouter.get('/:id', getActiveChatsInfo)
 
 
+// req: user_id, recipient_id
+const getMessageHistory = async (req, res) => {
+  let messagesArray = []
+  try {
+    await User.findOne({ _id: req.body.user_id }).lean().select('private_messages').then(ele => {
+      messagesArray = messagesArray.find(obj => obj._id === req.body.recipient_id)
+  console.log(obj)
+  return res.send(messagesArray)
+
+  }) } catch(err) { return res.status(404).send('No messages found.')}
 
 
-
+} 
+messageRouter.post('/history', getMessageHistory)
 
 
 
