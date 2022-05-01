@@ -17,6 +17,7 @@ const styles = {
     flex: '1 1 auto',
     height: 'auto',
     overflowY: 'scroll',
+    width: '100%',
   },
   
 }
