@@ -7,6 +7,7 @@ import styled from 'styled-components';
 interface IMainProps {
   currentChat: any,
   currentUser: any,
+  socket: any,
 }
 
 
@@ -18,11 +19,11 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const Main: React.FunctionComponent<IMainProps> = ({currentChat, currentUser}) => {
+const Main: React.FunctionComponent<IMainProps> = ({currentChat, currentUser, socket}) => {
   return (<Container >
     <Header currentChat={currentChat}/>
-    <MessageDisplay currentUser={currentUser} currentChat={currentChat} /> 
-    <TextInput />
+    <MessageDisplay socket={socket} currentUser={currentUser} currentChat={currentChat} /> 
+    <TextInput currentChat={currentChat} currentUser={currentUser} socket={socket} />
   </Container>);
 };
 

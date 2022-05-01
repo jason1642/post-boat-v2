@@ -7,6 +7,8 @@ import _ from 'lodash'
 interface IMessageDisplayProps {
   currentUser: any,
   currentChat: any,
+  socket: any,
+
 }
 const styles = {
   container: {
@@ -18,20 +20,17 @@ const styles = {
   },
   
 }
-const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentChat, currentUser}) => {
+const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentChat, currentUser, socket}) => {
   const [messageHistory, setMessageHistory] = useState<Array<any>>()
-  // const [recipientData, setRecipientData] = useState({
-  //   username: '',
-  //   bio: '',
-  //   email: '',
-  // })
+ 
   useEffect(() => {
-    console.log(currentChat)
+    // console.log(currentChat)
     getMessageHistory(currentUser._id, currentChat._id).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       setMessageHistory(res.data.messages)
-
-      // setRecipientData(_.pick(res.data, ['username', 'bio', 'email', '_id']))
+      socket.on('private message', ({ content, from }) => {
+        console.log('A PRIVATE MESSAGE')
+      })
     }, err => console.log(err))
 
   }, [currentChat]);
@@ -42,7 +41,7 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
       {
         messageHistory ? messageHistory.map(ele =>
           <SingleMessage key={ele._id} currentUser={currentUser} currentChat={currentChat} messageData={ele} />)
-          : <>No messages</>
+          : (<>No messages</>)
       }
       
     </Container>

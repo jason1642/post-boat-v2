@@ -5,18 +5,21 @@ import TextField from '@mui/material/TextField'
 import { FormContainer, UserInput, Submit } from '../../../styles/messenger/messenger.js'
 import Button from '@mui/material/Button'
 interface ITextInputProps {
-
+  socket: any,
+  currentUser: any,
+  currentChat: any,
 }
 type Inputs = {
-  
+  content: any
 }
 
-const TextInput: React.FunctionComponent<ITextInputProps> = (props) => {
+const TextInput: React.FunctionComponent<ITextInputProps> = ({socket, currentChat, currentUser}) => {
   const { register, watch, handleSubmit, formState: {errors} } = useForm() 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+
   const [isInvalid, setIsInvalid] = useState<boolean>(false)
   // console.log(errors)
 
+  const onErrors = errors => console.error(errors)
 
   useEffect(() => {
     const subscription = watch((value, { name, type }) => {
@@ -24,13 +27,29 @@ const TextInput: React.FunctionComponent<ITextInputProps> = (props) => {
  
       console.log(value.message.length, name, type)
     });
-    // console.log(subscription)
+    // console.log(currentChat)
     return () => subscription.unsubscribe()
   }, [watch]);
 
 
+
+  const onSubmit = async (content) => {
+    if (currentChat._id) {
+      console.log(currentChat._id)
+
+      socket.emit("private message", {
+        content,
+        to: currentChat._id,
+      });
+      // this.selectedUser.messages.push({
+      //   content,
+      //   fromSelf: true,
+      // });
+    }
+  }
+
   return (
-    <FormContainer onSubmit={handleSubmit(onSubmit)}>
+    <FormContainer onSubmit={handleSubmit(onSubmit, onErrors)}>
 
            
       <TextField
@@ -43,8 +62,8 @@ const TextInput: React.FunctionComponent<ITextInputProps> = (props) => {
         placeholder='Send a message.'
         {...register('message', { maxLength: 300 })}
       />
-
-    <Button size='large' variant="contained">Send</Button>
+    <button>submit</button>
+    {/* <Button size='large' variant="contained">Send</Button> */}
   </FormContainer>);
 };
 

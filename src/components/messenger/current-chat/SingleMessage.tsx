@@ -8,7 +8,7 @@ interface ISingleMessageProps {
 // Name, message, and data. Background colors of green and blue
 const SingleMessage: React.FunctionComponent<ISingleMessageProps> = ({messageData, currentChat, currentUser}) => {
   const { text, recipient, } = messageData
-  console.log(messageData.recipient, currentChat)
+  // console.log(messageData.recipient, currentChat)
   return (
     <Container>
       {text} from: {currentChat.recipient === recipient ? currentChat.username : currentUser.username}

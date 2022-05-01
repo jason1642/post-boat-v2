@@ -1,6 +1,7 @@
 import User from '../models/user.mjs'
 import express from 'express'
 import mongoose from 'mongoose'
+import {io} from '../server.mjs'
 import _ from 'lodash'
 
 const messageRouter = express.Router()
@@ -25,15 +26,16 @@ const sendPrivateMessage = async (req, res) => {
 
   // Since the private_messages value is new to the user document model, it will initialize a new property if one doesn't already exist
   // If the private_messages property does exist but a chat has never been initialized with the sender and recipient before, initialize a new chat 
+  // console.log(sender.private_messages.find(c => c.recipient.equals(recipient._id)))
   if (sender.private_messages === undefined) {
     sender.private_messages = [new chatClass(sender._id, recipient._id, new mongoose.Types.ObjectId())]
-  } else if (sender.private_messages.find(c => c.recipient === recipient._id) === undefined) {
+  } else if (sender.private_messages.find(c => c.recipient.equals(recipient._id)) === undefined) {
     sender.private_messages.push(new chatClass(sender._id, recipient._id, new mongoose.Types.ObjectId()))
   }
-
+  // console.log(recipient.private_messages.find(x=>x.recipient.equals(sender._id)))
   if (recipient.private_messages === undefined) {
     recipient.private_messages = [new chatClass(recipient._id, sender._id, new mongoose.Types.ObjectId())]
-  } else if (recipient.private_messages.find(x=>x.recipient === sender._id) === undefined) {
+  } else if (recipient.private_messages.find(x=>x.recipient.equals(sender._id)) === undefined) {
     recipient.private_messages.push(new chatClass(recipient._id, sender._id, new mongoose.Types.ObjectId()))
   }
 
@@ -48,15 +50,17 @@ const sendPrivateMessage = async (req, res) => {
     text: req.body.message,
   }
   
-  const senderChatIndex = sender.private_messages.findIndex(e=>e.recipient === recipient._id)
-  const recipientChatIndex = recipient.private_messages.findIndex(v=>v.recipient === sender._id)
-  console.log(sender)
+  const senderChatIndex = sender.private_messages.findIndex(e=>e.recipient.equals(recipient._id))
+  const recipientChatIndex = recipient.private_messages.findIndex(v=>v.recipient.equals(sender._id))
+
   sender.private_messages[senderChatIndex].messages.push(newMessage)
   recipient.private_messages[recipientChatIndex].messages.push(newMessage)
 
   await sender.save()
   await recipient.save()
   
+  io.emit(recipient._id, req.body.message)
+
   return res.send(sender.private_messages)
 
 
@@ -81,18 +85,18 @@ messageRouter.get('/:id', getActiveChatsInfo)
 // Assumes recipient is already in users chat list
 const getMessageHistory = async (req, res) => {
   let messagesObj
-    console.log(req.body.user_id)
+    // console.log(req.body.user_id)
 
   try {
     await User.findOne({ _id: req.body.user_id }).lean().select('private_messages').then(ele => {
-      console.log(ele.private_messages[0])
+      // console.log(ele.private_messages[0])
       messagesObj = ele.private_messages.find(obj => obj.recipient.equals(req.body.recipient_id))
   // return res.send(messagesObj)
 
     }).then(async e => {
       await User.findOne({ _id: req.body.recipient_id }).lean().select('username bio email').then(r => {
         messagesObj = _.assign(messagesObj, r)
-        console.log(messagesObj)
+        // console.log(messagesObj)
         return res.send(messagesObj)
       } )
     })

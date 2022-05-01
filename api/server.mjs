@@ -21,7 +21,7 @@ const server = app.listen(port, () => console.log('listening on port ' + port));
 
 
 // const server = http.createServer(generalServer)
-const io = new Server(server, {
+export const io = new Server(server, {
     cors: {
     origin: baseUrl,
     methods: ["GET", "POST"],
@@ -31,18 +31,38 @@ const io = new Server(server, {
 
 
 // server.listen(80, () => console.log(`Server running on port 8080`))
-
+ io.use((socket, next) => {
+    const user_id = socket.handshake.auth.user_id;
+    console.log(user_id, 'this is the user id')
+    if (!user_id) {
+      return next(new Error("invalid username"));
+    }
+   socket.user_id = user_id;
+   console.log(socket)
+    next();
+  });
 // console.log('this is the socket server')
 io.on('connection', (socket) => {
   console.log('A user connected');
-  // Public chat only, room chats emit via chat-room router
-  // socket.on('sent message', async (arg) => {
-  //   await api.post(`/api/chat_room/message/${arg.room_id}`, arg);
-
+console.log(socket.user_id, 'this is the socket id  ')
   
-  // })
-  socket.on('disconnect', (socket) => {
+  socket.join(socket.user_id)
+  
+  socket.on("private message", ({ content, to }) => {
+    console.log(socket.user_id, to)
+    socket.to(to).to(socket.user_id).emit("private message", { 
+      content,
+      from: socket.user_id,
+      to
+    });
+  });
+
+
+  socket.on('disconnect', () => {
     console.log('A user has disconnected')
+    socket.removeAllListeners();
+
+    socket.disconnect()
   })
 
   // Simple join chat room via route room_id parameter, see room-chat router
@@ -51,8 +71,10 @@ io.on('connection', (socket) => {
   })
 
 
+
   
 })
+
 
 
 db.connect()

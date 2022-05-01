@@ -24,7 +24,7 @@ const styles = {
   
 }
 const ChatList: React.FunctionComponent<IChatListProps> = ({ handleChangeCurrentChat, chatListUsersData }) => {
-  console.log(chatListUsersData)
+  // console.log(chatListUsersData)
   return (
     <List style={styles.container}>
       
@@ -32,6 +32,7 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({ handleChangeCurrent
         chatListUsersData.length > 0 ? 
           chatListUsersData.map(ele =>
             <ListItemButton
+              key={ele._id}
               // sx={{'&:hover': {cursor: 'pointer'}}}
               onClick={()=>handleChangeCurrentChat(ele)}
               alignItems='flex-start' >

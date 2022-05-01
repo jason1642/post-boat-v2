@@ -7,9 +7,6 @@ import Main from './current-chat/Main.tsx'
 import io from 'socket.io-client'
 import { getChatListUserInfo } from '../api-helpers/user-api.ts';
 
-
-
-
 interface IMessengerProps {
   currentUser: UserModel
 }
@@ -22,7 +19,7 @@ const styles = {
   marginTop: '10px',
   border: '1px solid red',
   height: '85%',
-    fontSize: '1.4rem',
+  fontSize: '1.4rem',
   width: '95%',
   },
 }
@@ -34,22 +31,51 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   const [currentChat, setCurrentChat] = useState()
   
 
-
+  // To create private messaging
+  // 1 When a user connects, store their connection in an object keyed by their username or any other data structure that ensures you can find a specific users connection
+  // 2 When one users wants to message another, send the server an even stating such
+  // 3 The server looks up jeffs socketio connection in the object from step 1
+  // 4 The server uses this connection to send the user(and only that users) the private message
   
   useEffect(() => {
-    const newSocket = io(url, { transports: ['websocket']})
+    // autoConnect is set to false so the connection is not established right away,
+    // so I can manually call socket.connect()
+    const newSocket = io(url, { transports: ['websocket'], autoConnect: false})
     setSocket(newSocket)
-    console.log(newSocket)
+    // console.log(socket)
+    // console.log(newSocket)
+    newSocket.auth = { user_id: currentUser._id}
+    newSocket.connect()    
+    newSocket.onAny((event, ...args) => {
+      console.log(event, args);
+    });
+
+
+    newSocket.on("private message", ({ content, from }) => {
+      
+      console.log(from, content)
+    });
+
+
+
     return () => {
-      newSocket.close()
+      socket.emit('disconnect', () => {
+        newSocket.close()
+         
+
+      })
     }
+    
   }, []);
 
+  useEffect(() => {
+    console.log(socket)
+  }, [socket]); 
   useEffect(() => {
     // Get list of users info from private_messages list
     // Create handleCurrentChat to get latest chat by default, based on updated_on date from object
     getChatListUserInfo(currentUser._id).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       setChatListUsersData(res.data)
 
       setCurrentChat(res.data[0])
@@ -59,7 +85,7 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
 
   const handleChangeCurrentChat = async (selectedUser: any) => {
     setCurrentChat(selectedUser)
-    console.log(selectedUser)
+    // console.log(selectedUser)
   }
 
 
@@ -69,7 +95,7 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
       maxWidth='xl'
       style={styles.container} >
       {chatListUsersData ? <ChatList handleChangeCurrentChat={handleChangeCurrentChat} chatListUsersData={chatListUsersData} currentUser={currentUser} /> : <>No chats found</>}
-      {currentChat ? <Main currentChat={currentChat} currentUser={currentUser} /> : <>No current chat</>}
+      {currentChat ? <Main socket={socket} currentChat={currentChat} currentUser={currentUser} /> : <>No current chat</>}
     </Container>
   ) : 
     (<div>wewqe</div>)
