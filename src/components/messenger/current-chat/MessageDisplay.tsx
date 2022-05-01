@@ -16,6 +16,7 @@ const styles = {
     flexDirection: 'column',
     flex: '1 1 auto',
     height: 'auto',
+    overflowY: 'scroll',
   },
   
 }
