@@ -38,7 +38,7 @@ export const io = new Server(server, {
       return next(new Error("invalid username"));
     }
    socket.user_id = user_id;
-   console.log(socket)
+  //  console.log(socket)
     next();
   });
 // console.log('this is the socket server')
@@ -49,8 +49,8 @@ console.log(socket.user_id, 'this is the socket id  ')
   socket.join(socket.user_id)
   
   socket.on("private message", ({ content, to }) => {
-    console.log(socket.user_id, to)
-    socket.to(to).to(socket.user_id).emit("private message", { 
+    // console.log(content)
+    socket.to(socket.user_id).emit("private message", { 
       content,
       from: socket.user_id,
       to

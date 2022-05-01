@@ -5,7 +5,7 @@ import type UserModel from '../../types/user-interface.ts'
 import ChatList from './ChatList.tsx'
 import Main from './current-chat/Main.tsx'
 import io from 'socket.io-client'
-import { getChatListUserInfo } from '../api-helpers/user-api.ts';
+import { getChatListUserInfo, getMessageHistory } from '../api-helpers/user-api.ts';
 
 interface IMessengerProps {
   currentUser: UserModel
@@ -28,8 +28,9 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   const url = window.location.hostname === 'localhost' ? 'http://localhost:3880' : 'https://circle-chat1.herokuapp.com'
   const [socket, setSocket] = useState<any>(null);
   const [chatListUsersData, setChatListUsersData] = useState<Array<any>>()
-  const [currentChat, setCurrentChat] = useState()
-  
+  const [currentChat, setCurrentChat] = useState<any>()
+  const [messageHistory, setMessageHistory] = useState<Array<any>>()
+
 
   // To create private messaging
   // 1 When a user connects, store their connection in an object keyed by their username or any other data structure that ensures you can find a specific users connection
@@ -42,30 +43,18 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
     // so I can manually call socket.connect()
     const newSocket = io(url, { transports: ['websocket'], autoConnect: false})
     setSocket(newSocket)
-    // console.log(socket)
-    // console.log(newSocket)
+    console.log(currentUser)
     newSocket.auth = { user_id: currentUser._id}
     newSocket.connect()    
     newSocket.onAny((event, ...args) => {
       console.log(event, args);
     });
-
-
-    newSocket.on("private message", ({ content, from }) => {
-      
-      console.log(from, content)
+    newSocket.on(currentUser._id, ({ content, from }) => {
+      console.log(content, from)
+      setMessageHistory(prev=> [...prev, content])
+      console.log(messageHistory)
     });
-
-
-
-    return () => {
-      socket.emit('disconnect', () => {
-        newSocket.close()
-         
-
-      })
-    }
-    
+    return () => {  newSocket.close() }
   }, []);
 
   useEffect(() => {
@@ -88,14 +77,26 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
     // console.log(selectedUser)
   }
 
-
+  useEffect(() => {
+    console.log(messageHistory)
+    if (currentChat) {
+      getMessageHistory(currentUser._id, currentChat._id).then(res => {
+        // console.log(res.data)
+        setMessageHistory(res.data.messages)
+        // socket.on('private message', ({ content, from }) => {
+        //   console.log('An incoming message', content)
+        // })
+      
+      }, err => console.log(err))
+    }
+  }, [currentChat]);
 
   return currentUser ? (
     <Container
       maxWidth='xl'
       style={styles.container} >
       {chatListUsersData ? <ChatList handleChangeCurrentChat={handleChangeCurrentChat} chatListUsersData={chatListUsersData} currentUser={currentUser} /> : <>No chats found</>}
-      {currentChat ? <Main socket={socket} currentChat={currentChat} currentUser={currentUser} /> : <>No current chat</>}
+      {currentChat ? <Main messageHistory={messageHistory} socket={socket} currentChat={currentChat} currentUser={currentUser} /> : <>No current chat</>}
     </Container>
   ) : 
     (<div>wewqe</div>)

@@ -48,6 +48,7 @@ const sendPrivateMessage = async (req, res) => {
     sender: sender._id,
     recipient: recipient._id,
     text: req.body.message,
+    created_at: new Date()
   }
   
   const senderChatIndex = sender.private_messages.findIndex(e=>e.recipient.equals(recipient._id))
@@ -58,10 +59,10 @@ const sendPrivateMessage = async (req, res) => {
 
   await sender.save()
   await recipient.save()
-  
-  io.emit(recipient._id, req.body.message)
+  console.log(sender)
+  io.emit(recipient._id, {content: newMessage ,from: sender._id})
 
-  return res.send(sender.private_messages)
+  return res.send(newMessage)
 
 
 }

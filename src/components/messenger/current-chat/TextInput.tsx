@@ -38,11 +38,14 @@ const TextInput: React.FunctionComponent<ITextInputProps> = ({socket, currentCha
   const onSubmit = async (content) => {
     console.log(getValues('message'))
     if (currentChat._id && socket) {
-      await sendMessage(currentUser._id, currentChat._id, getValues('message'))
-      socket.emit("private message", {
+      await sendMessage(currentUser._id, currentChat._id, getValues('message')).then(res => {
+        console.log(res.data)
+        socket.emit("private message", {
         content,
         to: currentChat._id,
       });
+      },err=>console.log(err))
+      
     }
     reset({message: ''})
     // register.message = ''
