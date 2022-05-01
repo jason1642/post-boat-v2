@@ -42,7 +42,7 @@ export const io = new Server(server, {
     next();
   });
 // console.log('this is the socket server')
-io.on('connection', (socket) => {
+io.on('connection', (socket) => { 
   console.log('A user connected');
 console.log(socket.user_id, 'this is the socket id  ')
   

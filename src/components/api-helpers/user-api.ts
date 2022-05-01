@@ -67,7 +67,8 @@ export const getChatListUserInfo = async (user_id: string) =>
 export const getMessageHistory = async (user_id: string, recipient_id: string) => 
   await api.post(`/api/messages/history`, {user_id, recipient_id})
 
-
+export const sendMessage = async (user_id: string, recipient_id: string, message: string) => 
+  await api.post('/api/messages/send-private-message', {user_id, recipient_id, message}).then(res=>res,err=>err)
 
 
 

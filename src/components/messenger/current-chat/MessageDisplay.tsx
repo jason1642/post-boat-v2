@@ -28,9 +28,9 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
     getMessageHistory(currentUser._id, currentChat._id).then(res => {
       // console.log(res.data)
       setMessageHistory(res.data.messages)
-      socket.on('private message', ({ content, from }) => {
-        console.log('A PRIVATE MESSAGE')
-      })
+      // socket.on('private message', ({ content, from }) => {
+      //   console.log('An incoming message', content)
+      // })
     }, err => console.log(err))
 
   }, [currentChat]);

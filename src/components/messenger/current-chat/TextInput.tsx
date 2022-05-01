@@ -4,6 +4,8 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import TextField from '@mui/material/TextField'
 import { FormContainer, UserInput, Submit } from '../../../styles/messenger/messenger.js'
 import Button from '@mui/material/Button'
+import {sendMessage} from '../../api-helpers/user-api.ts'
+
 interface ITextInputProps {
   socket: any,
   currentUser: any,
@@ -14,7 +16,7 @@ type Inputs = {
 }
 
 const TextInput: React.FunctionComponent<ITextInputProps> = ({socket, currentChat, currentUser}) => {
-  const { register, watch, handleSubmit, formState: {errors} } = useForm() 
+  const { register, watch, handleSubmit, reset, getValues, formState: {errors} } = useForm() 
 
   const [isInvalid, setIsInvalid] = useState<boolean>(false)
   // console.log(errors)
@@ -34,18 +36,16 @@ const TextInput: React.FunctionComponent<ITextInputProps> = ({socket, currentCha
 
 
   const onSubmit = async (content) => {
-    if (currentChat._id) {
-      console.log(currentChat._id)
-
+    console.log(getValues('message'))
+    if (currentChat._id && socket) {
+      await sendMessage(currentUser._id, currentChat._id, getValues('message'))
       socket.emit("private message", {
         content,
         to: currentChat._id,
       });
-      // this.selectedUser.messages.push({
-      //   content,
-      //   fromSelf: true,
-      // });
     }
+    reset({message: ''})
+    // register.message = ''
   }
 
   return (
@@ -60,7 +60,7 @@ const TextInput: React.FunctionComponent<ITextInputProps> = ({socket, currentCha
         // disableUnderline={true}
         variant='standard'
         placeholder='Send a message.'
-        {...register('message', { maxLength: 300 })}
+        {...register('message', { minLength: 2, maxLength: 300 })}
       />
     <button>submit</button>
     {/* <Button size='large' variant="contained">Send</Button> */}
