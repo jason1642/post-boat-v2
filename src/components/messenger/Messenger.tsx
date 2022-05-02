@@ -13,14 +13,17 @@ interface IMessengerProps {
 
 const styles = {
   container: {
-  display: 'flex',
+    display: 'flex',
+    justifyContent: 'center',
+    // alignItems: 'center',
   position: 'relative',
   flexDirection: 'row',
   marginTop: '10px',
   border: '1px solid red',
   height: '85%',
   fontSize: '1.4rem',
-  width: '95%',
+    // width: '95%',
+  maxWidth: '95vw',
   },
 }
 
@@ -90,13 +93,15 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
       }, err => console.log(err))
     }
   }, [currentChat]);
-
+  const updateMessageHistory = (message) => {
+    setMessageHistory(prev=> [...prev, message])
+  } 
   return currentUser ? (
     <Container
       maxWidth='xl'
       style={styles.container} >
       {chatListUsersData ? <ChatList handleChangeCurrentChat={handleChangeCurrentChat} chatListUsersData={chatListUsersData} currentUser={currentUser} /> : <>No chats found</>}
-      {currentChat ? <Main messageHistory={messageHistory} socket={socket} currentChat={currentChat} currentUser={currentUser} /> : <>No current chat</>}
+      {currentChat ? <Main updateMessageHistory={updateMessageHistory} messageHistory={messageHistory} socket={socket} currentChat={currentChat} currentUser={currentUser} /> : <>No current chat</>}
     </Container>
   ) : 
     (<div>wewqe</div>)

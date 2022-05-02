@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 5px;
-  border: 1px solid orange;
+  /* border: 1px solid orange; */
   margin: 0;
   padding: 5px;
   

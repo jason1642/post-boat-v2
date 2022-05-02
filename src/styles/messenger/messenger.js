@@ -29,26 +29,29 @@ export const Submit = styled.input`
 
 export const SingleMessageContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 80%;
-  border: 1px solid green;
-  padding: 5px;
+  max-width: 75%;
+  word-wrap: break-word;
+  text-align: left;
+  /* border: 1px solid green; */
   margin: 8px 0px;
   border-radius: 8px;
-  background-color: #149214;
-
+  gap: 5px;
 `
 export const MessageText = styled.div`
   display: flex;
-  padding: 5px;
+  padding: 4px 10px;
   font-size: 1.1rem;
+  border-radius: 8px;
+  overflow: auto;
   /* border: 1px solid brown; */
   flex-direction: column;
+  line-height: 1.6rem;
   /* width: 100%; */
 `
 export const DateSent = styled.div`
   display: flex;
+  white-space: nowrap;
   align-self: center;
   font-size: .8rem;
   padding: 0px;

@@ -9,6 +9,8 @@ interface IMainProps {
   currentUser: any,
   socket: any,
   messageHistory: any,
+  updateMessageHistory: Function,
+
 }
 
 
@@ -20,11 +22,11 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const Main: React.FunctionComponent<IMainProps> = ({currentChat, currentUser, socket, messageHistory}) => {
+const Main: React.FunctionComponent<IMainProps> = ({currentChat, updateMessageHistory, currentUser, socket, messageHistory}) => {
   return (<Container >
     <Header currentChat={currentChat}/>
     <MessageDisplay messageHistory={messageHistory} socket={socket} currentUser={currentUser} currentChat={currentChat} /> 
-    <TextInput currentChat={currentChat} currentUser={currentUser} socket={socket} />
+    <TextInput updateMessageHistory={updateMessageHistory} currentChat={currentChat} currentUser={currentUser} socket={socket} />
   </Container>);
 };
 

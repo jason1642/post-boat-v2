@@ -14,20 +14,26 @@ interface ISingleMessageProps {
 
 // Name, message, and data. Background colors of green and blue
 const SingleMessage: React.FunctionComponent<ISingleMessageProps> = ({messageData, currentChat, currentUser}) => {
-  const { text, recipient, date_created} = messageData
-  console.log(messageData)
+  const { text, recipient, date_created, sender } = messageData
+  const isFromRecipient = currentChat._id === sender
+  console.log(currentChat._id, recipient)
+
   return (
-    <SingleMessageContainer
+
+<SingleMessageContainer
       style={{
-        alignItems: currentChat._id === recipient ? 'flex-start' : 'flex-end',
-        alignSelf: currentChat._id === recipient ? 'flex-start' : 'flex-end',
-        backgroundColor: currentChat._id === recipient ? '#167ef3' : '#149214',
+        alignItems: isFromRecipient ? 'flex-start' : 'flex-end',
+        alignSelf: isFromRecipient ? 'flex-start' : 'flex-end',
       }}
     >
-              <DateSent >{moment(date_created).format("MMM Do, YYYY")}</DateSent>
+<DateSent style={{order: isFromRecipient ? 2 : 0}}>{moment(date_created).format("MMM Do, h:mm a")}</DateSent>
+    
+              
 
-      <MessageText >
-        {text} from: {currentChat._id === recipient ? currentChat.username : currentUser.username}
+        <MessageText
+          style={{backgroundColor: isFromRecipient ? '#167ef3' : '#149214',}}
+        >
+        {text}
       </MessageText>
     </SingleMessageContainer>
   );

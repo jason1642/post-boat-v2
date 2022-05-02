@@ -50,7 +50,7 @@ const sendPrivateMessage = async (req, res) => {
     text: req.body.message,
     created_at: new Date()
   }
-  
+   
   const senderChatIndex = sender.private_messages.findIndex(e=>e.recipient.equals(recipient._id))
   const recipientChatIndex = recipient.private_messages.findIndex(v=>v.recipient.equals(sender._id))
 

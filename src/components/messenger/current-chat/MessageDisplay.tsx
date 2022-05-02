@@ -11,13 +11,19 @@ interface IMessageDisplayProps {
 }
 const styles = {
   container: {
-    border: '1px solid white',
+    border: '1px solid grey',
     display: 'flex',
     flexDirection: 'column',
     flex: '1 1 auto',
     height: 'auto',
     overflowY: 'scroll',
     width: '100%',
+    '*::-webkit-scrollbar-thumb': {
+      backgroundColor: 'red',
+      color: 'red',
+      width: '0.4em'
+
+    }
   },
   
 }
