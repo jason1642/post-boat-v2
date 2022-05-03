@@ -77,7 +77,7 @@ const SideMenu: React.FunctionComponent<ISideMenuProps> = ({paramsUserData, onPo
 
         
       }
-      <Link to={`/messenger/${paramsUserData._id}`}>Send message</Link>
+      <Link style={{textDecoration:'none',color: 'inherit'}} to={`/messenger/${paramsUserData._id}`}><Button variant='contained'>Send message</Button></Link>
 
       {
         onPostPage && postData && 

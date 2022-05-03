@@ -52,12 +52,12 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
   const [counter, setCounter ] = useState(0)
   const [isAtBottom, setIsAtBottom] = useState(true)
 
-  const seeOffset = () => {
-    const {scrollHeight, scrollTop, clientHeight} = messagesEndRef.current
-    // console.log(scrollTop + clientHeight)
-    setCounter(prev=>prev + 1)
+  // const seeOffset = () => {
+  //   const {scrollHeight, scrollTop, clientHeight} = messagesEndRef.current
+  //   // console.log(scrollTop + clientHeight)
+  //   setCounter(prev=>prev + 1)
 
-  }
+  // }
   useEffect(() => {
   const {scrollHeight, scrollTop, clientHeight} = messagesEndRef.current
   // console.log(scrollHeight)

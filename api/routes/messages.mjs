@@ -118,6 +118,13 @@ const readMessages = async (req, res) => {
       user = r
       const currentChat = r.private_messages.find(x => x.recipient.equals(req.body.recipient_id))
       currentChat.messages.forEach((c, ind) => {
+        if (!c.seen_by_recipient) {
+          currentChat.messages[ind].seen_by_recipient = {
+            seen: currentChat.messages.recipient.equals(req.body.user_id) ? true : false,
+            date_seen: new Date()
+          }
+          return
+        }
         if (c.seen_by_recipient.seen === false && c.recipient.equals(req.body.user_id)) {
           currentChat.messages[ind].seen_by_recipient.seen = true;
         currentChat.messages[ind].seen_by_recipient.date_seen = new Date()
@@ -131,6 +138,13 @@ const readMessages = async (req, res) => {
       const recipientCurrentChat = u.private_messages.find(v => v.recipient.equals(req.body.user_id))
       
       recipientCurrentChat.messages.forEach((b, i) => {
+        if (b.seen_by_recipient === undefined) {
+          recipientCurrentChat.messages[i].seen_by_recipient = {
+            seen: recipientCurrentChat.messages.recipient.equals(req.body.user_id) ? true : false,
+            date_seen: new Date()
+          }
+          return
+        }
         if (b.seen_by_recipient.seen === false && b.recipient.equals(req.body.user_id)) {
           recipientCurrentChat.messages[i].seen_by_recipient.seen = true
           recipientCurrentChat.messages[i].seen_by_recipient.date_seen = new Date()
