@@ -2,7 +2,8 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { getmanyUsers } from '../api-helpers/user-api.ts';
-import {List, Title, ListItem} from '../../styles/account-page/side-menu.js'
+import { List, Title, ListItem } from '../../styles/account-page/side-menu.js'
+import ListUserCard from '../messenger/ListUserCard.tsx'
 interface IFollowListProps {
   type: string,
   data: any,
@@ -35,9 +36,11 @@ const FollowList: React.FunctionComponent<IFollowListProps> = ({type, title, dat
       <Title style={{marginBottom: '10px'}}>{data.username}{title}</Title>
       {
         usersArray.length > 0 && usersArray.map(ele =>
-          <ListItem
-            key={ele._id}
-            to={`/user/${ele._id}`}>{ele.username}</ListItem>)
+          <ListUserCard pathname={`/user/${ele._id}`} userData={ele}/> 
+          // <ListItem
+          //   key={ele._id}
+          //   to={`/user/${ele._id}`}>{ele.username}</ListItem>
+        )
       }
     </List>
   );

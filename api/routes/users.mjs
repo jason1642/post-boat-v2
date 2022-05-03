@@ -100,7 +100,7 @@ const getOneUser = async (req,res) => {
 
     // console.log(res)
   return res.send(_.pick(user, ['_id', 'username', 'email', 'bio', 'category_subscriptions', 'following',
-      'followers', 'liked_posts', 'created_comments', 'liked_comments', 'saved_posts', 'created_at', 'updated_at']));
+      'followers', 'liked_posts', 'preferences', 'created_comments', 'liked_comments', 'saved_posts', 'created_at', 'updated_at']));
   
 }
 userRouter.get('/:id', getOneUser)

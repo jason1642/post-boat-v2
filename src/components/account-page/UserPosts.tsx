@@ -30,7 +30,7 @@ const UserPosts: React.FunctionComponent<IUserPostsProps> = () => {
           )
           : 
           <ErrorMessage>
-            No posts 
+            No posts yet
           </ErrorMessage>
       }
     </Container>

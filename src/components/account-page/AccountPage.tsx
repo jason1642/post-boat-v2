@@ -37,7 +37,7 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) 
     // Must have id as dependency to refresh page upon going to the same path with a different id
    useEffect(() => {
       getUserInfoById(id).then(res => {
-      //  console.log(res.data)
+       console.log(res.data)
        setParamsUserData(res.data)
      }).catch(err => {
        console.log(err)
@@ -75,7 +75,7 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) 
       </Content>
         {
           currentUser._id === id ?
-           <CurrentUserSideMenu currentUser={ currentUser} />
+           <SideMenu paramsUserData={currentUser} currentUser={ currentUser} />
             : paramsUserData ?
               <SideMenu
                 currentUser={currentUser}

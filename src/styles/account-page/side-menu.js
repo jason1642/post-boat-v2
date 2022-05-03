@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 export const Container = styled.aside`
   display: flex;
   flex-direction: column;
+  width: auto;
   align-items: center;
   background-color: ${({theme})=>theme.cardBackground};
   border-radius: 8px;
   padding: 15px 5px;
   height: 75vh;
-  flex-grow: 2;
+  flex-grow: .5;
+  max-width: 300px;
   gap: 3px;
 `; 
 export const Item = styled.div`

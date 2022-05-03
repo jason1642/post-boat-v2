@@ -36,7 +36,7 @@ const UserComments: React.FunctionComponent<IUserCommentsProps> = (props) => {
             commentData={ele[0]}
             postData={ele[1]}
           />) : 
-          <>You have not made any comments yet</>
+          <>No comments yet</>
       } 
     </Main>
   );
