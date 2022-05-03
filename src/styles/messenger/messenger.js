@@ -13,6 +13,7 @@ export const FormContainer = styled.form`
   display: flex;
   padding: 10px 20px;
   gap: 10px;
+  /* background-color: grey; */
 `;
 
 export const UserInput = styled.input`

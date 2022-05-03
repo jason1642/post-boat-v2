@@ -5,8 +5,8 @@ import type UserModel from '../../types/user-interface.ts'
 import ChatList from './ChatList.tsx'
 import Main from './current-chat/Main.tsx'
 import io from 'socket.io-client'
-import { getChatListUserInfo, getMessageHistory } from '../api-helpers/user-api.ts';
-
+import { getChatListUserInfo, getMessageHistory, getBasicPublicUserInfo } from '../api-helpers/user-api.ts';
+import {useParams, useNavigate} from 'react-router-dom'
 interface IMessengerProps {
   currentUser: UserModel
 }
@@ -19,7 +19,7 @@ const styles = {
   position: 'relative',
   flexDirection: 'row',
   marginTop: '10px',
-  border: '1px solid red',
+  // border: '1px solid red',
   height: '85%',
   fontSize: '1.4rem',
     // width: '95%',
@@ -32,9 +32,9 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   const [socket, setSocket] = useState<any>(null);
   const [chatListUsersData, setChatListUsersData] = useState<Array<any>>()
   const [currentChat, setCurrentChat] = useState<any>()
-  const [messageHistory, setMessageHistory] = useState<Array<any>>()
-
-
+  const [messageHistory, setMessageHistory] = useState<Array<any>>([])
+  const {id} = useParams()
+  const navigate = useNavigate()
   // To create private messaging
   // 1 When a user connects, store their connection in an object keyed by their username or any other data structure that ensures you can find a specific users connection
   // 2 When one users wants to message another, send the server an even stating such
@@ -61,16 +61,37 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   }, []);
 
   useEffect(() => {
-    console.log(socket)
+    // console.log(socket)
   }, [socket]); 
   useEffect(() => {
     // Get list of users info from private_messages list
     // Create handleCurrentChat to get latest chat by default, based on updated_on date from object
-    getChatListUserInfo(currentUser._id).then(res => {
-      // console.log(res.data)
+    getChatListUserInfo(currentUser._id).then(async res => {
+      console.log(res.data.sort((a,b) => new Date(b.updated_at) -  new Date(a.updated_at)))
       setChatListUsersData(res.data)
-
-      setCurrentChat(res.data[0])
+      const findParamsChat = res.data.find(ele => ele._id === id)
+      if (!id) {
+        setCurrentChat(res.data[0])
+        return 
+      }
+      if (findParamsChat) {
+        setCurrentChat(findParamsChat)
+      } else {
+        await getBasicPublicUserInfo(id).then(r => {
+          if (r.status === 401 || r.status === 404) {
+            navigate('/messenger')
+            
+            window.location.reload()
+          } else {
+            // console.log(r.data)
+          setCurrentChat(r.data)
+          }
+          
+        }).catch( err => {
+          console.log('error!!')
+        })
+      }
+      // setCurrentChat(res.data[0])
     }, (err)=>console.log(err))
   }, []);
   
@@ -81,11 +102,16 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   }
 
   useEffect(() => {
-    console.log(messageHistory)
+    // console.log(messageHistory)
     if (currentChat) {
       getMessageHistory(currentUser._id, currentChat._id).then(res => {
         // console.log(res.data)
-        setMessageHistory(res.data.messages)
+        if (res.data.messages) {
+          setMessageHistory(res.data.messages)
+        } else {
+          setMessageHistory([])
+        }
+        // console.log(messageHistory)
         // socket.on('private message', ({ content, from }) => {
         //   console.log('An incoming message', content)
         // })

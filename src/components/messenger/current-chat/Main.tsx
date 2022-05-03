@@ -24,10 +24,17 @@ const Container = styled.div`
 
 const Main: React.FunctionComponent<IMainProps> = ({currentChat, updateMessageHistory, currentUser, socket, messageHistory}) => {
   return (<Container >
+    {currentChat ? <>
     <Header currentChat={currentChat}/>
     <MessageDisplay messageHistory={messageHistory} socket={socket} currentUser={currentUser} currentChat={currentChat} /> 
     <TextInput updateMessageHistory={updateMessageHistory} currentChat={currentChat} currentUser={currentUser} socket={socket} />
-  </Container>);
+      </>
+      : 
+      <>
+      
+      </>
+    }
+    </Container>);
 };
 
 export default Main;

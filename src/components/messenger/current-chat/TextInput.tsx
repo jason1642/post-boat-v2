@@ -56,19 +56,23 @@ const TextInput: React.FunctionComponent<ITextInputProps> = ({socket, currentCha
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit, onErrors)}>
 
-           
-      <TextField
-        sx={{opacity: '1', backgroundColor: '#a8a7a7e8', padding: '5px', borderRadius: '10px',}}
+      <div style={{width: '100%',backgroundColor: 'white'}}>
+        <TextField
+        sx={{opacity: '1',}}
         helperText={isInvalid && 'Message cannot exceed 200 characters.'}
         error={isInvalid}
+        // margin='normal'
         fullWidth={true}
-        // disableUnderline={true}
-        variant='standard'
+        label='Send message'
+        // variant='standard'
+        color='warning'
         placeholder='Send a message.'
         {...register('message', { minLength: 2, maxLength: 300 })}
       />
-    <button>submit</button>
-    {/* <Button size='large' variant="contained">Send</Button> */}
+      </div>  
+      
+    {/* <button>submit</button> */}
+    <Button size='large' variant="contained">Send</Button>
   </FormContainer>);
 };
 

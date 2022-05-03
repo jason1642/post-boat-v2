@@ -50,7 +50,12 @@ const SiteRoutes = ({ currentUser }) => {
     {
       path: '/messenger',
       element: currentUser.authenticated ? <Messenger currentUser={currentUser} /> : <Navigate to='/' replace />
-    }
+    },
+    
+    {
+      path: '/messenger/:id',
+      element: currentUser.authenticated ? <Messenger currentUser={currentUser} /> : <Navigate to='/' replace />
+    },
   ])
 }
 

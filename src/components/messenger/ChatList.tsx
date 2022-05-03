@@ -17,9 +17,10 @@ interface IChatListProps {
 }
 const styles = {
   container: {
-    border: '1px solid white',
+    border: '1px solid grey',
     minWidth: '20%',
     padding: '5px',
+    borderRadius: '5px',
   },
   
 }

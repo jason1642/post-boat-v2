@@ -14,7 +14,7 @@ interface ISingleMessageProps {
 
 // Name, message, and data. Background colors of green and blue
 const SingleMessage: React.FunctionComponent<ISingleMessageProps> = ({messageData, currentChat, currentUser}) => {
-  const { text, recipient, date_created, sender } = messageData
+  const { text, recipient, created_at, sender } = messageData
   const isFromRecipient = currentChat._id === sender
   console.log(currentChat._id, recipient)
 
@@ -26,7 +26,7 @@ const SingleMessage: React.FunctionComponent<ISingleMessageProps> = ({messageDat
         alignSelf: isFromRecipient ? 'flex-start' : 'flex-end',
       }}
     >
-<DateSent style={{order: isFromRecipient ? 2 : 0}}>{moment(date_created).format("MMM Do, h:mm a")}</DateSent>
+<DateSent style={{order: isFromRecipient ? 2 : 0}}>{moment(created_at).format("MMM Do, h:mm a")}</DateSent>
     
               
 

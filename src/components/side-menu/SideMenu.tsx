@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { followUser, subscribeToCategory } from '../api-helpers/user-api.ts'
 import FollowList from './FollowList.tsx'
 import CategoryButton from './CategoryButton.tsx'
+import {Link} from 'react-router-dom'
 // import {RiUserFollowFill, RiUserUnfollowFill} from 'react-icons/ri/index.js'
 // import { Link } from 'react-router-dom';
 interface ISideMenuProps {
@@ -76,7 +77,7 @@ const SideMenu: React.FunctionComponent<ISideMenuProps> = ({paramsUserData, onPo
 
         
       }
-      
+      <Link to={`/messenger/${paramsUserData._id}`}>Send message</Link>
 
       {
         onPostPage && postData && 

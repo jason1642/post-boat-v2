@@ -12,6 +12,7 @@ interface IMessageDisplayProps {
 const styles = {
   container: {
     border: '1px solid grey',
+    borderRadius: '4px',
     display: 'flex',
     flexDirection: 'column',
     flex: '1 1 auto',
@@ -33,7 +34,7 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
   console.log(messageHistory)
   return (
     <Container style={styles.container}>
-     
+     <div>This is the start of your conversation</div>
       {
         messageHistory ? messageHistory.map(ele =>
           <SingleMessage key={ele._id} currentUser={currentUser} currentChat={currentChat} messageData={ele} />)

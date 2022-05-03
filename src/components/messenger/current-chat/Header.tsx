@@ -20,7 +20,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({currentChat}) => {
       </Badge>
       
     </ProfilePicture> */}
-   {currentChat ?  <ListUserCard userData={currentChat} /> : <>Nothing</>}
+   {currentChat ?  <ListUserCard pathname={`/user/${currentChat._id}`} userData={currentChat} /> : <>Nothing</>}
 
   </HeaderContainer>);
 };

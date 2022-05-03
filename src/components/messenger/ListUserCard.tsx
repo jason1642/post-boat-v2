@@ -5,14 +5,15 @@ import Avatar from '@mui/material/Avatar'
 
 interface IListUserCardProps {
   userData: any,
+  pathname: string,
 }
 
 
-const ListUserCard: React.FunctionComponent<IListUserCardProps> = ({ userData }) => {
+const ListUserCard: React.FunctionComponent<IListUserCardProps> = ({ pathname, userData }) => {
   const { preferences, username } = userData;
-  // console.log(userData)
+  console.log(userData)
   return (
-    <Container>
+    <Container to={pathname}>
       <AvatarWrapper>
         
       <Badge color='success' variant='dot' overlap='circular' badgeContent={''} >
