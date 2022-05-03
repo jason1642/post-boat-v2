@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
 import { UserListSkeleton } from './Skeletons.jsx'
+import moment from 'moment'
 // import ListUserCard from './ListUserCard.tsx'
 // import axios from 'axios'
 import Avatar  from '@mui/material/Avatar';
@@ -41,9 +42,11 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({ handleChangeCurrent
                 <Avatar sx={{ bgcolor: ele.preferences.avatar_color }}>{ele.username.split('')[0].toUpperCase()}</Avatar>
               </ListItemAvatar>
               <ListItemText
+                
                 primary={ele.username}
                 secondary={<Typography
-                >Last online: Now</Typography>}
+                sx={{fontSize: '.7rem'}}
+                >Last online: {moment(ele.updated_at).calendar()}</Typography>}
               
               />
             </ListItemButton>

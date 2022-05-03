@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Container, InfoBox, TopRow, BottomRow, AvatarWrapper, } from '../../styles/messenger/list-user-card.js'
 import Badge from '@mui/material/Badge'
 import Avatar from '@mui/material/Avatar'
-
+import moment from 'moment'
 interface IListUserCardProps {
   userData: any,
   pathname: string,
@@ -16,7 +16,7 @@ const ListUserCard: React.FunctionComponent<IListUserCardProps> = ({ pathname, u
     <Container to={pathname}>
       <AvatarWrapper>
         
-      <Badge color='success' variant='dot' overlap='circular' badgeContent={''} >
+      <Badge color={userData.active ? 'success' : 'warning'} variant='dot' overlap='circular' badgeContent={''} >
       <Avatar sx={{ bgcolor:  preferences.avatar_color}}>{username.split('')[0].toUpperCase()}</Avatar>
 
       </Badge>
@@ -27,7 +27,7 @@ const ListUserCard: React.FunctionComponent<IListUserCardProps> = ({ pathname, u
           {username}
       </TopRow>
         <BottomRow>
-          Last online: Now
+          Last online: {moment(userData.updated_at).calendar()}
       </BottomRow>
       </InfoBox>
     </Container>

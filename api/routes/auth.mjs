@@ -48,6 +48,8 @@ authRouter.post('/verify', async (req, res, next) => {
       if (err) return res.status(403).send('invalid token')
       const userData = await User.findOne({ _id: user._id })
       // console.log(userData)
+      userData.active = true
+      userData.save()
       return res.send(userData)
     }
   )

@@ -230,7 +230,15 @@ const editUser = async (req, res, next) => {
 }
 userRouter.put('/edit', editUser)
 
-
+// req: user_id
+const logUserOut = async (req, res) => {
+  let user
+  try { await User.findOne({ _id: req.body.user_id }).then(r => user = r) } catch (err) { return res.status(404).send('user not found') }
+  user.active = false
+  user.save()
+  return res.status(200)
+}
+userRouter.post('/log-out', logUserOut)
 
 
 

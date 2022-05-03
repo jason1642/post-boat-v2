@@ -41,8 +41,12 @@ export const getUserInfoById = async (user_id:string) =>
 
 export const getBasicPublicUserInfo = async (user_id: string) => 
   await api.get(`/api/user/basic-info/${user_id}`).then(r => r, e => e.response)  
-export const removeToken = () => {
+
+
+
+export const removeToken = async(user_id) => {
     // Accepts type string, number, boolean
+    await api.post('/api/user/log-out', user_id).then(res=>console.log('logged out'))
     api.defaults.headers.common.authorization = false;
   };
 

@@ -19,10 +19,10 @@ interface INavProps {
 }
 
 
-const handleLogout = ( ) => {
+const handleLogout = (user_id) => {
   localStorage.clear();
   // setUser(null)
-  removeToken();
+  removeToken({user_id});
   // console.log('You are logged out')
   // console.log(localStorage)
   window.location.reload();
@@ -31,7 +31,7 @@ const handleLogout = ( ) => {
 const Nav: React.FunctionComponent<INavProps> = ({ theme, currentUser }) => {
   
   
-
+  console.log(currentUser)
   // Log in and register buttons are in ./GuestNav.tsx
   return (
     <List>
@@ -49,7 +49,7 @@ const Nav: React.FunctionComponent<INavProps> = ({ theme, currentUser }) => {
         {theme === 'light' ? <AiFillMessage /> : <AiOutlineMessage />}
       </Item>
 
-      <Item onClick={handleLogout} to='/'>
+      <Item onClick={() =>handleLogout(currentUser._id)} to='/'>
         {theme==='light' ? <BiLogOut/> : <IoLogOutSharp />}
       </Item>
     </List>

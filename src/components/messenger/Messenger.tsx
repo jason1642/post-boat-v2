@@ -8,8 +8,9 @@ import io from 'socket.io-client'
 import { getChatListUserInfo, getMessageHistory, getBasicPublicUserInfo } from '../api-helpers/user-api.ts';
 import {useParams, useNavigate} from 'react-router-dom'
 interface IMessengerProps {
-  currentUser: UserModel
+  currentUser: UserModel,
 }
+
 
 const styles = {
   container: {
@@ -35,6 +36,7 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   const [messageHistory, setMessageHistory] = useState<Array<any>>([])
   const {id} = useParams()
   const navigate = useNavigate()
+  console.log(currentUser.active)
   // To create private messaging
   // 1 When a user connects, store their connection in an object keyed by their username or any other data structure that ensures you can find a specific users connection
   // 2 When one users wants to message another, send the server an even stating such
