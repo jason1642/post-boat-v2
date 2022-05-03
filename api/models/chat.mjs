@@ -40,7 +40,6 @@ const chatSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-
   messages: {type: [messageSchema], default: []}
 }, snakeCaseStamps)
 

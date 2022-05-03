@@ -74,7 +74,7 @@ const getActiveChatsInfo = async (req, res, next) => {
   let user, infoArray
   try{ await User.findOne({_id: req.params.id}).lean().then(r=> user = r) } catch (err) {return res.status(404).send('User not found.')}
   // console.log(user)
-  try { await User.find({ _id: { $in: user.private_messages.map(c => c.recipient) } }).lean().select('username bio email preferences created_at updated_at').then(x => infoArray = x) } catch (err) { return res.status(404).send('No private messages were found.')}
+  try { await User.find({ _id: { $in: user.private_messages.map(c => c.recipient) } }).lean().select('username bio email active preferences created_at updated_at').then(x => infoArray = x) } catch (err) { return res.status(404).send('No private messages were found.')}
   // console.log(infoArray)
   return res.send(infoArray)
 }
@@ -110,7 +110,40 @@ const getMessageHistory = async (req, res) => {
 } 
 messageRouter.post('/history', getMessageHistory)
 
+const readMessages = async (req, res) => {
+  
+  let user, recipientUser
+  try {
+    await User.findOne({ _id: req.body.user_id }).then(r => {
+      user = r
+      const currentChat = r.private_messages.find(x => x.recipient.equals(req.body.recipient_id))
+      currentChat.messages.forEach((c, ind) => {
+        if (c.seen_by_recipient.seen === false && c.recipient.equals(req.body.user_id)) {
+          currentChat.messages[ind].seen_by_recipient.seen = true;
+        currentChat.messages[ind].seen_by_recipient.date_seen = new Date()
+        }
+        
+      })
+  }) } catch (err) { return res.status(404).send(err) }
+  try {
+    await User.findOne({ _id: req.body.recipient_id }).then(u => {
+      recipientUser = u
+      const recipientCurrentChat = u.private_messages.find(v => v.recipient.equals(req.body.user_id))
+      
+      recipientCurrentChat.messages.forEach((b, i) => {
+        if (b.seen_by_recipient.seen === false && b.recipient.equals(req.body.user_id)) {
+          recipientCurrentChat.messages[i].seen_by_recipient.seen = true
+          recipientCurrentChat.messages[i].seen_by_recipient.date_seen = new Date()
 
+        }
+      })
+    })
+  } catch (err) { return res.status(404).send(err) }
+  await user.save()
+  await recipientUser.save()
+  return res.send(user)
+}
+messageRouter.post('/read-messages', readMessages)
 
 
 export default messageRouter;

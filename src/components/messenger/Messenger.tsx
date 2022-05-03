@@ -5,7 +5,7 @@ import type UserModel from '../../types/user-interface.ts'
 import ChatList from './ChatList.tsx'
 import Main from './current-chat/Main.tsx'
 import io from 'socket.io-client'
-import { getChatListUserInfo, getMessageHistory, getBasicPublicUserInfo } from '../api-helpers/user-api.ts';
+import { getChatListUserInfo, getMessageHistory, getBasicPublicUserInfo, readMessages } from '../api-helpers/user-api.ts';
 import {useParams, useNavigate} from 'react-router-dom'
 interface IMessengerProps {
   currentUser: UserModel,
@@ -84,6 +84,7 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
             navigate('/messenger')
             
             window.location.reload()
+            return 
           } else {
             // console.log(r.data)
           setCurrentChat(r.data)
@@ -93,6 +94,7 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
           console.log('error!!')
         })
       }
+      
       // setCurrentChat(res.data[0])
     }, (err)=>console.log(err))
   }, []);
@@ -100,13 +102,14 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
 
   const handleChangeCurrentChat = async (selectedUser: any) => {
     setCurrentChat(selectedUser)
+    
     // console.log(selectedUser)
   }
 
   useEffect(() => {
     // console.log(messageHistory)
     if (currentChat) {
-      getMessageHistory(currentUser._id, currentChat._id).then(res => {
+      getMessageHistory(currentUser._id, currentChat._id).then(async res => {
         // console.log(res.data)
         if (res.data.messages) {
           setMessageHistory(res.data.messages)
@@ -117,7 +120,9 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
         // socket.on('private message', ({ content, from }) => {
         //   console.log('An incoming message', content)
         // })
-      
+        await readMessages(currentUser._id, currentChat._id).then(r => {
+          console.log(r)
+        })
       }, err => console.log(err))
     }
   }, [currentChat]);

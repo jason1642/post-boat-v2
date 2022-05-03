@@ -20,7 +20,11 @@ const snakeCaseStamps = {
       ref: 'Users',
       required: true
     },
-    
+    seen_by_recipient: 
+    {
+      seen: { type: Boolean, default: false },
+      date_seen: {type: Date, default: new Date()}
+    },
     text: {
       type: String,
       minlength: 2,

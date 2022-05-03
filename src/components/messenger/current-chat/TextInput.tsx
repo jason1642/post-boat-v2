@@ -72,7 +72,7 @@ const TextInput: React.FunctionComponent<ITextInputProps> = ({socket, currentCha
       </div>  
       
     {/* <button>submit</button> */}
-    <Button size='large' variant="contained">Send</Button>
+    <Button type='submit' size='large' component='button' variant="contained">Send</Button>
   </FormContainer>);
 };
 

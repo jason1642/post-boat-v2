@@ -16,7 +16,7 @@ interface ISingleMessageProps {
 const SingleMessage: React.FunctionComponent<ISingleMessageProps> = ({messageData, currentChat, currentUser}) => {
   const { text, recipient, created_at, sender } = messageData
   const isFromRecipient = currentChat._id === sender
-  console.log(currentChat._id, recipient)
+  // console.log(currentChat._id, recipient)
 
   return (
 
