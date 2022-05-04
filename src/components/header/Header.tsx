@@ -5,14 +5,19 @@ import Toggle from '../../styles/dark-mode/ToggleModeButton';
 import { IoBoatOutline, IoBoatSharp } from 'react-icons/io5/index.js'
 import { Link } from 'react-router-dom';
 import GuestNav from './GuestNav.tsx';
+import IconButton from '@mui/material/IconButton';
 
 const Container = styled.header`
   background-color: ${({ theme }) => theme.header} ;
   /* border: 1px solid white; */
+  position: fixed;
+  /* padding: 15px 0px; */
   width: 100%;
+  /* background-color: grey; */
   justify-content: space-between;
   align-items: center;
-  height: 46px;
+
+  /* height: 46px; */
 `;
 const Title = styled(Link)`
   text-decoration: none;
@@ -24,6 +29,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  padding-right: 15px;
 `
 interface IHeaderProps {
   theme: string,
@@ -39,8 +45,9 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ theme, themeToggler, cu
         BOAT
       </Title>
       <Wrapper>
-      {currentUser.authenticated && <div style={{fontSize:"8px"}}>Sailing as {currentUser.username}</div>}
-      <Toggle theme={theme} toggleTheme={themeToggler} />
+      {currentUser.authenticated && <div style={{fontSize:"1rem"}}>Sailing as {currentUser.username}</div>}
+        <IconButton><Toggle theme={theme} toggleTheme={themeToggler} />
+        </IconButton> 
         {
           currentUser.authenticated ?
             <Nav currentUser={currentUser} theme={theme} />

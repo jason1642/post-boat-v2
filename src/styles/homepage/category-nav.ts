@@ -20,7 +20,7 @@ export const Item = styled(Link)<Props>`
   color: ${({color, theme})=>color ? color : theme.text};
   text-decoration: none;
   padding: 4px;
-  font-size: .8em;
+  font-size: 1.2rem;
 
   &:hover{
     color: green;

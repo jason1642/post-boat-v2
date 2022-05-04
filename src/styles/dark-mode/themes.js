@@ -1,7 +1,7 @@
 export const lightTheme = {
-  body: '#FFF',
+  body: '#9f9f9fa8',
   text: 'black',
-  header: '#cecece',
+  header: '#a2a1a2',
   toggleBorder: '#FFF',
   background: '#3b3b3b',
   border: '1px solid black',
@@ -10,8 +10,8 @@ export const lightTheme = {
   icon: '#444242',
   elementBackground: '#d2d2d2',
   buttonBackground: 'white',
-  cardBackground: 'lightgrey',
-  modalBackground: 'white',
+  cardBackground: '#84827c',
+  modalBackground: '#9ca4a2',
   commentBackground: 'lightgrey',
 }
 export const darkTheme = {

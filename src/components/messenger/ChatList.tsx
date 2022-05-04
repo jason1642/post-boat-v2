@@ -21,8 +21,12 @@ interface IChatListProps {
   handleChangeCurrentChat: Function,
 }
 const LinkWrapper = styled(Link)`
+  display: flex;
   text-decoration: none;
-  color: ${({theme})=>theme.text};
+  color: ${({ theme }) => theme.text};
+  border-bottom: 1px solid white;
+  background-color: ${({theme})=>theme.cardBackground};
+
 `;
 const styles = {
   container: {
@@ -44,7 +48,7 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({ handleChangeCurrent
         <LinkWrapper to={`/messenger/${ele._id}`}>
             <ListItemButton
               key={ele._id}
-              // sx={{'&:hover': {cursor: 'pointer'}}}
+              sx={{backgroundColor: 'grey'}}
               onClick={()=>handleChangeCurrentChat(ele)}
               alignItems='flex-start' >
               

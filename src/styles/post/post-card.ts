@@ -15,12 +15,13 @@ export const Container = styled.div<Props>`
   justify-content: space-between;
   margin: 4px 0px;
   background-color: ${({theme})=>theme.cardBackground};
-  width: 80%;
+  width: 640px;
   padding: ${props=>props.cardPadding};
   /* padding: 8px 4px 12px 13px/; */
   /* min-height: 96px; */
   /* max-height: 512px; */
   border-radius: 8px;
+  border: 1px solid #8080806e;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   & > *{ 
     display: flex;
@@ -41,23 +42,23 @@ export const Wrapper = styled.div`
 export const TopRow = styled.div`
     border-radius: 8px;
   margin-bottom: 5px;
-  
+  padding: 3px;
   @media (max-width: 480px){
     width: 100%;
     margin-left: 10px;
   }
 `
 export const Title = styled.h3`
-  font-size: 1em;
+  font-size: 1.2em;
   padding: 3px 0px;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
-  margin: 0;
+  margin: 3px 0px;
   width: 100%;
   text-align: left;
 `
 export const CreatedBy = styled(Link)`
-  font-size: 7px;
+  font-size: .7rem;
   width: 100%;
   text-align: left;
   text-decoration: none;
@@ -68,7 +69,7 @@ export const CreatedBy = styled(Link)`
   }
 `
 export const Main = styled.div`
-  min-height: 10px;
+  /* min-height: 10px; */
   max-height: 512px;
   margin: 5px 0;
   flex-grow: 1;
@@ -101,7 +102,7 @@ export const Image = styled.img`
 `
 export const BottomRow = styled.div`
   min-height: 15px;
-  /* padding: 4px; */
+  padding-bottom: 4px;
   gap: 5px;
   flex-direction: row;
   font-size: 10px;
