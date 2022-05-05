@@ -74,7 +74,7 @@ const getActiveChatsInfo = async (req, res, next) => {
   let user, infoArray
   try{ await User.findOne({_id: req.params.id}).lean().then(r=> user = r) } catch (err) {return res.status(404).send('User not found.')}
   // console.log(user)
-  try { await User.find({ _id: { $in: user.private_messages.map(c => c.recipient) } }).lean().select('username bio email active preferences created_at updated_at').then(x => infoArray = x) } catch (err) { return res.status(404).send('No private messages were found.')}
+  try { await User.find({ _id: { $in: user.private_messages.map(c => c.recipient) } }).lean().select('username bio email active preferences private_messages created_at updated_at').then(x => infoArray = x) } catch (err) { return res.status(404).send('No private messages were found.')}
   // console.log(infoArray)
   return res.send(infoArray)
 }

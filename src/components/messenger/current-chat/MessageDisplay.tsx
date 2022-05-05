@@ -47,47 +47,29 @@ const styles = {
 const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentChat, currentUser, socket, messageHistory}) => {
   const messagesEndRef = useRef(null)
   const footerRef = useRef(null)
-  const [history, setHistory] = useState(messageHistory)
   const [newMessage, setNewMessage] = useState(false)
-  const [counter, setCounter ] = useState(0)
-  const [isAtBottom, setIsAtBottom] = useState(true)
-
-  // const seeOffset = () => {
-  //   const {scrollHeight, scrollTop, clientHeight} = messagesEndRef.current
-  //   // console.log(scrollTop + clientHeight)
-  //   setCounter(prev=>prev + 1)
-
-  // }
 
   useEffect(() => {
-  const {scrollHeight, scrollTop, clientHeight} = messagesEndRef.current
-  // console.log(scrollHeight)
-    // console.log(scrollTop)
-    // console.log(clientHeight)
-    // console.log(scrollTop + clientHeight)
-    // console.log(messagesEndRef)
-    
-    // if (scrollTop + clientHeight !== scrollHeight) {
-    //    footerRef.current.scrollIntoView({ behavior: "auto" })
+    if (messageHistory.length > 0 && messageHistory[messageHistory.length - 1].sender !== currentUser._id) {
       setNewMessage(true)
-    // } else {
-    //   setNewMessage(false)
-    // }
-
-    console.log(currentChat)
-  }, [currentChat, messageHistory, isAtBottom]);
+    }
   console.log(messageHistory)
+    // console.log(currentChat)
+  }, [currentChat, messageHistory]);
+
 
 
   useEffect(() => {
-    footerRef.current.scrollIntoView({ behavior: "auto" })
-  }, []);
+    const { scrollHeight, scrollTop, clientHeight } = messagesEndRef.current
+    if (scrollTop + clientHeight !== scrollHeight) {
+      footerRef.current.scrollIntoView({ behavior: "auto" })
+    }
+  }, [currentChat, messageHistory]);
   return (
     <Container ref={messagesEndRef}
-      // onClick={seeOffset}
       onScroll={() => {
         const { scrollHeight, scrollTop, clientHeight } = messagesEndRef.current
-        console.log(scrollHeight)
+        // console.log(scrollHeight)
         if (scrollTop + clientHeight === scrollHeight) {
          setNewMessage(false)
        } 

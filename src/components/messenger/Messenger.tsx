@@ -14,17 +14,13 @@ interface IMessengerProps {
 
 const styles = {
   container: {
-    display: 'flex',
-    justifyContent: 'center',
-    // alignItems: 'center',
+  display: 'flex',
+  justifyContent: 'center',
   position: 'relative',
   flexDirection: 'row',
-  // marginTop: '10px',
   paddingTop: '60px',
-  // border: '1px solid red',
   height: '85%',
   fontSize: '1.4rem',
-    // width: '95%',
   maxWidth: '95vw',
   },
 }
@@ -49,28 +45,27 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
     // so I can manually call socket.connect()
     const newSocket = io(url, { transports: ['websocket'], autoConnect: false})
     setSocket(newSocket)
-    console.log(currentUser)
+    // console.log(currentUser)
     newSocket.auth = { user_id: currentUser._id}
     newSocket.connect()    
     newSocket.onAny((event, ...args) => {
       console.log(event, args);
     });
     newSocket.on(currentUser._id, ({ content, from }) => {
-      console.log(content, from)
+      // console.log(content, from)
       setMessageHistory(prev=> [...prev, content])
-      console.log(messageHistory)
+      // console.log(messageHistory)
     });
     return () => {  newSocket.close() }
   }, []);
 
-  useEffect(() => {
-    // console.log(socket)
-  }, [socket]); 
+  
   useEffect(() => {
     // Get list of users info from private_messages list
     // Create handleCurrentChat to get latest chat by default, based on updated_on date from object
     getChatListUserInfo(currentUser._id).then(async res => {
-      console.log(res.data.sort((a,b) => new Date(b.updated_at) -  new Date(a.updated_at)))
+      console.log(res.data)
+      res.data.sort((a,b) => new Date(b.updated_at) -  new Date(a.updated_at))
       setChatListUsersData(res.data)
       const findParamsChat = res.data.find(ele => ele._id === id)
       if (!id) {
@@ -117,12 +112,9 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
         } else {
           setMessageHistory([])
         }
-        // console.log(messageHistory)
-        // socket.on('private message', ({ content, from }) => {
-        //   console.log('An incoming message', content)
-        // })
+
         await readMessages(currentUser._id, currentChat._id).then(r => {
-          console.log(r)
+          // console.log(r)
         })
       }, err => console.log(err))
     }
@@ -133,9 +125,9 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   return currentUser ? (
     <Container
       maxWidth='xl'
-      style={styles.container} >
+      sx={styles.container} >
       {chatListUsersData ? <ChatList handleChangeCurrentChat={handleChangeCurrentChat} chatListUsersData={chatListUsersData} currentUser={currentUser} /> : <>No chats found</>}
-      {currentChat ? <Main updateMessageHistory={updateMessageHistory} messageHistory={messageHistory} socket={socket} currentChat={currentChat} currentUser={currentUser} /> : <>No current chat</>}
+      {currentChat && messageHistory ? <Main updateMessageHistory={updateMessageHistory} messageHistory={messageHistory} socket={socket} currentChat={currentChat} currentUser={currentUser} /> : <>No current chat</>}
     </Container>
   ) : 
     (<div>wewqe</div>)
