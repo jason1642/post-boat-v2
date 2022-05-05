@@ -4,8 +4,8 @@ import db from './database.mjs';
 import axios from 'axios'
 import http from 'http'
 import { Server } from 'socket.io'
-const port = 3880; 
-// console.log(io)
+const port = process.env.PORT ? process.env.PORT : 3880; 
+console.log(port)
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://postboat.herokuapp.com' : 'http://localhost:3880';
 
 // const api = axios.create({
