@@ -58,6 +58,7 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
   //   setCounter(prev=>prev + 1)
 
   // }
+
   useEffect(() => {
   const {scrollHeight, scrollTop, clientHeight} = messagesEndRef.current
   // console.log(scrollHeight)
@@ -66,12 +67,12 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
     // console.log(scrollTop + clientHeight)
     // console.log(messagesEndRef)
     
-    if (scrollTop + clientHeight !== scrollHeight) {
-       footerRef.current.scrollIntoView({ behavior: "auto" })
-      
-    } else {
-      setNewMessage(false)
-    }
+    // if (scrollTop + clientHeight !== scrollHeight) {
+    //    footerRef.current.scrollIntoView({ behavior: "auto" })
+      setNewMessage(true)
+    // } else {
+    //   setNewMessage(false)
+    // }
 
     console.log(currentChat)
   }, [currentChat, messageHistory, isAtBottom]);
@@ -79,11 +80,18 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
 
 
   useEffect(() => {
-    // set
-  }, [history]);
+    footerRef.current.scrollIntoView({ behavior: "auto" })
+  }, []);
   return (
     <Container ref={messagesEndRef}
       // onClick={seeOffset}
+      onScroll={() => {
+        const { scrollHeight, scrollTop, clientHeight } = messagesEndRef.current
+        console.log(scrollHeight)
+        if (scrollTop + clientHeight === scrollHeight) {
+         setNewMessage(false)
+       } 
+      }}
       sx={styles.container}>
      <div >This is the start of your conversation</div>
       {
@@ -92,7 +100,11 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
           : (<>No messages</>)
       }
       <NewMessageNotification
-      style={{display: newMessage ? 'flex' : 'none'}}>New message</NewMessageNotification>
+        onClick={() => {
+          footerRef.current.scrollIntoView({ behavior: "auto" })
+          setNewMessage(false)
+        }}
+        style={{display: newMessage ? 'flex' : 'none'}}>New message</NewMessageNotification>
       <div ref={footerRef}></div>
     </Container>
   );

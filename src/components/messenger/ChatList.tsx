@@ -24,7 +24,8 @@ const LinkWrapper = styled(Link)`
   display: flex;
   text-decoration: none;
   color: ${({ theme }) => theme.text};
-  border-bottom: 1px solid white;
+  border-radius: 5px;
+  margin: 1px 0px;
   background-color: ${({theme})=>theme.cardBackground};
 
 `;
