@@ -64,7 +64,7 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
     if (scrollTop + clientHeight !== scrollHeight) {
       footerRef.current.scrollIntoView({ behavior: "auto" })
     }
-  }, [currentChat, messageHistory]);
+  }, [currentChat,]);
   return (
     <Container ref={messagesEndRef}
       onScroll={() => {

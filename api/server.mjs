@@ -6,7 +6,7 @@ import http from 'http'
 import { Server } from 'socket.io'
 const port = 3880; 
 // console.log(io)
-const baseUrl = process.env.NODE_ENV === 'production' ? 'http://localhost:3880' : 'http://localhost:3880';
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://postboat.herokuapp.com' : 'http://localhost:3880';
 
 // const api = axios.create({
 //   baseURL: baseUrl 

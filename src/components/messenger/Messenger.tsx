@@ -26,7 +26,7 @@ const styles = {
 }
 
 const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
-  const url = window.location.hostname === 'localhost' ? 'http://localhost:3880' : 'https://circle-chat1.herokuapp.com'
+  const url = window.location.hostname === 'localhost' ? 'https://postboat.herokuapp.com' : 'https://circle-chat1.herokuapp.com'
   const [socket, setSocket] = useState<any>(null);
   const [chatListUsersData, setChatListUsersData] = useState<Array<any>>()
   const [currentChat, setCurrentChat] = useState<any>()

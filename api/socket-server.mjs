@@ -4,7 +4,7 @@ import { Server } from 'socket.io'
 import axios from 'axios'
 const app = express();
 
-const baseUrl = process.env.NODE_ENV === 'production' ? 'http://localhost:3880' : 'http://localhost:3880';
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://postboat.herokuapp.com' : 'http://localhost:3880';
 const api = axios.create({
   baseURL: baseUrl 
 })  
