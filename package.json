@@ -44,9 +44,12 @@
   },
   "type": "module",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cd api && nodemon server.mjs",
+    "heroku-postbuild": "npm run build",
     "build": "react-scripts build",
-    "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage --setupFiles dotenv/config",
+    "front-end": "react-scripts start",
+    "server": "nodemon server.mjs",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
