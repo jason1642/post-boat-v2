@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 export const Container = styled.div`
-  padding: 10px;
+  padding: 15px;
   box-sizing: border-box;
   margin: 0;
   width: 100%;
@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 `;
 export const CreatedBy = styled(Link)`
-  font-size: 9px;
+  font-size: .8rem;
   width: 100%;
   text-align: left;
   text-decoration: none;
@@ -38,7 +38,7 @@ export const TopRow = styled.div`
   align-items: flex-end;
 `;
 export const Title = styled.div`
-  font-size: 20px;
+  font-size: 1.7rem;
   margin: 0;
   padding: 10px 0px;
 `;
@@ -52,7 +52,7 @@ export const BottomRow= styled.div`
 `;
 
 export const CategoryName = styled.div`
-  font-size: 10px;
+  font-size: 1rem;
   font-weight: bold;
   margin-right: 6px;
 `;
@@ -65,6 +65,7 @@ export const Span = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  font-size: 0.8rem;
   height: 100%;
   gap: 5px;
   margin: 0 4px;

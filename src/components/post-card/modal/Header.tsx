@@ -93,7 +93,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
           <Span>
             {likedSaved.saved ?
               <BsSaveFill style={{ color: 'green', fontSize: '14px',}} /> :
-                <BsSave style={{ color: 'black', fontSize: '14px' }} />}{savedNum + (savedNum === 1 ? 'Saves' : 'Save ')} 
+                <BsSave style={{ color: 'black', fontSize: '14px' }} />}{`(${savedNum})`+ (savedNum === 1 ? ' Saves' : ' Save ')} 
           </Span>
         </>}
 
@@ -103,7 +103,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
             onClick={()=>closeModal()}
             style={{color: 'inherit',textDecoration: 'none'}}
             to={`/category/` + data.category}
-          >More posts from /{data.category}</Link></Span>
+          >| More posts from /{data.category}</Link></Span>
       </BottomRow>
       
     </Container>

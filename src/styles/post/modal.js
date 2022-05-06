@@ -26,8 +26,8 @@ export const ReactModal = styled(Modal)`
 export const Text = styled.p`
   line-height: 20px;
   padding: 8px;
-  font-size: 13px;
-  
+  font-size: 1.2rem;
+  line-height: 1.7rem;
 `;
 
 
@@ -42,12 +42,12 @@ export const ImageContainer = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  max-height: 312px;
+  max-height: 470px;
   margin: 14px auto;
 `;
 
 export const Image = styled.img`
-  max-height: 312px;
+  max-height: 450px;
   max-width: 50%;
   /* width: 100%; */
   

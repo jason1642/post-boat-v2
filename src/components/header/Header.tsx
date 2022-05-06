@@ -12,6 +12,7 @@ const Container = styled.header`
   /* border: 1px solid white; */
   position: fixed;
   /* padding: 15px 0px; */
+  /* margin-bottom: 15px; */
   z-index: 5;
   width: 100%;
   /* background-color: grey; */

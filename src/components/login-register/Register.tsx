@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Form, Input, SubmitSuccessfulMessage, Title, SubmitButton, Span, Label } from '../../styles/forms/forms.js'
 import { createUser } from '../api-helpers/user-api.ts'
 import _ from 'lodash'
+import Button from '@mui/material/Button'
+
 import { registerOptions } from '../resources/validation-options.tsx';
 import { useForm } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message';
@@ -46,14 +48,19 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
             placeholder={_.capitalize(name)}
             name={name}
           />
-        <ErrorMessage
+          <ErrorMessage
+            
           name={name}
           errors={errors}
           render={({ message }) => <ErrorComponent message={message} />}
         />
         </Label>)}
       
-      <SubmitButton>Submit</SubmitButton>
+        {/* <SubmitButton type='submit' size='large' variant="contained">Submit</SubmitButton> */}
+        <Button
+          sx={{marginTop: '2rem'}}
+          type='submit' size='large' component='button' variant="contained">Send</Button>
+
       </Form>)
       
       : 

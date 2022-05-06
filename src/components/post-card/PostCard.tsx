@@ -129,7 +129,7 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
           <ImageContainer
             textAlign={'center'}
           >
-            <Image alt='placeholder' src={'https://images.unsplash.com/photo-1649258895691-3f3ac37bc408?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2787&q=80'} />
+            {/* <Image alt='placeholder' src={'https://images.unsplash.com/photo-1649258895691-3f3ac37bc408?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2787&q=80'} /> */}
           </ImageContainer>
         }
     </Main>

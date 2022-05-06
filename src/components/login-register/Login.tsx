@@ -2,6 +2,8 @@ import * as React from 'react';
 import {Form, Input, Label, Title, Span, SubmitButton} from '../../styles/forms/forms.js'
 import { ErrorComponent } from '../resources/validation-options.tsx';
 import _ from 'lodash'
+import Button from '@mui/material/Button'
+
 import { bindActionCreators } from 'redux'
 import { useDispatch} from 'react-redux';
 import { userActions } from '../../redux/index.ts';
@@ -88,8 +90,10 @@ const Login = (props) => {
         />
       </Label> 
         )}
-      <SubmitButton>Submit</SubmitButton>
-
+      {/* <SubmitButton>Submit</SubmitButton> */}
+      <Button
+          sx={{marginTop: '2rem'}}
+          type='submit' size='large' component='button' variant="contained">Send</Button>
     </Form>
   );
 };

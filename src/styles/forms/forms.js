@@ -1,20 +1,22 @@
 import styled from 'styled-components';
-
+// import Button from '@mui/material/Button'
 
 export const Form = styled.form`
   background-color: ${({ theme }) => theme.elementBackground};
   display: flex;
   flex-direction: column;
+  position: relative;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   /* padding-top: 40px; */
   /* border: 1px solid green; */
   border-radius: 8px;
-  height: 100%;
-  /* min-height: 80vh; */
+  /* height: 50%; */
+  min-height: 70vh;
   width: 65%;
-  margin: 0 auto;
-  margin-top: 10px;
+  margin: auto;
+  /* padding-top: 50px; */
+  /* margin-top: 5px; */
   @media(max-width: 480px){
     width: 90%;
     margin-top: 30px;
@@ -26,6 +28,8 @@ export const Input = styled.input`
   padding: 7px 7px 7px 8px;
   margin: 5px 0px;
   width: 100%;
+  font-size: 1rem;
+  min-height: 1.7rem;
   border-radius: 13px;
   border-width: 0px;
   @media(max-width: 480px){
@@ -81,6 +85,7 @@ export const Title = styled.h1`
   font-weight: 400;
   margin: 0px;
   margin-top: 10px;
+  font-size: 3rem;
   padding: 0px;
   @media(max-width: 480px){
     width: 90%;

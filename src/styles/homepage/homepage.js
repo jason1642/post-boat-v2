@@ -45,8 +45,8 @@ export const Main = styled.div`
   /* display: flex; */
   justify-content: center;
   /* align-items: center; */
-  /* height: 100%;
-  max-height: 90vh; */
+  /* height: 100%; */
+  min-height: 90vh; 
   width: 100%;
   gap: 10px;
   @media (max-width: 480px){

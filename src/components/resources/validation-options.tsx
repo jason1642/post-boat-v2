@@ -39,7 +39,10 @@ export const loginOptions = {
 export const ErrorComponent: React.FunctionComponent<IErrorMessageProps> = ({message}) => {
 
   return (
-    <ErrorMessage>
+    <ErrorMessage
+      style={{
+        fontSize: '.9rem'
+      }}>
       {message}
     </ErrorMessage>
   )
