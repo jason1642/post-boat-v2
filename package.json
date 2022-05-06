@@ -44,12 +44,11 @@
   },
   "type": "module",
   "scripts": {
-    "start": "cd api && nodemon server.mjs",
+    "start": "cd ./api && nodemon server.mjs",
     "heroku-postbuild": "npm run build",
     "build": "react-scripts build",
     "front-end": "react-scripts start",
-    "server": "nodemon server.mjs",
-    "test": "jest",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
