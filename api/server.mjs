@@ -1,10 +1,10 @@
 import {app} from './app.mjs'
 import 'dotenv/config';
 import db from './database.mjs';
-import axios from 'axios'
-import http from 'http'
+// import axios from 'axios'
+// import http from 'http'
 import { Server } from 'socket.io'
-const port = process.env.PORT ? process.env.PORT : 3880; 
+const port = process.env.PORT || 3880; 
 console.log(port)
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://postboat.herokuapp.com' : 'http://localhost:3880';
 
@@ -12,7 +12,7 @@ const baseUrl = process.env.NODE_ENV === 'production' ? 'https://postboat.heroku
 //   baseURL: baseUrl 
 // })  
 
-
+db.connect()
 
 const server = app.listen(port, () => console.log('listening on port ' + port));
 
@@ -77,6 +77,6 @@ console.log(socket.user_id, 'this is the socket id  ')
 
 
 
-db.connect()
+
 
   

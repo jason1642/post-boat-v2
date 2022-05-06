@@ -41,7 +41,7 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = ({currentUser}) =>
 console.log(didSubmit)
   return (
     !didSubmit ?
-    <Form
+    (<Form
       onSubmit={handleSubmit(onSubmit, onErrors)}> 
         <Title>Create Post</Title>
       {inputNames.map(name =>
@@ -76,7 +76,7 @@ console.log(didSubmit)
     </DropDownContainer>
       
       <SubmitButton>Submit</SubmitButton>
-    </Form>
+    </Form>)
      : 
      (<SubmitSuccessfulMessage>
         Successfully created post. Thank you for using PostBoat!
