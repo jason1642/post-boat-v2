@@ -1,5 +1,6 @@
 import {app} from './app.mjs'
 import 'dotenv/config';
+import express from 'express'
 import db from './database.mjs';
 // import axios from 'axios'
 // import http from 'http'
@@ -75,7 +76,9 @@ console.log(socket.user_id, 'this is the socket id  ')
   
 })
 
-
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("../build"));
+}
 
 
 
