@@ -11,7 +11,7 @@ interface IListUserCardProps {
 
 const ListUserCard: React.FunctionComponent<IListUserCardProps> = ({ pathname, userData }) => {
   const { preferences, username } = userData;
-  console.log(userData)
+  // console.log(userData)
   return (
     <Container to={pathname}>
       <AvatarWrapper>

@@ -12,8 +12,12 @@ export const Item = styled(Link)`
 color: ${({ theme }) => theme.text};
 text-decoration: none;
 /* border: ${({ theme }) => theme.border}; */
-padding: 6px;
-height: 100%;
-font-size: 1.7rem;
-margin: 0;
+padding: 10px;
+display: flex;
+align-items: center;
+  justify-content: center;
+/* height: 100%; */
+
+font-size: 2rem;
+/* margin: 0; */
 `

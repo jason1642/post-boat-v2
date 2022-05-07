@@ -32,7 +32,7 @@ const Main: React.FunctionComponent<IMainProps> = ({currentChat, didLoad, update
       // console.log(messageHistory)
 
   return (<Container >
-    {currentChat && messageHistory ? <>
+
       <Header currentChat={currentChat} />
       
       <MessageDisplay
@@ -46,12 +46,7 @@ const Main: React.FunctionComponent<IMainProps> = ({currentChat, didLoad, update
         currentChat={currentChat}
         currentUser={currentUser}
         socket={socket} />
-      </>
-      : 
-      <>
-      
-      </>
-    }
+
     </Container>);
 };
 

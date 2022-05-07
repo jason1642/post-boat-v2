@@ -4,7 +4,6 @@ import Container from '@mui/material/Container'
 import SingleMessage from './SingleMessage.tsx';
 // import _ from 'lodash'
 import styled from 'styled-components';
-import { initial } from 'lodash';
 import { readMessages } from '../../api-helpers/user-api.ts';
 
 const NewMessageNotification = styled.div`

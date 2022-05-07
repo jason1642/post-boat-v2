@@ -12,6 +12,7 @@ export const Container = styled.div`
 
 export const Item = styled(Link)`
   display: flex;
+
   padding: 8px;
   font-size: 1.1em;
   text-decoration: none;

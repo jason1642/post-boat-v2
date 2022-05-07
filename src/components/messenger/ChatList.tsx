@@ -58,7 +58,7 @@ const checkListItemForNewMessage = (chatFriendData, currentUser) => {
 
 
 const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat, handleChangeCurrentChat, currentUser, chatListUsersData }) => {
-  console.log(chatListUsersData)
+  // console.log(chatListUsersData)
  
   return (
     <List
@@ -72,16 +72,18 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat, handleC
             <Badge
               anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
               color={'info'}
-              sx={{ width: 1 }}
+              sx={{ width: 1 }} 
               max={9}
               key={ele._id}
-
+              onClick={()=>handleChangeCurrentChat(ele)}
               invisible={currentChat._id === ele._id ? true : false}
               badgeContent={checkListItemForNewMessage(ele, currentUser)} >
-        <LinkWrapper to={`/messenger/${ele._id}`}>
+              <LinkWrapper
+                
+                to={`/messenger/${ele._id}`}>
             <ListItemButton
               sx={{backgroundColor: 'grey'}}
-              onClick={()=>handleChangeCurrentChat(ele)}
+              
               alignItems='flex-start' >
               
               

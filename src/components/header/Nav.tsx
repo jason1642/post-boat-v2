@@ -1,6 +1,10 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { removeToken } from '../api-helpers/user-api.ts'
-import {List, Item} from '../../styles/nav.js'
+import { List, Item } from '../../styles/nav.js'
+import { getChatListUserInfo } from '../api-helpers/user-api.ts';
+import { useLocation } from 'react-router-dom';
+import Badge from '@mui/material/Badge';
 import {
   AiOutlineHome,
   AiFillHome,
@@ -21,17 +25,57 @@ interface INavProps {
 
 const handleLogout = (user_id) => {
   localStorage.clear();
-  // setUser(null)
   removeToken({user_id});
-  // console.log('You are logged out')
-  // console.log(localStorage)
+ 
   window.location.reload();
 }
 
+
+
 const Nav: React.FunctionComponent<INavProps> = ({ theme, currentUser }) => {
+  const location = useLocation()
+
+  const [newMessages, setNewMessages] = useState(0)
+
+  const checkNewMessages = async (currentUser) => {
+    await getChatListUserInfo(currentUser._id).then(res => {
+      res.data.forEach(ele => {
+        const mutualChat = ele.private_messages.find(r => r.recipient === currentUser._id)
+        const isNewMessage = mutualChat.messages.filter(e => {
+        return e.seen_by_recipient && !e.seen_by_recipient.seen && (e.sender === ele._id)
+        })
+        setNewMessages(prev=>prev + isNewMessage.length)
+      })
+    })
+  }
   
+  useEffect(() => {
+
+    let intervalId
+    setNewMessages(0)
+    if (location.pathname.split('/')[1] !== 'messenger') {
+      
+      // intervalId = setInterval(() => {
+         checkNewMessages(currentUser)
+      //   console.log('string')
+      // }, 1000 * 5)
+    }
+    
   
-  console.log(currentUser)
+     
+      return () => clearInterval(intervalId)
+  
+
+
+  }, [location]);
+
+  useEffect(() => {
+    // console.log(newMessages)
+    if (location.pathname.split('/')[1] !== 'messenger') {    
+         checkNewMessages(currentUser)
+    }
+  }, []);
+  // console.log(currentUser)
   // Log in and register buttons are in ./GuestNav.tsx
   return (
     <List>
@@ -45,8 +89,14 @@ const Nav: React.FunctionComponent<INavProps> = ({ theme, currentUser }) => {
         {theme === 'light' ? <IoPersonSharp /> : <IoPersonOutline />}
       </Item>
       
-      <Item to={'/messenger'} >
-        {theme === 'light' ? <AiFillMessage /> : <AiOutlineMessage />}
+      <Item style={{ width: '3rem' }}to={'/messenger'} >
+      
+          <Badge
+          // sx={{ height: '100%' }}
+          color='info'
+          badgeContent={newMessages}
+        >{theme === 'light' ? <AiFillMessage /> : <AiOutlineMessage />}
+          </Badge> 
       </Item>
 
       <Item onClick={() =>handleLogout(currentUser._id)} to='/'>
