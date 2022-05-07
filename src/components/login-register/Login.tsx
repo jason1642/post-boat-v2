@@ -93,7 +93,7 @@ const Login = (props) => {
       {/* <SubmitButton>Submit</SubmitButton> */}
       <Button
           sx={{marginTop: '2rem'}}
-          type='submit' size='large' component='button' variant="contained">Send</Button>
+          type='submit' size='large' component='button' variant="contained">Submit</Button>
     </Form>
   );
 };

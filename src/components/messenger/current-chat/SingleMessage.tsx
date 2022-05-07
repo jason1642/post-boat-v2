@@ -20,7 +20,7 @@ const SingleMessage: React.FunctionComponent<ISingleMessageProps> = ({messageDat
   const { text, recipient, created_at, sender } = messageData
   const isFromRecipient = currentChat._id === sender
   // console.log(currentChat._id, recipient)
-
+  // console.log(messageData)
   return (
 
 <SingleMessageContainer

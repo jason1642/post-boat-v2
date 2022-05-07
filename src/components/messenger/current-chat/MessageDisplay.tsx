@@ -4,6 +4,7 @@ import Container from '@mui/material/Container'
 import SingleMessage from './SingleMessage.tsx';
 // import _ from 'lodash'
 import styled from 'styled-components';
+import { initial } from 'lodash';
 
 const NewMessageNotification = styled.div`
   position: sticky;
@@ -23,6 +24,7 @@ interface IMessageDisplayProps {
   currentChat: any,
   socket: any,
   messageHistory: any,
+  didLoad: Boolean,
 }
 const styles = {
   container: {
@@ -44,18 +46,26 @@ const styles = {
   },
   
 }
-const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentChat, currentUser, socket, messageHistory}) => {
+const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentChat, didLoad, currentUser, messageHistory}) => {
   const messagesEndRef = useRef(null)
   const footerRef = useRef(null)
   const [newMessage, setNewMessage] = useState(false)
+
 
   useEffect(() => {
     if (messageHistory.length > 0 && messageHistory[messageHistory.length - 1].sender !== currentUser._id) {
       setNewMessage(true)
     }
-  console.log(messageHistory)
-    // console.log(currentChat)
-  }, [currentChat, messageHistory]);
+  // console.log(messageHistory)
+      
+  }, [ messageHistory]);
+
+
+
+  useEffect(() => {
+    footerRef.current.scrollIntoView({ behavior: "auto" })
+
+  }, [didLoad, currentChat]);
 
 
 
@@ -65,8 +75,17 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
       footerRef.current.scrollIntoView({ behavior: "auto" })
     }
   }, [currentChat,]);
+
+
+
+
+ 
+useEffect(() => {
+  console.log(messageHistory)
+}, [messageHistory]);
   return (
     <Container ref={messagesEndRef}
+      maxWidth='lg'
       onScroll={() => {
         const { scrollHeight, scrollTop, clientHeight } = messagesEndRef.current
         // console.log(scrollHeight)
@@ -77,7 +96,7 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
       sx={styles.container}>
      <div >This is the start of your conversation</div>
       {
-        messageHistory ? messageHistory.map(ele =>
+        messageHistory && currentChat ? messageHistory.map(ele =>
           <SingleMessage key={ele._id} currentUser={currentUser} currentChat={currentChat} messageData={ele} />)
           : (<>No messages</>)
       }
@@ -87,7 +106,7 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
           setNewMessage(false)
         }}
         style={{display: newMessage ? 'flex' : 'none'}}>New message</NewMessageNotification>
-      <div ref={footerRef}></div>
+      <div style={{position:'relative', bottom:'0'}} ref={footerRef}></div>
     </Container>
   );
 };

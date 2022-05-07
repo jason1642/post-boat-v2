@@ -115,8 +115,10 @@ const readMessages = async (req, res) => {
   let user, recipientUser
   try {
     await User.findOne({ _id: req.body.user_id }).then(r => {
+      
       user = r
-      const currentChat = r.private_messages.find(x => x.recipient.equals(req.body.recipient_id))
+      const currentChat = user.private_messages.find(x => x.recipient.equals(req.body.recipient_id))
+      console.log(req.body.recipient_id)
       currentChat.messages.forEach((c, ind) => {
         if (!c.seen_by_recipient) {
           currentChat.messages[ind].seen_by_recipient = {
@@ -131,8 +133,13 @@ const readMessages = async (req, res) => {
         }
         
       })
-  }) } catch (err) { return res.status(404).send(err) }
+    })
+  } catch (err) {
+    console.log(err)
+    return res.status(404).send(err)
+  }
   try {
+    console.log(req.body.recipient_id)
     await User.findOne({ _id: req.body.recipient_id }).then(u => {
       recipientUser = u
       const recipientCurrentChat = u.private_messages.find(v => v.recipient.equals(req.body.user_id))
@@ -152,7 +159,10 @@ const readMessages = async (req, res) => {
         }
       })
     })
-  } catch (err) { return res.status(404).send(err) }
+  } catch (err) {
+    console.log('ERROR')
+    return res.status(404).send(err)
+  }
   await user.save()
   await recipientUser.save()
   return res.send(user)
