@@ -27,7 +27,7 @@ const styles = {
 
 const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   const url = window.location.hostname === 'localhost' ? 'http://localhost:3880' : 'https://postboat.herokuapp.com'
-  const [socket, setSocket] = useState<any>(null);
+  const [socket, setSocket] = useState<any>();
   const [chatListUsersData, setChatListUsersData] = useState<Array<any>>()
   const [currentChat, setCurrentChat] = useState<any>()
   const [messageHistory, setMessageHistory] = useState<Array<any>>(undefined)
@@ -35,6 +35,47 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   const [currentChatId, setCurrentChatId] = useState()
   const {id} = useParams()
   const navigate = useNavigate()
+
+
+  const chatInstance = () => {
+    getChatListUserInfo(currentUser._id)
+    .then(async res => {
+    res.data.sort((a,b) => new Date(b.updated_at) -  new Date(a.updated_at))
+    setChatListUsersData(res.data)
+    const findParamsChat = res.data.find(ele => ele._id === id)
+  
+    if (!id) {
+      setCurrentChat(res.data[0])
+      setMessageHistory(res.data[0].private_messages.find(c => c.recipient === currentUser._id).messages)
+      // console.log(currentUser._id)
+      await readMessages(currentUser._id, res.data[0]._id).then(r => {
+      })
+      return 
+    }
+    if (findParamsChat) {
+      setCurrentChat(findParamsChat)
+      setMessageHistory(findParamsChat.private_messages.find(e => e.sender === id).messages)
+
+      await readMessages(currentUser._id, findParamsChat.private_messages.find(e => e.sender === id).sender).then(r => {
+      })
+    } else {
+      await getBasicPublicUserInfo(id).then(r => {
+        if (r.status === 401 || r.status === 404) {
+          navigate('/messenger')
+          
+          window.location.reload()
+          return 
+        } else {
+          setCurrentChat(r.data)
+        }
+        
+      }).catch( err => {
+        console.log('error!!')
+      })
+    }
+    
+  }, (err) => console.log(err))
+  }
   // console.log(currentUser.active)
   // To create private messaging
   // 1 When a user connects, store their connection in an object keyed by their username or any other data structure that ensures you can find a specific users connection
@@ -49,57 +90,31 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
     setSocket(newSocket)
     newSocket.auth = { user_id: currentUser._id}
     newSocket.connect()    
-    newSocket.onAny((event, ...args) => {
-      console.log(event, args);
-    });
+    // newSocket.onAny((event, ...args) => {
+    //   console.log(event, args);
+    // });
     newSocket.on(currentUser._id, ({ content, from }) => {
-      setMessageHistory(prev => [...prev, content])
+      console.log(currentChat)
+      if (from === currentChat._id) {
+        
+        setMessageHistory(prev => [...prev, content])
+      } else {
+        chatInstance()
+      }
 
     });
     return () => {  newSocket.close() }
-  }, []);
+  }, [currentChat]);
+
 
   
   useEffect(() => {
     // console.log('render')
     // Get list of users info from private_messages list
     // Create handleCurrentChat to get latest chat by default, based on updated_on date from object
-    getChatListUserInfo(currentUser._id).then(async res => {
-      res.data.sort((a,b) => new Date(b.updated_at) -  new Date(a.updated_at))
-      setChatListUsersData(res.data)
-      const findParamsChat = res.data.find(ele => ele._id === id)
     
-      if (!id) {
-        setCurrentChat(res.data[0])
-        setMessageHistory(res.data[0].private_messages.find(c => c.recipient === currentUser._id).messages)
-        // console.log(currentUser._id)
-        await readMessages(currentUser._id, res.data[0]._id).then(r => {
-        })
-        return 
-      }
-      if (findParamsChat) {
-        setCurrentChat(findParamsChat)
-        setMessageHistory(findParamsChat.private_messages.find(e => e.sender === id).messages)
-  
-        await readMessages(currentUser._id, findParamsChat.private_messages.find(e => e.sender === id).sender).then(r => {
-        })
-      } else {
-        await getBasicPublicUserInfo(id).then(r => {
-          if (r.status === 401 || r.status === 404) {
-            navigate('/messenger')
-            
-            window.location.reload()
-            return 
-          } else {
-            setCurrentChat(r.data)
-          }
-          
-        }).catch( err => {
-          console.log('error!!')
-        })
-      }
-      
-    }, (err)=>console.log(err))
+    chatInstance()
+
   }, [currentChatId]);
   
   const handleChangeCurrentChat = async (selectedUser: any) => {
@@ -112,9 +127,9 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({currentUser}) => {
   } 
   return currentUser ? (
     <Container
-      maxWidth='xl'
+      maxWidth='lg'
       sx={styles.container} >
-      {chatListUsersData ? <ChatList handleChangeCurrentChat={handleChangeCurrentChat} chatListUsersData={chatListUsersData} currentUser={currentUser} /> : <>No chats found</>}
+      {chatListUsersData && currentChat && messageHistory ? <ChatList currentChat={currentChat} currentUser={currentUser} handleChangeCurrentChat={handleChangeCurrentChat} chatListUsersData={chatListUsersData} currentUser={currentUser} /> : <>No chats found</>}
       {currentChat && messageHistory ? <Main didLoad={didLoad} updateMessageHistory={updateMessageHistory} messageHistory={messageHistory} socket={socket} currentChat={currentChat} currentUser={currentUser} /> : <>No current chat</>}
     </Container>
   ) : 

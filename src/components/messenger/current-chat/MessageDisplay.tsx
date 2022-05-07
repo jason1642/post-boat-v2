@@ -85,10 +85,9 @@ useEffect(() => {
 }, [messageHistory]);
   return (
     <Container ref={messagesEndRef}
-      maxWidth='lg'
+      maxWidth='md'
       onScroll={() => {
         const { scrollHeight, scrollTop, clientHeight } = messagesEndRef.current
-        // console.log(scrollHeight)
         if (scrollTop + clientHeight === scrollHeight) {
          setNewMessage(false)
        } 
