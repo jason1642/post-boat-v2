@@ -44,12 +44,14 @@ export const getBasicPublicUserInfo = async (user_id: string) =>
 
 
 
-export const removeToken = async(user_id) => {
+export const removeToken = async(user_id: string) => {
     // Accepts type string, number, boolean
     await api.post('/api/user/log-out', user_id).then(res=>console.log('logged out'))
     api.defaults.headers.common.authorization = false;
   };
 
+export const removeActive = async (user_id: string) => 
+  await api.post('/api/user/log-out', {user_id}).then(r=>r,e=>e)
 // Get user create to work with api helper - dont worry about userstate 
 // Implement create function in redux to set user state
 // Remove function here 

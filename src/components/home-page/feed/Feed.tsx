@@ -15,8 +15,9 @@ const Feed: React.FunctionComponent<IFeedProps> = (props) => {
   const { category } = useParams()
   
   useEffect(() => {
-    getAllByCategoryName(category).then(res=>{setFeedData(res)})
-    console.log(feedData)
+    getAllByCategoryName(category).then(res => {
+      setFeedData(res)
+    })
       
   }, [category]);
 

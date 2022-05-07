@@ -9,7 +9,7 @@ interface ICategoryNavProps {
 const categoryArray = ['general', 'sports', 'gaming', 'programming', 'cooking']
 const CategoryNav: React.FunctionComponent<ICategoryNavProps> = (props) => {
   const {category} = useParams()
-  console.log(category)
+  // console.log(category)
   
   
   // Display names of different categories, highlight current one

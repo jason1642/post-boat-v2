@@ -5,10 +5,15 @@ import SingleMessage from './SingleMessage.tsx';
 // import _ from 'lodash'
 import styled from 'styled-components';
 import { initial } from 'lodash';
+import { readMessages } from '../../api-helpers/user-api.ts';
 
 const NewMessageNotification = styled.div`
   position: sticky;
-  bottom: 0px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  /* display: flex; */
+  bottom: 5px;
   width: 30%;
   border-radius: 8px;
   opacity: .5;
@@ -17,6 +22,7 @@ const NewMessageNotification = styled.div`
   background-color: grey;
   &:hover{
     cursor: pointer;
+    opacity: 0.2;
   }
 `;
 interface IMessageDisplayProps {
@@ -32,9 +38,12 @@ const styles = {
     borderRadius: '4px',
     display: 'flex',
     position: 'relative',
+    // justifyContent: 'center',
+    // minHeight: '90%',
+    alignItems: 'stretch',
     flexDirection: 'column',
     flex: '1 1 auto',
-    height: 'auto',
+    // height: '100%',
     overflowY: 'scroll',
     width: '100%',
     '*::-webkit-scrollbar-thumb': {
@@ -80,15 +89,19 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
 
 
  
-useEffect(() => {
-  console.log(messageHistory)
-}, [messageHistory]);
+// useEffect(() => {
+//   const { scrollHeight, scrollTop, clientHeight } = messagesEndRef.current
+//   if (scrollTop + clientHeight === scrollHeight) {
+//     footerRef.current.scrollIntoView({ behavior: "auto" })
+//   }
+// }, [messageHistory]);
   return (
     <Container ref={messagesEndRef}
       maxWidth='md'
-      onScroll={() => {
+      onScroll={async() => {
         const { scrollHeight, scrollTop, clientHeight } = messagesEndRef.current
         if (scrollTop + clientHeight === scrollHeight) {
+          await readMessages(currentUser._id, currentChat._id)
          setNewMessage(false)
        } 
       }}
@@ -104,7 +117,7 @@ useEffect(() => {
           footerRef.current.scrollIntoView({ behavior: "auto" })
           setNewMessage(false)
         }}
-        style={{display: newMessage ? 'flex' : 'none'}}>New message</NewMessageNotification>
+        style={{display: newMessage ? 'flex' : 'none'}}>New message!</NewMessageNotification>
       <div style={{position:'relative', bottom:'0'}} ref={footerRef}></div>
     </Container>
   );

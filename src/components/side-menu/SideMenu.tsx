@@ -17,17 +17,6 @@ interface ISideMenuProps {
   postData: any,
 }
 
-
-const ButtonRender = (isFollowing:boolean, handleFollow: Function) => {
-  if (isFollowing) {
-    return <Button size='small' onClick={()=>handleFollow()} sx={{ width: 100, fontSize: 10 }} variant='contained'>Unfollow</Button>
-  }
-  
-  return (
-    <Button size='small' onClick={()=>handleFollow()} sx={{ width: 100, fontSize: 10 }} variant='contained'>Follow</Button>
-  )
-}
-
 const SideMenu: React.FunctionComponent<ISideMenuProps> = ({paramsUserData, onPostPage, currentUser, postData }) => {
   
   const [isFollowing, setIsFollowing] = useState(false)
@@ -50,61 +39,36 @@ const SideMenu: React.FunctionComponent<ISideMenuProps> = ({paramsUserData, onPo
 }
 
  
-// console.log(onPostPage, postData)
   useEffect(() => {
     const isUserFollowing = currentUser.following.find(uid => uid === paramsUserData._id)
-    // console.log(isUserFollowing)
     if(isUserFollowing) setIsFollowing(true)
   }, []);
+  
   return (
     <Container>
       {
         followingList ? <FollowList title=" is Following" type={'following'} data={paramsUserData} handleListClose={handleListClose}/> : 
           followerList ? <FollowList title="'s Followers" type={'followers'} data={paramsUserData} handleListClose={handleListClose} /> :
             <>
-              
-
-
-
-
-
-              {/* <Badge color={paramsUserData.active ? 'success' : 'warning'} variant='dot' overlap='circular' badgeContent={''} >
-      <Avatar sx={{ bgcolor:  paramsUserData.preferences.avatar_color}}>{paramsUserData.username.split('')[0].toUpperCase()}</Avatar>
-
-      </Badge>
-      {onPostPage ?
-        <LinkButton to={`/user/${paramsUserData._id}`}>u/{paramsUserData.username} </LinkButton>
-        :
-         <Title>u/{paramsUserData.username}</Title>
-
-              }
-              Last online: {moment(paramsUserData.updated_at).calendar()} */}
-
-    
               <HorizontalUserCard styles={{ flexDirection: 'column', textAlign: 'center', alignItems: 'center', justifyContent: 'center'}} pathname={`/user/${paramsUserData._id}`} userData={paramsUserData}/>
- 
-
-
-      <Item>Joined {moment(paramsUserData.created_at).fromNow()}</Item>
+              <Item>Joined {moment(paramsUserData.created_at).fromNow()}</Item>
               <ItemButton  onClick={()=>setFollowerList(true)}>Followers: {followersNum}</ItemButton>
-      <ItemButton onClick={()=> setFollowingList(true)}>Following: {paramsUserData.following.length}</ItemButton>
-
-      {currentUser._id && paramsUserData._id !== currentUser._id ?
+              <ItemButton onClick={()=> setFollowingList(true)}>Following: {paramsUserData.following.length}</ItemButton>
+                {currentUser._id && paramsUserData._id !== currentUser._id ?
                 <>
-                  {ButtonRender(isFollowing, handleFollow)}
-                  <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/messenger/${paramsUserData._id}`}>
-        <Button variant='contained'>Send message</Button></Link>
-                </> : <></>}
-      </>
+                  <Link style={{ textDecoration: 'none', color: 'inherit', margin: '10px 0px' }} to={`/messenger/${paramsUserData._id}`}>
+                    <Button variant='contained'>Send message</Button></Link>
+                    <Button onClick={() => handleFollow()} variant='contained'>
+                      {isFollowing ? 'Unfollow' : 'Follow'}
+                    </Button>
+                    
+                  </> : <></>}
+            </>
       }
-      
-
-      {
-        onPostPage && postData && 
+      {onPostPage && postData && 
         <CategoryButton
           currentUser={currentUser}
-          postData={postData} />
-      }
+          postData={postData} />}
     </Container>
   );
 };

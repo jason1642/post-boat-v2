@@ -6,6 +6,7 @@ export const Container = styled.div`
   /* background-color: darkcyan; */
   width: 100vw;
   margin: 0 auto;
+  margin-top: 60px;
   justify-content: flex-start;
   align-items: center;
 `;
@@ -18,6 +19,7 @@ export const Main = styled.div`
   display: flex;
   padding: 10px;
   width: 65%;
+  max-width: 1280px;
   /* background-color: royalblue; */
   justify-content: space-around;
   /* gap: 25px; */

@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import _ from 'lodash';
 import { verifyUser } from '../middleware/verify.mjs';
 import Post from '../models/post.mjs';
-import Category from '../models/category.mjs'
+// import Category from '../models/category.mjs'
 const userRouter = express.Router(); 
 const randomStrings = [
   'anon',

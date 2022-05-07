@@ -16,12 +16,13 @@ export const Container = styled.aside`
 `; 
 export const Item = styled.div`
   display: flex;
-  font-size: 12px;
+  font-size: 1rem;
   margin-top: 3px;
 `
 export const ItemButton = styled.div`
   display: flex;
-  font-size: 12px;
+  font-size: 1rem;
+  padding: 5px;
   margin-top: 3px;
   &:hover{
     cursor: pointer;

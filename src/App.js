@@ -6,13 +6,14 @@ import Header from './components/header/Header.tsx';
 import {ThemeProvider} from "styled-components";
 import { GlobalStyles } from "./styles/dark-mode/globalStyles.js";
 import { lightTheme, darkTheme } from "./styles/dark-mode/themes.js"
-
+import {removeActive} from './components/api-helpers/user-api.ts'
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {actionCreators, userActions } from './redux/index.ts'
 import { useParams } from "react-router-dom";
 
-
+import axios from 'axios'
+import { remove } from "lodash";
 
 function App() {
   const [theme, themeToggler] = useDarkMode();
@@ -38,10 +39,15 @@ function App() {
   }
   
   useEffect(() => {
-    console.log(allParams)
+    // console.log(allParams)
     
     handleVerify()
     
+  
+
+    return async () => currentUser._id && await removeActive(currentUser._id)
+      
+      
     // console.log(currentUser)
   }, [])
   

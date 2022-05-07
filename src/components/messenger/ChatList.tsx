@@ -74,11 +74,12 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat, handleC
               color={'info'}
               sx={{ width: 1 }}
               max={9}
+              key={ele._id}
+
               invisible={currentChat._id === ele._id ? true : false}
               badgeContent={checkListItemForNewMessage(ele, currentUser)} >
         <LinkWrapper to={`/messenger/${ele._id}`}>
             <ListItemButton
-              key={ele._id}
               sx={{backgroundColor: 'grey'}}
               onClick={()=>handleChangeCurrentChat(ele)}
               alignItems='flex-start' >
