@@ -76,14 +76,7 @@ console.log(socket.user_id, 'this is the socket id  ')
   
 })
 
-app.get('*', (req, res) => {
-  res.sendFile('https://postboat.herokuapp.com'.join(__dirname, '../build)'), (err) => {
-    if (err) {
-      res.status(500).send(__dirname)
-    }
-  })
-})
 
-
-
-
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("../build"));
+}
