@@ -77,7 +77,7 @@ console.log(socket.user_id, 'this is the socket id  ')
 })
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("../build"));
+  app.use(express.static("../build/index.html"));
 }
 
 
