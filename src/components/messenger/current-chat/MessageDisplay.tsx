@@ -64,6 +64,7 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
     // if the last message was from another user and if the message was not seen
     if (messageHistory.length > 0
       && messageHistory[messageHistory.length - 1].sender !== currentUser._id
+      && messageHistory[messageHistory.length - 1].seen_by_recipient
       && messageHistory[messageHistory.length - 1].seen_by_recipient.seen === false) {
       setNewMessage(true)
     }      

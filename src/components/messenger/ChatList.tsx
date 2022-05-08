@@ -66,7 +66,7 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat, handleC
       style={styles.container}>
       
       {
-        chatListUsersData.length > 0 ? 
+        chatListUsersData && chatListUsersData.length > 0 ? 
           chatListUsersData.map(ele =>
 
             <Badge

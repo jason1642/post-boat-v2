@@ -2,7 +2,6 @@ import {app} from './app.mjs'
 import 'dotenv/config';
 import express from 'express'
 import db from './database.mjs';
-import path from 'path'
 // import axios from 'axios'
 // import http from 'http'
 import { Server } from 'socket.io'
@@ -17,22 +16,11 @@ const baseUrl = process.env.NODE_ENV === 'production' ? 'https://postboat.heroku
 db.connect()
 
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("../build"));
-}
 
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build'), (err) => {
-    if (err) {
-      res.status(500).send(__dirname)
-    }
-  })
-})
 const server = app.listen(port, () => console.log('listening on port ' + port));
 
 
-
+ 
 
 
 
