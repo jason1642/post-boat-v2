@@ -28,11 +28,11 @@ app.use(cors());
 
 console.log(process.env.NODE_ENV)
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("../build"));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("../build"));
 
   
-}
+// }
 
 
 
@@ -67,4 +67,4 @@ app.use(function (err, req, res, next) {
   });
 });
   
-export {app}
+export default app
