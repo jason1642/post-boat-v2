@@ -15,8 +15,15 @@ const baseUrl = process.env.NODE_ENV === 'production' ? 'https://postboat.heroku
 // })  
 
 db.connect()
+
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("../build"));
+}
+
+
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/index.html'), (err) => {
+  res.sendFile(path.join(__dirname, '../build'), (err) => {
     if (err) {
       res.status(500).send(__dirname)
     }
@@ -90,6 +97,3 @@ console.log(socket.user_id, 'this is the socket id  ')
 
 
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("../build"));
-// }
