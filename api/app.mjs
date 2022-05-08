@@ -36,10 +36,10 @@ if (process.env.NODE_ENV === "production") {
 
 
 
-app.get('/*', (req, res) => {
-  app.use(express.static("../build"));
-  res.send(req)
-})
+// app.get('/*', (req, res) => {
+//   app.use(express.static("../build"));
+//   res.send(req)
+// })
 
 app.use('/api/auth', authRouter)
 app.use('/api/category', categoryRouter)
