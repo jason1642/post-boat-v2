@@ -29,7 +29,7 @@ app.use(cors());
 
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("../build"));
+  app.use(express.static("../build/index.html"));
 
   app.get('*', (req, res) => {
   console.log(path)
