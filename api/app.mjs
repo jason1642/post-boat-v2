@@ -30,19 +30,21 @@ app.use(cors());
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("../build"));
+
+  app.get('*', (req, res) => {
+  console.log(path)
+  console.log('path!!!!')
+  console.log(path.join(__dirname, '../build/index.html'))
+  res.sendFile(path.join(__dirname, '../build/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(__dirname)
+    }
+  })
+})
 }
 
 
-// app.get('*', (req, res) => {
-//   console.log(path)
-//   console.log('path!!!!')
-//   console.log(path.join(__dirname, '../build/index.html'))
-//   res.sendFile(path.join(__dirname, '../build'), (err) => {
-//     if (err) {
-//       res.status(500).send(__dirname)
-//     }
-//   })
-// })
+
 
 app.use('/api/auth', authRouter)
 app.use('/api/category', categoryRouter)
