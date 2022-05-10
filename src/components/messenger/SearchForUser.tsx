@@ -39,7 +39,9 @@ const SearchForUser: React.FunctionComponent<ISearchForUserProps> = (props) => {
 
 
     if (active && inputValue !== '') {
-      searchDatabase('a')
+      console.log(value)
+      console.log(inputValue)
+      searchDatabase(inputValue)
     }
 
     console.log('querying')
@@ -69,7 +71,8 @@ const SearchForUser: React.FunctionComponent<ISearchForUserProps> = (props) => {
       }}
       options={options}
       loading={loading}
-
+      isOptionEqualToValue={(option, value) => option.username === value.username}
+      getOptionLabel={(option) => option.username}
 
       onChange={(event, newValue) => {
         setOptions(newValue ? [newValue, ...options] : options);
@@ -82,6 +85,9 @@ const SearchForUser: React.FunctionComponent<ISearchForUserProps> = (props) => {
         <TextField
           {...params}
           label='Search for user'
+          onClick={() => {
+            console.log('clicking result')
+          }}
           InputProps={{
             ...params.InputProps, endAdornment: (<>
               {console.log(params)}
