@@ -10,7 +10,7 @@ import ListItemText from '@mui/material/ListItemText'
 import Badge from '@mui/material/Badge'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components';
-
+import SearchForUser from './SearchForUser.tsx';
 import { UserListSkeleton } from './Skeletons.jsx'
 import moment from 'moment'
 // import ListUserCard from './ListUserCard.tsx'
@@ -47,6 +47,7 @@ const styles = {
 // 
 const checkListItemForNewMessage = (chatFriendData, currentUser) => { 
   // console.log(chatFriendData.private_messages.find(r => r.recipient === currentUser._id))
+  console.log(chatFriendData)
   const mutualChat = chatFriendData.private_messages.find(r => r.recipient === currentUser._id)
   const isNewMessage = mutualChat.messages.filter(e => {
     // console.log(e.seen_by_recipient)
@@ -64,7 +65,7 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat, handleC
     <List
       sx={{width: 1/4}}
       style={styles.container}>
-      
+      <SearchForUser />
       {
         chatListUsersData  && chatListUsersData.length > 0 ? 
           chatListUsersData.map(ele =>

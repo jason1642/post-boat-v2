@@ -90,7 +90,6 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
 
   
   useEffect(() => {
-    // console.log('render')
     // Get list of users info from private_messages list
     // Create handleCurrentChat to get latest chat by default, based on updated_on date from object
     
@@ -99,7 +98,7 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
       console.log(id)
      await getChatListUserInfo(currentUser._id)
       .then(async res => {
-      res.data.sort((a,b) => new Date(b.updated_at) -  new Date(a.updated_at))
+      res.data.sort((a: any,b: any) => new Date(b.updated_at) -  new Date(a.updated_at))
         setChatListUsersData(res.data)
         
         const findParamsChat = res.data.find(ele => {
@@ -108,9 +107,10 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
         })
         console.log(id)
         if (!id) {
-        // console.log('!ID FIRST IF')
+        console.log('!ID FIRST IF')
         setCurrentChat(res.data[0])
-        setMessageHistory(res.data[0].private_messages.find(c => c.recipient === currentUser._id).messages)
+          setMessageHistory(res.data[0].private_messages.find(c => c.recipient === currentUser._id).messages)
+          console.log(res.data[0].private_messages.find(c => c.recipient === currentUser._id).messages)
         // console.log(currentUser._id)
         await readMessages(currentUser._id, res.data[0]._id).then(r => {
         })
@@ -134,6 +134,9 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
           } else {
             console.log('LAST ELSE BLOCK')
             setCurrentChat(r.data)
+            // setChatListUsersData(prev => [...prev, r.data])
+            console.log(chatListUsersData)
+            setMessageHistory([])
           }
           
         }).catch( err => {
@@ -148,6 +151,7 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
     console.log('render')
     chatInstance()
 
+    console.log(messageHistory)
   }, [id, currentChatId]);
   
   const handleChangeCurrentChat = async (selectedUser: any) => {
@@ -163,7 +167,15 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
       maxWidth='lg'
       sx={styles.container} >
       {chatListUsersData && currentChat ? <ChatList currentChat={currentChat} currentUser={currentUser} handleChangeCurrentChat={handleChangeCurrentChat} chatListUsersData={chatListUsersData}  /> : <>No chats found</>}
-      {currentChat && messageHistory ? <Main didLoad={didLoad} updateMessageHistory={updateMessageHistory} messageHistory={messageHistory} socket={socket} currentChat={currentChat} currentUser={currentUser} /> : <>No current chat</>}
+      {currentChat && messageHistory
+        ? <Main
+          didLoad={didLoad}
+          updateMessageHistory={updateMessageHistory}
+          messageHistory={messageHistory}
+          socket={socket}
+          currentChat={currentChat}
+          currentUser={currentUser} />
+        : <>No current chat</>}
     </Container>
   ) : 
     (<div>wewqe</div>)

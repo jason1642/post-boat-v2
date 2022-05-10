@@ -35,6 +35,10 @@ export const getmanyUsers = async (userIdArray: Array<string>) =>
   await api.post('/api/user/find-many-users', {user_id_array: userIdArray}).then(res=>res).catch(err=>err)
 
 
+export const queryUsers = async (searchString: string) => 
+  await api.get(`/api/user/query-users/${searchString}`).then(r => r, e => e)
+  
+
 export const getUserInfoById = async (user_id:string) => 
   await api.get('/api/user/' + user_id).then(res=> res).catch(err=>err)
 
