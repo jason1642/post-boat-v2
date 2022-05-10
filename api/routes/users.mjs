@@ -112,7 +112,7 @@ userRouter.get('/:id', getOneUser)
 
 const searchForUser = async (req, res) => {
   let searchResults = []
-  try { await User.find({ username: { $regex: req.params.search_input, $options: 'i' } }).lean().limit(10).select('username').then(r=>searchResults = r) } catch (err) { return res.status(404).send('No users were found') }
+  try { await User.find({ username: { $regex: req.params.search_input, $options: 'i' } }).lean().limit(10).select('username preferences').then(r=>searchResults = r) } catch (err) { return res.status(404).send('No users were found') }
   console.log(searchResults)
 
   return res.send(searchResults)

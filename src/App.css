@@ -15,6 +15,38 @@
   pointer-events: none;
 }
 
+
+.MuiAutocomplete-loading		{
+  background-color: grey
+}
+#user-search-label {
+  color: black;
+  /* background-color: grey; */
+  
+}
+#chat-list-container{
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+#chat-list-container::-webkit-scrollbar{ 
+  display: none;
+  width: 0;
+  -ms-overflow-style: none;
+  scrollbar-color: transparent transparent;
+}
+
+#user-search{
+  background-color: grey;
+  
+}
+.MuiAutocomplete-listbox::-webkit-scrollbar { 
+  display: none;
+  width: 0;
+  -ms-overflow-style: none;
+  scrollbar-color: transparent transparent;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

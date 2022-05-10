@@ -39,7 +39,9 @@ const styles = {
   container: {
     border: '1px solid grey',
     minWidth: '20%',
+    maxHeight: '100%',
     padding: '5px',
+    // overFlow: 'auto',
     borderRadius: '5px',
   },
   
@@ -47,7 +49,7 @@ const styles = {
 // 
 const checkListItemForNewMessage = (chatFriendData, currentUser) => { 
   // console.log(chatFriendData.private_messages.find(r => r.recipient === currentUser._id))
-  console.log(chatFriendData)
+  // console.log(chatFriendData)
   const mutualChat = chatFriendData.private_messages.find(r => r.recipient === currentUser._id)
   const isNewMessage = mutualChat.messages.filter(e => {
     // console.log(e.seen_by_recipient)
@@ -63,9 +65,11 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat, handleC
  
   return (
     <List
-      sx={{width: 1/4}}
-      style={styles.container}>
-      <SearchForUser />
+      sx={{width: 1/4, }}
+      style={styles.container}
+      id='chat-list-container'
+    >
+      <SearchForUser handleChangeCurrentChat={handleChangeCurrentChat}/>
       {
         chatListUsersData  && chatListUsersData.length > 0 ? 
           chatListUsersData.map(ele =>
