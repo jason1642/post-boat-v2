@@ -23,6 +23,7 @@ interface IChatListProps {
   handleChangeCurrentChat: Function,
   currentUser: any,
   currentChat: any,
+  messageHistory: any,
 }
 const LinkWrapper = styled(Link)`
   display: flex;
@@ -60,9 +61,10 @@ const checkListItemForNewMessage = (chatFriendData, currentUser) => {
   
 
 
-const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat, handleChangeCurrentChat, currentUser, chatListUsersData }) => {
+const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat,  handleChangeCurrentChat, currentUser, chatListUsersData }) => {
   // console.log(chatListUsersData)
  
+  console.log(chatListUsersData)
   return (
     <List
       sx={{width: 1/4, }}
@@ -71,7 +73,7 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat, handleC
     >
       <SearchForUser handleChangeCurrentChat={handleChangeCurrentChat}/>
       {
-        chatListUsersData  && chatListUsersData.length > 0 ? 
+        chatListUsersData && chatListUsersData.length > 0 ? 
           chatListUsersData.map(ele =>
 
             <Badge

@@ -87,7 +87,14 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
     // return () => {  socket.close() }
   }, [socket.connected]);
 
-
+  const unshiftCurrentChatOnMessage = (id) => {
+    const arrayCopy = chatListUsersData
+    console.log(chatListUsersData)
+    const elementToUnshift = arrayCopy.splice(chatListUsersData.findIndex(e => e._id === id), 1)
+    
+    chatListUsersData.unshift(...elementToUnshift)
+    console.log(chatListUsersData)
+  }
   
   useEffect(() => {
     // Get list of users info from private_messages list
@@ -97,7 +104,8 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
     const chatInstance = async() => {
       // console.log(id)
      await getChatListUserInfo(currentUser._id)
-      .then(async res => {
+       .then(async res => {
+        // Change sort to last message sent date
       res.data.sort((a: any,b: any) => new Date(b.updated_at) -  new Date(a.updated_at))
         setChatListUsersData(res.data)
         
@@ -152,7 +160,7 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
     chatInstance()
 
     // console.log(messageHistory)
-  }, [id, currentChatId]);
+  }, [id, currentChatId,]);
   
   const handleChangeCurrentChat = async (selectedUser: any) => {
     // setCurrentChat(selectedUser)
@@ -171,6 +179,7 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
         <ChatList
           currentChat={currentChat}
           currentUser={currentUser}
+          messageHistory={messageHistory}
           handleChangeCurrentChat={handleChangeCurrentChat}
           chatListUsersData={chatListUsersData} />
         : <>No chats found</>}
@@ -178,6 +187,7 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
       
       {currentChat && messageHistory
         ? <Main
+        unshiftCurrentChatOnMessage={unshiftCurrentChatOnMessage}
           didLoad={didLoad}
           updateMessageHistory={updateMessageHistory}
           messageHistory={messageHistory}

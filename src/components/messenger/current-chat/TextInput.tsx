@@ -12,11 +12,9 @@ interface ITextInputProps {
   currentChat: any,
   updateMessageHistory: Function,
 }
-type Inputs = {
-  content: any
-}
 
-const TextInput: React.FunctionComponent<ITextInputProps> = ({socket, currentChat, updateMessageHistory, currentUser}) => {
+
+const TextInput: React.FunctionComponent<ITextInputProps> = ({socket, currentChat, unshiftCurrentChatOnMessage, updateMessageHistory, currentUser}) => {
   const { register, watch, handleSubmit, reset, getValues, formState: {errors} } = useForm() 
 
   const [isInvalid, setIsInvalid] = useState<boolean>(false)
@@ -45,7 +43,8 @@ const TextInput: React.FunctionComponent<ITextInputProps> = ({socket, currentCha
         socket.emit("private message", {
         content,
         to: currentChat._id,
-      });
+        });
+        unshiftCurrentChatOnMessage(currentChat._id)
       },err=>console.log(err))
       
     }

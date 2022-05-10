@@ -13,6 +13,7 @@ interface IMainProps {
   didLoad: Boolean,
   messageHistory: any,
   updateMessageHistory: Function,
+  unshiftCurrentChatOnMessage: any,
 
 }
 
@@ -25,7 +26,7 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const Main: React.FunctionComponent<IMainProps> = ({currentChat, didLoad, updateMessageHistory, currentUser, socket, messageHistory}) => {
+const Main: React.FunctionComponent<IMainProps> = ({currentChat, didLoad, unshiftCurrentChatOnMessage, updateMessageHistory, currentUser, socket, messageHistory}) => {
   useEffect(() => {
     // console.log(messageHistory)
   }, [messageHistory]);
@@ -44,7 +45,8 @@ const Main: React.FunctionComponent<IMainProps> = ({currentChat, didLoad, update
       <TextInput
         updateMessageHistory={updateMessageHistory}
         currentChat={currentChat}
-        currentUser={currentUser}
+      currentUser={currentUser}
+      unshiftCurrentChatOnMessage={unshiftCurrentChatOnMessage}
         socket={socket} />
 
     </Container>);
