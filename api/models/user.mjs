@@ -63,7 +63,8 @@ const User = mongoose.model('User', new mongoose.Schema({
     },
     default: {
       preferences: {
-        dark_mode: false
+        dark_mode: false,
+        avatar_color: 'blue'
       }
     },
     _id: false

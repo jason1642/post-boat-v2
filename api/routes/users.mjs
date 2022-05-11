@@ -6,9 +6,16 @@ import mongoose from 'mongoose';
 import _ from 'lodash';
 import { verifyUser } from '../middleware/verify.mjs';
 import Post from '../models/post.mjs';
+import {randomImages, randomNames, randomTitles, randomCategory, randomDescriptions, randomColors} from '../sample-data.mjs'
 // import Category from '../models/category.mjs'
 const userRouter = express.Router(); 
 const randomStrings = [
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
+  'anon',
   'anon',
   'anon',
   'anon',
@@ -276,52 +283,89 @@ userRouter.post('/log-out', logUserOut)
 
 
 // For testing purposes only
-userRouter.post('/create-many-users', async (req, res) => {
-  const dataArray = randomStrings.map((ele, i) => ({
-    username: ele + i,
-    email: ele + i + '@gmail.com',
-    password: 'pass123'
-  }))
-  await User.insertMany(dataArray)
-  
 
-  res.send(dataArray)
+userRouter.post('/create-many-users', async (req, res) => {
+  await User.deleteMany()
+  const dataArray = randomStrings.map((ele, i) => {
+    const randomElement = randomNames[Math.floor(Math.random() * randomNames.length)];
+    const randomUsername = randomElement + i + Math.floor(Math.random() * randomNames.length)
+    return ({
+      username: randomUsername,
+      email: randomUsername + '@gmail.com',
+      password: 'testpass123',
+      bio: `contact me at ${randomUsername + '@gmail.com'}`,
+      preferences: {
+        dark_mode: true,
+        avatar_color: randomColors[Math.floor(Math.random() * randomColors.length)]
+      }
+    })
+  })
+
+  await User.insertMany(dataArray)
+
+  return res.send(dataArray)
 })
 
 
 // Testing only
 userRouter.post('/create-many-posts', async (req, res) => {
-  const users = await User.find({})
-  const inputData = (id, username, num) => ({
-    author: {
-      user_id: id,
-      username: username,
-      profile_image:'testimage.jpg'
-    },
-    title: 'Title for post number ' + num,
-    text: 'This is the text for the description of this post that i am testing ',
-    category: 'general',
-    images: ['oneimage.jpg']
-  });
-  const dataArray = users.map((ele, i) => {
-    ele.created_posts.push(i)
-    return inputData(ele._id, ele.username, i)
-  })
-  // console.log(users)
-  // console.log(users)
-  await Post.insertMany(dataArray)
+  let resultArray = []
+  return await User.find({}).lean().select('_id username').then(async e => {
+    // await Post.insertMany(e.map(async (ele, i) => {
+    //   const newPostId = new mongoose.Types.ObjectId()
+    //   const oneUser = await User.findOne({ _id: ele._id })
+    //   oneUser.created_posts.push({ post_id: newPostId })
+    //   await oneUser.save()
+      // resultArray.push(new Post({
+      //   _id: newPostId,
+      //    category: randomCategory[Math.floor(Math.random() * randomCategory.length)],
+      //   author: {
+      //     user_id: ele._id,
+      //     username: ele.username,
+      //     profile_image:'testimage.jpg'
+      //   },
+      //   title: randomTitles[Math.floor(Math.random() * randomTitles.length)],
+      //   text: randomDescriptions[Math.floor(Math.random() * randomDescriptions.length)],
+       
+      //   images: [randomImages[Math.floor(Math.random() * randomImages.length)]]
+      //   }))
+      
+      
+    // })
+    return res.send(e)
 
-  users.forEach(ele => {
-    const didUserCreate = dataArray.find(x => x.author.user_id.equals(ele._id))
-    didUserCreate && ele.created_posts.push(didUserCreate._id)
-    
-    
   })
-  console.log(users)
-  // await users.save()
-  console.log(dataArray)
-  return res.send(users)
 })
+  // await Post.deleteMany()
+  // console.log(randomCategory[Math.floor(Math.random() * randomCategory.length)])
+  // const inputData = async (id, username, post_id) => { 
+
+  //   const newPost = await new Post({
+  //   _id: post_id,
+  //    category: randomCategory[Math.floor(Math.random() * randomCategory.length)],
+  //   author: {
+  //     user_id: id,
+  //     username: username,
+  //     profile_image:'testimage.jpg'
+  //   },
+  //   title: randomTitles[Math.floor(Math.random() * randomTitles.length)],
+  //   text: randomDescriptions[Math.floor(Math.random() * randomDescriptions.length)],
+   
+  //   images: [randomImages[Math.floor(Math.random() * randomImages.length)]]
+  //   });
+  //   return newPost
+  // }
+
+ 
+//   console.log(resultArray)
+//   // console.log(users)
+//   await Post.insertMany(resultArray)
+//   // await Post.save()
+//   // console.log(users)
+//   // await users.save()
+//   // console.log(dataArray)
+//   return res.send(resultArray)
+// })
 // req: user_id, category_name
 
 

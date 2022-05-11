@@ -25,7 +25,7 @@ const Post = mongoose.model('Post', new mongoose.Schema({
   comments: {
     type: [commentSchema]
   },
-  category: { type: String, required: true },
+  category: { type: String, required: true, trim: true},
   images: {
     type: [{
       type:
