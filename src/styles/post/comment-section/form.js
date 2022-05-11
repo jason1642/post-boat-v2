@@ -10,7 +10,8 @@ export const Container = styled.div`
 `;
 export const Title = styled.div`
   display: flex;
-  font-size: 10px;
+  font-size: 1rem;
+  padding: 4px;
   text-align: left;
   align-self: flex-start;
   margin: 3px 0px 3px 8%;

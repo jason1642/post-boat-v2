@@ -33,8 +33,9 @@ export const Text = styled.p`
 
 
 export const Main = styled.div`
-  /* display: flex;
-  flex-direction: column; */
+  display: flex;
+
+  flex-direction: column;
 `
 export const ImageContainer = styled.div`
   display: flex;

@@ -10,7 +10,7 @@ export const Container = styled.div`
   /* border: 1px solid white; */
 `;
 export const Title = styled.div`
-  font-size: 18px;
+  font-size: 1rem;
   width: 90%;
   text-align: center;
   border-top: 1px solid black;

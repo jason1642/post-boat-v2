@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import _ from 'lodash';
 import { verifyUser } from '../middleware/verify.mjs';
 import Post from '../models/post.mjs';
+import sampleData from '../scripts/sample-data.json' assert {type: "json"};
 import {randomImages, randomNames, randomTitles, randomCategory, randomDescriptions, randomColors} from '../sample-data.mjs'
 // import Category from '../models/category.mjs'
 const userRouter = express.Router(); 
@@ -307,66 +308,46 @@ userRouter.post('/create-many-users', async (req, res) => {
 })
 
 
+
+
+
 // Testing only
 userRouter.post('/create-many-posts', async (req, res) => {
-  let resultArray = []
-  return await User.find({}).lean().select('_id username').then(async e => {
-    // await Post.insertMany(e.map(async (ele, i) => {
-    //   const newPostId = new mongoose.Types.ObjectId()
-    //   const oneUser = await User.findOne({ _id: ele._id })
-    //   oneUser.created_posts.push({ post_id: newPostId })
-    //   await oneUser.save()
-      // resultArray.push(new Post({
-      //   _id: newPostId,
-      //    category: randomCategory[Math.floor(Math.random() * randomCategory.length)],
-      //   author: {
-      //     user_id: ele._id,
-      //     username: ele.username,
-      //     profile_image:'testimage.jpg'
-      //   },
-      //   title: randomTitles[Math.floor(Math.random() * randomTitles.length)],
-      //   text: randomDescriptions[Math.floor(Math.random() * randomDescriptions.length)],
-       
-      //   images: [randomImages[Math.floor(Math.random() * randomImages.length)]]
-      //   }))
-      
-      
-    // })
-    return res.send(e)
+  await Post.deleteMany()
+  let users 
+  try {
+    await User.find({}).then(async e => {
+      users = e
+      e.forEach(u => {
+        console.log(sampleData[0])
+        const respectivePost = sampleData.find(p => u._id.equals(p.author.user_id))
+        u.created_posts.push(respectivePost._id)
+      })
 
-  })
-})
-  // await Post.deleteMany()
-  // console.log(randomCategory[Math.floor(Math.random() * randomCategory.length)])
-  // const inputData = async (id, username, post_id) => { 
-
-  //   const newPost = await new Post({
-  //   _id: post_id,
-  //    category: randomCategory[Math.floor(Math.random() * randomCategory.length)],
-  //   author: {
-  //     user_id: id,
-  //     username: username,
-  //     profile_image:'testimage.jpg'
-  //   },
-  //   title: randomTitles[Math.floor(Math.random() * randomTitles.length)],
-  //   text: randomDescriptions[Math.floor(Math.random() * randomDescriptions.length)],
-   
-  //   images: [randomImages[Math.floor(Math.random() * randomImages.length)]]
-  //   });
-  //   return newPost
-  // }
+    
 
  
-//   console.log(resultArray)
-//   // console.log(users)
+    })
+  } catch (err) {
+    console.log(err)
+    return res.status(404).send(err)
+  }
+
+
+await Post.insertMany(sampleData)
+
 //   await Post.insertMany(resultArray)
-//   // await Post.save()
-//   // console.log(users)
-//   // await users.save()
-//   // console.log(dataArray)
-//   return res.send(resultArray)
+  // await Post.save()
+
+//  await users.save()
+
+  return res.send(users)
 // })
 // req: user_id, category_name
+
+
+})
+
 
 
 export default userRouter; 

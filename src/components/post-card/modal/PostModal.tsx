@@ -69,13 +69,12 @@ const PostModal: React.FunctionComponent<IPostModalProps> = ({currentUser, data,
           {data.images.length > 0 &&
             <ImageContainer>
               <Image
-                alt={data.title}
-                src={'https://images.unsplash.com/photo-1649258895691-3f3ac37bc408?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2787&q=80'}
-                // src={data.images[0]}
+                // alt={data.title}
+                src={data.images[0]}
               />
             </ImageContainer>
           }
-          <Text>{data.text}{data.text}{data.text}</Text>
+          <Text>{data.text}</Text>
 
         </Main>
         <CommentSection

@@ -116,7 +116,7 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
       textAlign={'center'}
     >
       <TopRow>
-        <CreatedBy to={`/user/${data.author.user_id}`}>Posted by u/<b>{data.author.username}</b>&nbsp;{moment().startOf('day').fromNow(data.created_at)} ago</CreatedBy>
+        <CreatedBy to={`/user/${data.author.user_id}`}>Posted by u/<b>{data.author.username}</b>&nbsp;{moment(data.created_at).fromNow()} ago</CreatedBy>
         <Title
           onClick={openModal}
         >{data.title}</Title>
@@ -129,7 +129,7 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
           <ImageContainer
             textAlign={'center'}
           >
-            {/* <Image alt='placeholder' src={'https://images.unsplash.com/photo-1649258895691-3f3ac37bc408?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2787&q=80'} /> */}
+            <Image src={data.images[0]} />
           </ImageContainer>
         }
     </Main>

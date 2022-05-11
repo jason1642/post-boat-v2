@@ -16,7 +16,7 @@ const HorizontalUserCard: React.FunctionComponent<IHorizontalUserCardProps> = ({
     <Container style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center',}} to={pathname}>
       <AvatarWrapper >
         
-      <Badge color={userData.active ? 'success' : 'warning'} variant='dot' overlap='circular' badgeContent={''} >
+        <Badge sx={{ zIndex:0}} color={userData.active ? 'success' : 'warning'} variant='dot' overlap='circular' badgeContent={''} >
       <Avatar sx={{ fontSize: '1.6rem', bgcolor:  preferences.avatar_color}}>{username.split('')[0].toUpperCase()}</Avatar>
 
       </Badge>

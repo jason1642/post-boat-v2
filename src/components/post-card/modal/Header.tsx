@@ -45,7 +45,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
 
       <TopRow>
         <CategoryName>/{_.capitalize(data.category)}</CategoryName>
-        <CreatedBy to={`/user/${data.author.user_id}`}>Posted by u/{data.author.username} {moment().startOf('day').fromNow(data.created_at)} ago</CreatedBy>
+        <CreatedBy to={`/user/${data.author.user_id}`}>Posted by u/{data.author.username} {moment(data.created_at).fromNow()}</CreatedBy>
       </TopRow>
 
       <Title>
@@ -70,7 +70,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
         
 
           <Span
-            style={{width: '60px'}}
+            style={{width: '65px'}}
             onClick={() => {
               savePost(data._id, currentUser._id).then(res => { setSavedNum(res.data.length) })
               setLikedSaved(prev => ({ ...prev, saved: !likedSaved.saved }))
