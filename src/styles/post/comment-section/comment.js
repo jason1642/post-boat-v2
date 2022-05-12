@@ -8,13 +8,13 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.commentBackground};
   color: ${({theme})=>theme.text};
   margin: 3px 0px;
-  padding: 7px 4px 7px 6px;
+  padding: 10px;
   border-radius: 7px;
-  font-size: 14px;
+  /* font-size: 1rem; */
 `;
 
 export const Body = styled.p`
-  font-size: 14px;
+  font-size: 1rem;
   text-align: left;
 `
 
@@ -24,11 +24,11 @@ export const Header = styled.div`
   align-items: center;
 `
 export const AuthorName = styled.div`
-  font-size: 11px;
+  font-size: .9rem;
   font-weight: bold;
 `;
 export const DateCreated = styled.div`
-  font-size: 10px;
+  font-size: .9rem;
 `;
 export const Footer = styled.div`
   display: flex;
@@ -37,6 +37,8 @@ export const Footer = styled.div`
 `;
 export const Span = styled.div`
   color: #808384;
+  display: flex;
+  font-size: .8rem;
   &:hover{
     cursor: pointer;
   }

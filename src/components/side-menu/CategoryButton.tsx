@@ -32,10 +32,12 @@ const CategoryButton: React.FunctionComponent<ICategoryButtonProps> = ({postData
     <LinkButton to={`/category/${postData.category}`}>Community: /{postData.category}</LinkButton>
 
     {categoryData && <Span>{categoryData.followers.length} members</Span>}
-    <SubscribeButton
-    onClick={handleSubscribeToCommunity}
+    {currentUser.authenticated ? <SubscribeButton
+      onClick={handleSubscribeToCommunity}
     >
-    {isSubscribed ? 'Unsubscribe' : 'Subscribe'}</SubscribeButton>
+      {isSubscribed ? 'Unsubscribe' : 'Subscribe'}</SubscribeButton>
+      :
+      <SubscribeButton>Sign in to subscribe</SubscribeButton>}
 </Section>;
 };
 

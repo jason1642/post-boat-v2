@@ -20,7 +20,7 @@ const Comment: React.FunctionComponent<ICommentProps> = ({ postData, commentData
     <Container>
       <Header>
         <AuthorName>{commentData.author.username} - </AuthorName>
-        <DateCreated>{moment(commentData.created_at).fromNow()}</DateCreated>
+        <DateCreated>&nbsp;{moment(commentData.created_at).fromNow()}</DateCreated>
       </Header>
       <Body>
         {commentData.text}

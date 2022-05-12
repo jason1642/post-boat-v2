@@ -9,6 +9,7 @@ export const Container = styled.div`
   align-items: center;
   height: 100%;
   /* border-radius: 9px; */
+  gap: 8px;
   overflow-y: scroll;
   max-height: 95vh;
   -ms-overflow-style: none;  /* IE and Edge */

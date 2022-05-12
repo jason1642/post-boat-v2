@@ -24,7 +24,7 @@ export const Container = styled.div<Props>`
   /* max-height: 512px; */
   border-radius: 8px;
   border: 1px solid #8080806e;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0), 0 6px 20px 0 rgba(0, 0, 0, 0);
   & > *{ 
     display: flex;
     flex-direction: column;
@@ -43,7 +43,7 @@ export const Wrapper = styled.div`
 
 export const TopRow = styled.div`
     border-radius: 8px;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
   padding: 3px;
   @media (max-width: 480px){
     width: 100%;
@@ -72,18 +72,26 @@ export const CreatedBy = styled(Link)`
 `
 export const Main = styled.div`
   /* min-height: 10px; */
-  align-self: center;
+  display: flex;
+  width: 100%;
+  
+  /* font-size: 1rem; */
+  align-items: center;
   max-height: 512px;
-  margin: 5px 0;
-  flex-grow: 1;
+  margin: 5px 0px;
+  /* flex-grow: 1; */
   &:hover{
     cursor: pointer;
   }
   /* height: 60%; */  
 `
 export const Text = styled.div`
-  font-size: .7em;
-  padding: 4px 0px;
+  /* display: flex; */
+  text-align: left;
+  font-size: 1em;
+  word-wrap: break-word;
+  max-width: 90%;
+  padding: 4px;
   line-height: 1.5em;
 `;
 export const ImageContainer = styled.div`
@@ -106,13 +114,12 @@ export const Image = styled.img`
 `
 export const BottomRow = styled.div`
   min-height: 15px;
-  padding-bottom: 4px;
+  padding: 8px 0px;
   gap: 5px;
   flex-direction: row;
   /* font-size: 1rem; */
   justify-self: flex-end;
   align-self: flex-start;
-  margin-top: 4px;
   width: 100%;
   @media (max-width: 480px){
     width: 100%;
