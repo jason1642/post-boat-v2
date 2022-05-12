@@ -79,7 +79,7 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat,  handle
       id='chat-list-container'
     >
       <SearchForUser handleChangeCurrentChat={handleChangeCurrentChat} />
-      <div style={{display: 'flex',}}>
+      <div style={{display: 'flex', flexDirection: 'column',}}>
 
       
 

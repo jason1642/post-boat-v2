@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Container, Title, FormBox, SubmitButton, TextInput } from '../../../styles/post/comment-section/form.js'
+import {Container, Title, FormBox, Label, SubmitButton, TextInput } from '../../../styles/post/comment-section/form.js'
 import {commentOnPost} from '../../api-helpers/post-api.ts'
 import { useForm } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
@@ -35,14 +35,20 @@ const Form: React.FunctionComponent<IFormProps> = ({ postData, currentUser }) =>
   return (
     <Container>
       <Title>Comment as {currentUser.username}</Title>
-      <FormBox onSubmit={()=>handleSubmit(onSubmit, onErrors)}>
+      <FormBox onSubmit={handleSubmit(onSubmit, onErrors)}>
+        <Label>
 
         <TextInput
+          rows={4}
+            maxRows={4}
+            multiline
           {...register('comment', commentOptions.comment)}
           placeholder='What are your thoughts?'
           name='comment'
 
         />
+        </Label>
+
         <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end', alignItems:'center',}}>
           <ErrorMessage
           name={'comment'}
@@ -51,8 +57,9 @@ const Form: React.FunctionComponent<IFormProps> = ({ postData, currentUser }) =>
         />
         <SubmitButton
           type='submit'
-          name='submit'
-          />
+            name='submit'
+            variant='contained'
+          >Submit</SubmitButton>
         </div>
         
       </FormBox>

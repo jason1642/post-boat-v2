@@ -8,6 +8,10 @@ export const Container = styled.div`
   margin: 0 auto;
   justify-content: space-between;
   gap: 25px;
+  overflow: auto;
+  &::-webkit-scrollbar {
+  display: none;
+}
 `;
 export const Main = styled.div`
   display: flex;
@@ -25,13 +29,13 @@ export const ImageContainer = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  max-height: 312px;
+  max-height: 470px;
   margin: 14px auto;
 `;
 
 export const Image = styled.img`
-  max-height: 312px;
-  max-width: 50%;
+  max-height: 100%;
+  /* max-width: 50%; */
   /* width: 100%; */
   
   object-fit: contain;
@@ -91,7 +95,7 @@ export const Text = styled.p`
   line-height: 20px;
   padding: 8px;
   width: 100%;
-  font-size: 13px;
+  font-size: 1rem;
   text-align: left;
 
 `;

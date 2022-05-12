@@ -31,8 +31,8 @@ const PostPage: React.FunctionComponent<IPostPageProps> = ({ currentUser }) => {
   }, []);
 
   useEffect(() => {
-    
-  },[])
+    console.log(postData)
+  },[postData])
 
   return (
     
@@ -48,7 +48,16 @@ const PostPage: React.FunctionComponent<IPostPageProps> = ({ currentUser }) => {
             savePost={savePost}
           />
           
+          {postData.images.length > 0 &&
+            <ImageContainer>
+              <Image
+                // alt={data.title}
+                src={postData.images[0]}
+              />
+            </ImageContainer>
+          }
           <Text>{postData.text}</Text>
+          
 
           <CommentSection
             width={'100%'}

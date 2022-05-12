@@ -178,7 +178,6 @@ const SearchForUser: React.FunctionComponent<ISearchForUserProps> = ({handleChan
           }}
           InputProps={{
             ...params.InputProps, endAdornment: (<>
-              {console.log(params)}
               {loading ? <CircularProgress color="inherit"  size={20} /> : null}
               {params.InputProps.endAdornment}
             </>)

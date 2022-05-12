@@ -25,12 +25,12 @@ postRouter.post('/create', async (req, res, next) => {
   console.log(user)
   if (!category || !user) return res.status(404).send('Category or User does not exist.')
   let post = new Post(_.assign(
-    _.pick(req.body, ['title', 'text', 'images', 'category']), {
+    _.pick(req.body, ['title', 'text', 'category']), {
     author: {
       user_id: req.body.author.user_id,
       username: req.body.author.username,
       profile_image: req.body.author.profile_image
-    }, _id: new mongoose.Types.ObjectId() 
+    }, _id: new mongoose.Types.ObjectId(), images: [req.body.images] 
   }))
 
 
