@@ -5,10 +5,12 @@ export const Container = styled.div`
    display: flex;
   padding: 10px;
   width: 85%;
+  max-width: 1280px;
   margin: 0 auto;
-  justify-content: space-between;
-  gap: 25px;
-  overflow: auto;
+  justify-content: space-around;
+  /* gap: 25px; */
+  border-top: 1px solid grey;
+ overflow-y: auto;
   &::-webkit-scrollbar {
   display: none;
 }
@@ -20,7 +22,10 @@ export const Main = styled.div`
   width: 65%;
   align-items: center;
   /* background-color: royalblue; */
-
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+  display: none;
+}
 
 `;
 export const ImageContainer = styled.div`

@@ -9,6 +9,7 @@ export const ReactModal = styled(Modal)`
   margin: 0 auto;
   border-radius: 5px;
   margin-top: 10px;
+  z-index: 10;
   overflow-y: auto;
   padding: 10px;
   ::-webkit-scrollbar {
@@ -48,8 +49,8 @@ export const ImageContainer = styled.div`
 `;
 
 export const Image = styled.img`
-  max-height: 450px;
-  max-width: 50%;
+  max-height: 100%;
+  /* max-width: 50%; */
   /* width: 100%; */
   
   object-fit: contain;

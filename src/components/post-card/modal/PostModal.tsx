@@ -30,9 +30,9 @@ const customStyles = {
     maxWidth: '60vw',
     marginTop: '10px',
     height: '95%',
+    zIndex: '16',
     outline: 'none',
     // backgroundColor: '#262626',
-    opacity: '1',
     
   },
   overlay: {

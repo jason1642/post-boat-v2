@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import {Container, Header, Span, Footer, Body, AuthorName, DateCreated} from '../../../styles/post/comment-section/comment.js'
-import {likeComment} from '../../api-helpers/post-api.ts'
+import { likeComment } from '../../api-helpers/post-api.ts'
+import moment from 'moment'
 interface ICommentProps {
   commentData: any,
   currentUser: any,
@@ -19,7 +20,7 @@ const Comment: React.FunctionComponent<ICommentProps> = ({ postData, commentData
     <Container>
       <Header>
         <AuthorName>{commentData.author.username} - </AuthorName>
-        <DateCreated>12 hours ago</DateCreated>
+        <DateCreated>{moment(commentData.created_at).fromNow()}</DateCreated>
       </Header>
       <Body>
         {commentData.text}

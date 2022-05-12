@@ -11,10 +11,10 @@ export const Container = styled.div`
 `;
 export const Title = styled.div`
   font-size: 1rem;
-  width: 90%;
+  width: 100%;
   text-align: center;
   border-top: 1px solid black;
-  padding: 10px;
+  padding: 7px 0px;
   margin: 10px 0px;
 `
 export const CommentContainer = styled.div`

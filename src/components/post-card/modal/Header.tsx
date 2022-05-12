@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import {Container, CreatedBy, CategoryName, Title, TopRow, BottomRow,Span, Date } from '../../../styles/post/modal-header.js'
 import moment from 'moment'
+import Button from '@mui/material/Button'
 import {Link} from 'react-router-dom'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai/index.js'
 import { BsSave, BsSaveFill} from 'react-icons/bs/index.js'
@@ -12,13 +13,13 @@ interface IHeaderProps {
   currentUser: any,
   savePost: Function,
   closeModal: Function,
-
+  onPostPage: Boolean,
 }
 interface LikedSaved {
   liked: boolean,
   saved: boolean
 }
-const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost, currentUser, closeModal}) => {
+const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, onPostPage, savePost, currentUser, closeModal}) => {
   const [likesNum, setLikesNum] = useState(data.liked_by.length)
   const [likedSaved, setLikedSaved] = useState<LikedSaved>({
     liked: false,
@@ -104,6 +105,19 @@ const Header: React.FunctionComponent<IHeaderProps> = ({data, likePost, savePost
             style={{color: 'inherit',textDecoration: 'none'}}
             to={`/category/` + data.category}
           >| More posts from /{data.category}</Link></Span>
+        
+
+        {
+          !onPostPage &&
+        <Button sx={{display: 'flex', fontSize: '.8rem', justifyContent: 'center',}}size='small'>
+          <Link
+            style={{display: 'flex',color: 'inherit',textDecoration: 'none'}}
+            to={`/post/${data._id}`}>
+            View full page
+          </Link>
+        </Button>}
+
+
       </BottomRow>
       
     </Container>

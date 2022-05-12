@@ -76,9 +76,11 @@ export const ListItem = styled(Link)`
 
 export const Section = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 5px 0 rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  padding: 15px 0px;
+  
   margin-top: 15px;
   gap: 7px;
 `
@@ -87,7 +89,7 @@ export const SubscribeButton = styled.div`
   background-color: grey;
   width: 60%;
   border-radius: 8px;
-  background-color: darkslateblue;
+  /* background-color: darkslateblue; */
   font-size: 12px;
   margin: 0 auto;
   padding: 5px 9px;

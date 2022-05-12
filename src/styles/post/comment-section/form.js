@@ -42,12 +42,13 @@ export const Label = styled.label`
 
 `
 export const TextInput = styled(TextField)`
+  display: flex;
   width: 100%;
   padding: 10px;
   min-height: 95px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: ${({theme})=>theme.text};
-  background-color: ${({theme})=>theme.elementBackground};
+  background-color: ${({theme})=>theme.inverseBackground};
   /* padding-bottom: 20px; */
   font-size: 1rem;
   resize: none;

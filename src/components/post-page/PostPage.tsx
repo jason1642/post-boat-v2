@@ -46,6 +46,7 @@ const PostPage: React.FunctionComponent<IPostPageProps> = ({ currentUser }) => {
             likePost={likePost}
             data={postData}
             savePost={savePost}
+            onPostPage={true}
           />
           
           {postData.images.length > 0 &&
