@@ -121,10 +121,18 @@ postRouter.delete('/delete', async (req, res) =>
 
 // Find all by category name
 postRouter.get('/findAllByCategory/:name', async (req, res, next) => {
-  const posts = await Post.find({ category: req.params.name })
+  const query = req.params.name === 'general' ? '' : req.params.name
+  let posts
+  console.log(query)
+  if (query === '') {
+    posts = await Post.find({})
+  } else {
+    posts = await Post.find({category: query})
+  }
+
   if (!posts) return res.status(404).send('No posts were found.')
   
-  res.send(posts)
+  return res.send(posts)
 })
 
 // Add like/remove like 

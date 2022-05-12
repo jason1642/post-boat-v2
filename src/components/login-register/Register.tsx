@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Input, SubmitSuccessfulMessage, Title, SubmitButton, Span, Label } from '../../styles/forms/forms.js'
 import { createUser } from '../api-helpers/user-api.ts'
 import _ from 'lodash'
 import Button from '@mui/material/Button'
-
 import { registerOptions } from '../resources/validation-options.tsx';
 import { useForm } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message';
@@ -30,7 +29,9 @@ const Register: React.FunctionComponent<IRegisterProps> = (props) => {
     })
   };
   const onErrors = errors => console.error(errors);
-
+  useEffect(() => {
+    document.title = 'Register'
+  }, []);
   return (
     !didSubmit ?
     (<Form onSubmit={handleSubmit(onFormSubmit, onErrors)} >

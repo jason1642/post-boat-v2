@@ -44,8 +44,11 @@ const PostModal: React.FunctionComponent<IPostModalProps> = ({currentUser, data,
   let subtitle;
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
+    document.title = data.title
     subtitle.style.color = 'black';
-}
+  }
+  
+  
   return (
    
     <Modal

@@ -265,6 +265,7 @@ userRouter.put('/edit', editUser)
 const logUserOut = async (req, res) => {
   let user
   try { await User.findOne({ _id: req.body.user_id }).then(r => user = r) } catch (err) { return res.status(404).send('user not found') }
+  console.log(user)
   user.active = false
   user.save()
   return res.status(200)

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState} from 'react';
+import { useState, useEffect} from 'react';
 import { useForm } from 'react-hook-form'
 import _ from 'lodash'
 import { ErrorMessage } from '@hookform/error-message'
@@ -38,7 +38,11 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = ({currentUser}) =>
     }).catch(err=>console.log(err))
   }
   const onErrors = errors => console.error(errors);
-console.log(didSubmit)
+  console.log(didSubmit)
+  
+  useEffect(() => {
+    document.title = 'Create Post'
+  }, []);
   return (
     !didSubmit ?
     (<Form

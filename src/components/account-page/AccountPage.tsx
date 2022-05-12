@@ -19,7 +19,7 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) 
   const { id } = useParams();
   const match = useMatch('/user/:id')
   const [postData, setPostData] = useState([])
-  const [paramsUserData, setParamsUserData] = useState()
+  const [paramsUserData, setParamsUserData] = useState<any>()
 
   useEffect(() => {
     getAllPostsByUser(id).then(res => {
@@ -32,8 +32,14 @@ const AccountPage: React.FunctionComponent<IAccountPageProps> = ({currentUser}) 
   }, [paramsUserData]);
 
   useEffect(() => {
-    
-  }, []);
+    if (id === currentUser._id) {
+      document.title = 'My account'
+    } else if (paramsUserData){
+      document.title = 'Account - ' + paramsUserData.username
+    } else {
+      document.title = 'Account'
+    }
+  }, [paramsUserData]);
     // Must have id as dependency to refresh page upon going to the same path with a different id
    useEffect(() => {
       getUserInfoById(id).then(res => {

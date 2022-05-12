@@ -80,6 +80,7 @@ const PostCard: React.FunctionComponent<IPostCardProps> = ({ data, cardPadding }
     setIsOpen(true);
   }
   function closeModal() {
+    document.title = 'Home'
     setIsOpen(false);
   }
 

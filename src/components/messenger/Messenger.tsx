@@ -8,7 +8,6 @@ import Main from './current-chat/Main.tsx'
 import { getChatListUserInfo, getMessageHistory, getBasicPublicUserInfo, readMessages } from '../api-helpers/user-api.ts';
 import { useParams, useNavigate } from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-
 interface IMessengerProps {
   currentUser: UserModel,
 }
@@ -46,16 +45,15 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
   // 2 When one users wants to message another, send the server an even stating such
   // 3 The server looks up jeffs socketio connection in the object from step 1
   // 4 The server uses this connection to send the user(and only that users) the private message
-  
+
   useEffect(() => {
     // autoConnect is set to false so the connection is not established right away,
     // so I can manually call socket.connect()
-    
+    document.title = 'Messenger'
     // const newSocket = io(url, { transports: ['websocket'], autoConnect: false })
     // newSocket.auth = { user_id: currentUser._id}
     // newSocket.connect()
     // console.log(newSocket)
-    
     const chatInstance = async() => {
       console.log(id)
      await getChatListUserInfo(currentUser._id)
@@ -175,6 +173,7 @@ const Messenger: React.FunctionComponent<IMessengerProps> = ({ currentUser }) =>
     <Container
       maxWidth='lg'
       sx={styles.container} >
+    
       {chatListUsersData && currentChat ?
         <ChatList
           currentChat={currentChat}

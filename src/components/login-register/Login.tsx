@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import {Form, Input, Label, Title, Span, SubmitButton} from '../../styles/forms/forms.js'
 import { ErrorComponent } from '../resources/validation-options.tsx';
 import _ from 'lodash'
@@ -27,7 +28,9 @@ const Login = (props) => {
   const { logInUser } = bindActionCreators(userActions, dispatch);
 
 
-
+  useEffect(() => {
+    document.title = 'Login'
+  }, []);
   const onFormSubmit = async data => {
     let timerInterval
     console.log(data)

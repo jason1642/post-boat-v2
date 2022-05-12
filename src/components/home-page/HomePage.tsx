@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import {Main,Container,  Wrapper} from '../../styles/homepage/homepage.js'
 import CategoryNav from './category-nav/CategoryNav.tsx';
 import Feed from './feed/Feed.tsx'
@@ -10,12 +11,14 @@ interface IHomePageProps {
 
 
 // Pass current user props
-const HomePage: React.FunctionComponent<IHomePageProps> = ({currentUser}) => {
+const HomePage: React.FunctionComponent<IHomePageProps> = ({ currentUser }) => {
+  useEffect(() => {
+    document.title= 'Home'
+  }, []);
   return (<Container>
   
     
     <Main>
-      
       <Wrapper>
         <CategoryNav />
         <Feed currentUser={currentUser}/>
