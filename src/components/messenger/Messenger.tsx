@@ -16,7 +16,8 @@ interface IMessengerProps {
 
 const styles = {
   container: {
-  display: 'flex',
+    display: 'flex',
+    gap: '10px',
   justifyContent: 'center',
   position: 'relative',
   flexDirection: 'row',

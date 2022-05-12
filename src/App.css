@@ -18,16 +18,22 @@
 
 
 .MuiAutocomplete-loading		{
-  background-color: grey
+  background-color: grey;
 }
 #user-search-label {
   color: black;
-  /* background-color: grey; */
+  background-color: grey;
+  border-radius: 10px 10px 0 0;
+  border-top: 1px solid rgb(55, 55, 55);
+  border-width: 0px;
+  /* border-bottom: 0px solid black; */
+  padding: 5px;
   
 }
 #chat-list-container{
   overflow-y: scroll;
   overflow-x: hidden;
+  padding: 5px;
 }
 #chat-list-container::-webkit-scrollbar{ 
   display: none;
@@ -38,7 +44,7 @@
 
 #user-search{
   background-color: grey;
-  
+  margin: 3px;
 }
 .MuiAutocomplete-listbox::-webkit-scrollbar { 
   display: none;

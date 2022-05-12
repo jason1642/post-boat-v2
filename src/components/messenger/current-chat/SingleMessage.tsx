@@ -26,10 +26,9 @@ const SingleMessage: React.FunctionComponent<ISingleMessageProps> = ({messageDat
 <SingleMessageContainer
       style={{
         flexDirection: isFromRecipient ? 'row-reverse' : 'row',
-        alignItems: isFromRecipient ? 'flex-start' : 'flex-end',
         alignSelf: isFromRecipient ? 'flex-start' : 'flex-end',
       }}
-    ><div style={{ display: 'flex',  alignSelf: isFromRecipient ? 'flex-start' : 'flex-end',}}>
+    ><div style={{ display: 'flex', }}>
       {messageData.sender === currentUser._id  && <>{(messageData.seen_by_recipient && messageData.seen_by_recipient.seen) && messageData.seen_by_recipient !== undefined ?
           <Tooltip placement='left' title={`Seen ${moment(messageData.seen_by_recipient.date_seen).format("MMM Do, h:mm a")}`}><span><IconButton disabled><BsCheck2All style={{ color: 'green' }} /></IconButton></span></Tooltip>
           :

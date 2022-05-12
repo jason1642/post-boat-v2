@@ -38,10 +38,13 @@ const LinkWrapper = styled(Link)`
 `;
 const styles = {
   container: {
+    display: 'flex',
+    flexDirection: 'column',
     border: '1px solid grey',
     minWidth: '20%',
     maxHeight: '100%',
-    padding: '5px',
+    padding: '10px',
+    gap: '8px',
     // overFlow: 'auto',
     borderRadius: '5px',
   },
@@ -67,15 +70,19 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat,  handle
  
 
   useEffect(() => {
-     console.log(chatListUsersData)
-  }, [chatListUsersData]);
+     console.log(currentChat)
+  }, [currentChat]);
   return (
     <List
       sx={{width: 1/4, }}
       style={styles.container}
       id='chat-list-container'
     >
-      <SearchForUser handleChangeCurrentChat={handleChangeCurrentChat}/>
+      <SearchForUser handleChangeCurrentChat={handleChangeCurrentChat} />
+      <div style={{display: 'flex',}}>
+
+      
+
       {
         chatListUsersData && chatListUsersData.length > 0 ? 
           chatListUsersData.map(ele =>
@@ -87,7 +94,7 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat,  handle
               max={9}
               key={ele._id}
               onClick={()=>handleChangeCurrentChat(ele)}
-              invisible={currentChat._id === ele._id ? true : false}
+              invisible={currentChat && currentChat._id === ele._id ? true : false}
               badgeContent={checkListItemForNewMessage(ele, currentUser)} >
               <LinkWrapper
                 
@@ -123,7 +130,8 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat,  handle
               style={{padding: '10px', marginTop: '.5rem',}}
             >No current chats</div>
             : <UserListSkeleton />
-    }
+        }
+        </div>
     </List>)
 };
 

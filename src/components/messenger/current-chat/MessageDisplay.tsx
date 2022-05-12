@@ -26,7 +26,7 @@ const NewMessageNotification = styled.div`
 `;
 const Span = styled.div`
   display: flex;
-  padding: 10px;
+  padding: 5px 0px;
   margin-top: .5rem;
   width: 100%;
   justify-content: center;
@@ -41,6 +41,7 @@ interface IMessageDisplayProps {
 const styles = {
   container: {
     border: '1px solid grey',
+    // borderLeft: '0px solid black',
     borderRadius: '4px',
     display: 'flex',
     position: 'relative',
@@ -50,7 +51,7 @@ const styles = {
     flexDirection: 'column',
     flex: '1 1 auto',
     // height: '100%',
-    overflowY: 'scroll',
+    overflowY: 'auto',
     width: '100%',
     '*::-webkit-scrollbar-thumb': {
       backgroundColor: 'red',
@@ -69,10 +70,13 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
 
   useEffect(() => {
     // if the last message was from another user and if the message was not seen
+    const { scrollHeight, scrollTop, clientHeight } = messagesEndRef.current
+    
     if (messageHistory.length > 0
       && messageHistory[messageHistory.length - 1].sender !== currentUser._id
       && messageHistory[messageHistory.length - 1].seen_by_recipient
-      && messageHistory[messageHistory.length - 1].seen_by_recipient.seen === false) {
+      && messageHistory[messageHistory.length - 1].seen_by_recipient.seen === false
+      && scrollTop + clientHeight !== scrollHeight) {
       setNewMessage(true)
     }      
   }, [ messageHistory]);
