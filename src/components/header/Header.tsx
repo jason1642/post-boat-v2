@@ -8,9 +8,10 @@ import GuestNav from './GuestNav.tsx';
 import IconButton from '@mui/material/IconButton';
 
 const Container = styled.header`
-  background-color: ${({ theme }) => theme.header} ;
+  /* background-color: ${({ theme }) => theme.header} ; */
   /* border: 1px solid white; */
-  position: fixed;
+  /* position: fixed; */
+  display: flex;
   /* padding: 15px 0px; */
   /* margin-bottom: 15px; */
   z-index: 5;
@@ -19,7 +20,7 @@ const Container = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  /* height: 46px; */
+  min-height: 46px;
 `;
 const Title = styled(Link)`
   text-decoration: none;
@@ -32,6 +33,7 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding-right: 15px;
+  height: 100%;
 `
 interface IHeaderProps {
   theme: string,
@@ -48,7 +50,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ theme, themeToggler, cu
       </Title>
       <Wrapper>
       {currentUser.authenticated && <div style={{fontSize:"1rem"}}>Sailing as {currentUser.username}</div>}
-        <IconButton><Toggle theme={theme} toggleTheme={themeToggler} />
+        <IconButton sx={{height: 'inherit'}}><Toggle theme={theme} toggleTheme={themeToggler} />
         </IconButton> 
         {
           currentUser.authenticated ?

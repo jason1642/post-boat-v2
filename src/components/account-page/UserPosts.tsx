@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Container, ErrorMessage} from '../../styles/account-page/user-posts.js'
 import { useOutletContext } from 'react-router-dom';
 import PostCard from '../post-card/PostCard.tsx'
+import { CommentContainer } from '../../styles/account-page/user-comments.js';
 interface IUserPostsProps {
   currentUser: any, 
   id: string,
@@ -30,7 +31,9 @@ const UserPosts: React.FunctionComponent<IUserPostsProps> = () => {
           )
           : 
           <ErrorMessage>
-            No posts yet
+            <CommentContainer style={{backgroundColor: 'transparent'}}>
+              No posts created
+            </CommentContainer>
           </ErrorMessage>
       }
     </Container>

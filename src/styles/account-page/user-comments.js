@@ -5,9 +5,10 @@ export const Main = styled.div`
   /* border: 1px solid black; */
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  /* padding: 5px; */
   width: 100%;
   /* width: 90%; */
+  justify-content: flex-start;
 `;
 
 

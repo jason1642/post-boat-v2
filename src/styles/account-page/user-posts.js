@@ -8,5 +8,7 @@ export const Container = styled.div`
   align-items: center;
   `;
 export const ErrorMessage = styled.div`
-
+  display: flex;
+  width: 100%;
+  /* min-width: 620px; */
 `

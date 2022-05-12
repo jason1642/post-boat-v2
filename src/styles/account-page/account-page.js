@@ -6,7 +6,7 @@ export const Container = styled.div`
   /* background-color: darkcyan; */
   width: 100vw;
   margin: 0 auto;
-  margin-top: 60px;
+  /* margin-top: 60px; */
   justify-content: flex-start;
   align-items: center;
 `;

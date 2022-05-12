@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { Main } from '../../styles/account-page/user-comments.js'
+import { CommentContainer, Main } from '../../styles/account-page/user-comments.js'
 import UserPageCommentCard from './UserPageCommentCard.tsx'
 import { getManyPostsFromCommentArray } from '../api-helpers/post-api.ts';
-
+import {ErrorMessage } from '../../styles/account-page/user-posts.js'
 interface IUserCommentsProps {
 }
 
@@ -36,7 +36,11 @@ const UserComments: React.FunctionComponent<IUserCommentsProps> = (props) => {
             commentData={ele[0]}
             postData={ele[1]}
           />) : 
-          <>No comments yet</>
+          <ErrorMessage>
+            <CommentContainer style={{ backgroundColor: 'transparent' }}>
+              No comments yet
+            </CommentContainer>
+          </ErrorMessage>
       } 
     </Main>
   );

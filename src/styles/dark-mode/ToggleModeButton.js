@@ -10,15 +10,15 @@ const Button = styled.button`
   /* color: ${({ theme }) => theme.text}; */
   border-radius: 30px;
   cursor: pointer; 
-  font-size:0.8rem;
+  /* font-size:0.8rem; */
   height: 35px;
-  font-size: 12px;
-  padding: 6px;
+  /* font-size: 12px; */
+  /* padding: 6px; */
  `;
 const styles = {
   icon: {
     height: '100%',
-    width: '100%'
+    width: 'auto'
    }
  }
 const Toggle = ({theme,  toggleTheme }) => {

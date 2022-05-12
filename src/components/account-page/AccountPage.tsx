@@ -8,7 +8,7 @@ import { Outlet, useMatch, useParams } from 'react-router-dom';
 import Nav from './Nav.tsx';
 import { getAllPostsByUser } from '../api-helpers/post-api.ts';
 import { getUserInfoById } from '../api-helpers/user-api.ts'
-import CurrentUserSideMenu from './/CurrentUserSideMenu.tsx'
+// import CurrentUserSideMenu from './/CurrentUserSideMenu.tsx'
 
 interface IAccountPageProps {
   currentUser: UserModel,

@@ -5,7 +5,10 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   width: 100%;
-  /* flex-direction: column; */
+  gap: 5px;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-top: 12px;
 `;
 
 
@@ -13,9 +16,24 @@ const Container = styled.div`
 export const UserListSkeleton = () => {
 
   return (<Container>
-    <Skeleton variant='circular' height={40} width={40} />
-    {/* <Skeleton height={40} width={100}/> */}
-    <Skeleton width={100}/>
+    <div>
+      <Skeleton variant='circular' height={40} width={40} />
+    <Skeleton width={140}/>
+    </div>
+    <div>
+      <Skeleton variant='circular' height={40} width={40} />
+    <Skeleton width={140}/>
+    </div>
+    <div>
+      <Skeleton variant='circular' height={40} width={40} />
+    <Skeleton width={140}/>
+    </div>
+    <div>
+      <Skeleton variant='circular' height={40} width={40} />
+    <Skeleton width={140}/>
+    </div>
+    
+    
   </Container>)
 }
 

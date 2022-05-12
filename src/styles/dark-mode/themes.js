@@ -10,7 +10,7 @@ export const lightTheme = {
   icon: '#444242',
   elementBackground: '#d2d2d2',
   buttonBackground: 'white',
-  cardBackground: '#84827c',
+  cardBackground: '#9a9993',
   modalBackground: '#9ca4a2',
   commentBackground: 'lightgrey',
 }

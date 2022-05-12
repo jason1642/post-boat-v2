@@ -35,7 +35,7 @@ const SiteRoutes = ({ currentUser }) => {
     },
     {
       path: '/create-post',
-      element: <CreatePost currentUser={currentUser}/>
+      element: currentUser.authenticated ? <CreatePost currentUser={currentUser}/> : <Navigate to='/' replace />
     },
     { 
       path: '/user/:id',

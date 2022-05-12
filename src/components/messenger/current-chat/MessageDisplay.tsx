@@ -24,6 +24,13 @@ const NewMessageNotification = styled.div`
     opacity: 0.2;
   }
 `;
+const Span = styled.div`
+  display: flex;
+  padding: 10px;
+  margin-top: .5rem;
+  width: 100%;
+  justify-content: center;
+`;
 interface IMessageDisplayProps {
   currentUser: any,
   currentChat: any,
@@ -107,11 +114,15 @@ const MessageDisplay: React.FunctionComponent<IMessageDisplayProps> = ({currentC
        } 
       }}
       sx={styles.container}>
-     <div >This is the start of your conversation</div>
+     
+      { currentChat ? 
+        <Span>This is the start of your conversation</Span>
+        : <Span>Begin a conversation by looking for a user!</Span>
+      }
       {
         messageHistory && currentChat ? messageHistory.map(ele =>
           <SingleMessage key={ele._id} currentUser={currentUser} currentChat={currentChat} messageData={ele} />)
-          : (<>No messages</>)
+          : (<></>)
       }
       <NewMessageNotification
         onClick={() => {

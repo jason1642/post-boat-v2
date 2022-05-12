@@ -64,7 +64,11 @@ const checkListItemForNewMessage = (chatFriendData, currentUser) => {
 const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat,  handleChangeCurrentChat, currentUser, chatListUsersData }) => {
   // console.log(chatListUsersData)
  
-  console.log(chatListUsersData)
+ 
+
+  useEffect(() => {
+     console.log(chatListUsersData)
+  }, [chatListUsersData]);
   return (
     <List
       sx={{width: 1/4, }}
@@ -114,7 +118,11 @@ const ChatList: React.FunctionComponent<IChatListProps> = ({currentChat,  handle
 
             // <ListUserCard key={ele._id} userData={ele} />
           )
-          : <UserListSkeleton />
+          : chatListUsersData ?
+            <div
+              style={{padding: '10px', marginTop: '.5rem',}}
+            >No current chats</div>
+            : <UserListSkeleton />
     }
     </List>)
 };
