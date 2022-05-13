@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import _ from 'lodash';
 import { verifyUser } from '../middleware/verify.mjs';
 import Post from '../models/post.mjs';
-import sampleData from '../scripts/sample-data.json' assert {type: "json"};
+// import sampleData from '../scripts/sample-data.json' assert {type: "json"};
 import {randomImages, randomNames, randomTitles, randomCategory, randomDescriptions, randomColors} from '../sample-data.mjs'
 // import Category from '../models/category.mjs'
 const userRouter = express.Router(); 
@@ -313,41 +313,41 @@ userRouter.post('/create-many-users', async (req, res) => {
 
 
 // Testing only
-userRouter.post('/create-many-posts', async (req, res) => {
-  await Post.deleteMany()
-  let users 
-  try {
-    await User.find({}).then(async e => {
-      users = e
-      e.forEach(u => {
-        console.log(sampleData[0])
-        const respectivePost = sampleData.find(p => u._id.equals(p.author.user_id))
-        u.created_posts.push(respectivePost._id)
-      })
+// userRouter.post('/create-many-posts', async (req, res) => {
+//   await Post.deleteMany()
+//   let users 
+//   try {
+//     await User.find({}).then(async e => {
+//       users = e
+//       e.forEach(u => {
+//         console.log(sampleData[0])
+//         const respectivePost = sampleData.find(p => u._id.equals(p.author.user_id))
+//         u.created_posts.push(respectivePost._id)
+//       })
 
     
 
  
-    })
-  } catch (err) {
-    console.log(err)
-    return res.status(404).send(err)
-  }
+//     })
+//   } catch (err) {
+//     console.log(err)
+//     return res.status(404).send(err)
+//   }
 
 
-await Post.insertMany(sampleData)
+// await Post.insertMany(sampleData)
 
 //   await Post.insertMany(resultArray)
   // await Post.save()
 
 //  await users.save()
 
-  return res.send(users)
+  // return res.send(users)
 // })
 // req: user_id, category_name
 
 
-})
+// })
 
 
 
